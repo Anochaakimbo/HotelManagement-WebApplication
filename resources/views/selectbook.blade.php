@@ -97,5 +97,42 @@
             <button>ต่อไป</button>
         </div>
     </main>
+    @foreach ($rooms as $room)
+    <p>{{ $room->name }} 
+    - Status: {{ $room->is_available ? 'ห้องว่าง' : 'ห้องไม่ว่าง' }}</p>
+
+    @if ($room->is_available)
+        <!-- ฟอร์มกรอกข้อมูลสำหรับจองห้อง -->
+        <form action="/guest/book" method="POST">
+            @csrf
+            <input type="hidden" name="room_id" value="{{ $room->id }}">
+            
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" required>
+            
+            <button type="submit">Book Now</button>
+        </form>
+    @else
+        <button disabled>ไม่สามารถจองได้</button>
+    @endif
+@endforeach
+
+
+    @foreach ($bookings as $booking)
+    <p>{{ $booking->room->name }} - Status: {{ $booking->status }}</p>
+
+    @if ($booking->status == 'รอชำระเงิน')
+        <form action="/guest/bookings/{{ $booking->id }}/pay" method="POST">
+            @csrf
+            <button type="submit">Pay Now</button>
+        </form>
+    @endif
+@endforeach
 </body>
 </html>
