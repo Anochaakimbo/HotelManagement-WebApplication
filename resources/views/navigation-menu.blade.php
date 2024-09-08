@@ -20,6 +20,25 @@
                         {{ __('Guest') }}
                         </x-nav-link>
                     @endif
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('customerproblem') }}" :active="request()->routeIs('customerproblem')">
+                        {{ __('CustomerProblem') }}
+                        </x-nav-link>
+                    @endif
+                    {{-- @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
+                        {{ __('Billing') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
+                        {{ __('Room information') }}
+                        </x-nav-link>
+                    @endif@if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
+                        {{ __('Booking') }}
+                        </x-nav-link>
+                    @endif --}}
                 </div>
             </div>
 

@@ -15,6 +15,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/Report', function () {
+        return view('Report');})->name('Report');
+    Route::get('/Payrent', function () {
+        return view('Payrent');
+    })->name('Payrent');
+    Route::get('/Roomdetails', function () {
+        return view('Roomdetails');
+    })->name('Roomdetails');
 });
 
 
@@ -24,18 +32,18 @@ route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->na
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('admin')->name('guestpage');
 
+route::get('/customerproblem',[HomeController::class,'room'])->Middleware('admin')->name('customerproblem');
+
 Route::get('/select', function () {
     return view('selectbook');
-});
+})->name('select');
 
-Route::get('/Roomdetails', function () {
-    return view('Roomdetails');  // ชื่อไฟล์ต้องตรงกันกับที่อยู่ใน views
-})->name('Roomdetails');
 
-Route::get('/Payrent', function () {
-    return view('Payrent');
-})->name('Payrent');
 
-Route::get('/Report', function () {
-    return view('Report');
-})->name('Report');
+// Route::get('/Roomdetails', function () {
+//     return view('Roomdetails');
+// })->name('Roomdetails');
+
+// Route::get('/Payrent', function () {
+//     return view('Payrent');
+// })->name('Payrent');
