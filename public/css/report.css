@@ -1,0 +1,146 @@
+/* การจัดวางหัวข้อให้อยู่ตรงกลาง */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* การตั้งค่าหลักของตัวเว็บ */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+}
+
+/* การตั้งค่าของ sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f9e6d0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 15px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a.active {
+    background-color: #f7b366;
+    color: white;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+}
+
+/* การจัดการเนื้อหาหลัก */
+.content {
+    margin-left: auto;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+/* การจัดวาง header ให้สมดุล */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header button {
+    background-color: #f98f60;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: #f76b3c;
+}
+
+.header .user-info {
+    font-size: 16px;
+    color: #4a4a4a;
+}
+
+/* การจัดการฟอร์ม */
+.form-container {
+    background-color: #fef2e5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.form-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #4a4a4a;
+}
+
+.form-container label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #4a4a4a;
+}
+
+.form-container input[type="text"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-container input[type="radio"] {
+    margin-right: 10px;
+}
+
+.form-container button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #218838;
+}
