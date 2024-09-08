@@ -13,10 +13,6 @@ header {
     background-color: #ffffff;
 }
 
-.logo img {
-    height: 60px;
-}
-
 nav ul {
     list-style: none;
     display: flex;
@@ -115,4 +111,13 @@ tbody tr:nth-child(even) {
 button.now{
     color: rgb(255, 255, 255);
     background-color: black;
+}
+
+.logo img{
+    width: 100px;
+    height: auto;
+}
+
+tbody tr:hover{
+    background-color: rgb(216, 215, 215);
 }
