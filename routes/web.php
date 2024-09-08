@@ -17,8 +17,14 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
 route::get('/home',[HomeController::class,'index']);
 
 route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->name('adminpage');
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('admin')->name('guestpage');
+
+Route::get('/select', function () {
+    return view('selectbook');
+});
+
