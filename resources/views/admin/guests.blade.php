@@ -9,4 +9,9 @@
 <body>
     <h1>Guest Admin</h1>
 </body>
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 </html>
