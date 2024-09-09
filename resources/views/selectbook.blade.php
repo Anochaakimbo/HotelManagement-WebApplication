@@ -122,9 +122,7 @@
         <button disabled>ไม่สามารถจองได้</button>
     @endif
 @endforeach
-
-
-    @foreach ($bookings as $booking)
+@foreach ($bookings as $booking)
     <p>{{ $booking->room->name }} - Status: {{ $booking->status }}</p>
 
     @if ($booking->status == 'รอชำระเงิน')
@@ -134,5 +132,10 @@
         </form>
     @endif
 @endforeach
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 </body>
 </html>

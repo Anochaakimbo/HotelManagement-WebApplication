@@ -11,27 +11,36 @@ class BookingController extends Controller
 {
     public function create(Request $request)
 {
-    // สร้าง Guest
+    // ตรวจสอบข้อมูลที่รับเข้ามา
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'phone' => 'required|string|max:15',
+        'room_id' => 'required|exists:rooms,id',
+    ]);
+
+    // สร้าง Guest ใหม่
     $guest = Guest::create([
         'name' => $request->input('name'),
         'email' => $request->input('email'),
         'phone' => $request->input('phone'),
     ]);
 
-    // สร้าง Booking
+    // สร้าง Booking ใหม่
     $booking = Booking::create([
         'guest_id' => $guest->id,
         'room_id' => $request->input('room_id'),
-        'status' => 'รอชำระเงิน',
+        'status' => 'รอชำระเงิน', // สถานะเริ่มต้น
     ]);
 
-    // อัปเดตสถานะห้องเป็น "ห้องไม่ว่าง"
-    $room = rooms::find($request->input('room_id'));
-    $room->is_available = false; // เปลี่ยนเป็นห้องไม่ว่าง
+    // อัปเดตสถานะห้องเป็น "ไม่ว่าง" (is_available = 0)
+    $room = rooms::findOrFail($request->input('room_id'));
+    $room->is_available = 0; // ห้องไม่ว่างหลังจากจอง
     $room->save();
 
-    return redirect()->back()->with('message', 'Booking created successfully. Please proceed to payment.');
+    return redirect()->back()->with('message', 'Booking created successfully, room is now unavailable.');
 }
+
     public function updateStatus(Request $request, Booking $booking)
 {
     // เปลี่ยนสถานะการจอง
@@ -59,22 +68,26 @@ class BookingController extends Controller
 
     return redirect()->back()->with('error', 'Invalid booking status.');
 }
-public function destroy(Booking $booking)
+public function payBooking($id)
 {
-    // คืนสถานะห้องให้เป็น "ห้องว่าง" เมื่อการจองถูกลบ
-    $room = $booking->room;
-    $room->is_available = true; // คืนสถานะห้องให้จองได้
-    $room->save();
+    // ดึงข้อมูลการจอง
+    $booking = Booking::findOrFail($id);
 
-    // ลบข้อมูล Guest หลังจากลบการจอง
-    $guest = $booking->guest; // ดึงข้อมูล guest ที่เกี่ยวข้อง
-    $booking->delete(); // ลบการจองก่อน
+    // ตรวจสอบว่าสถานะของการจองคือ 'รอชำระเงิน'
+    if ($booking->status == 'รอชำระเงิน') {
+        // เปลี่ยนสถานะการจองเป็น "รอยืนยัน"
+        $booking->status = 'รอยืนยัน';
+        $booking->save();
 
-    // ตรวจสอบว่า guest ไม่มีการจองอื่นๆ
-    if ($guest->bookings()->count() == 0) {
-        $guest->delete(); // ลบ guest ถ้าไม่มีการจองอื่นๆ
+        // เปลี่ยนสถานะห้องให้เป็น "ไม่ว่าง" (is_available = 0)
+        $room = $booking->room;
+        $room->is_available = 0; // ห้องไม่ว่าง
+        $room->save();
+
+        return redirect()->back()->with('message', 'Payment completed and room is now unavailable.');
     }
 
-    return redirect()->back()->with('message', 'Booking and guest deleted successfully.');
+    return redirect()->back()->with('error', 'Invalid booking status.');
 }
+
 }

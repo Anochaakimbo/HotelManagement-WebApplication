@@ -30,11 +30,13 @@
                         {{ __('Booking') }}
                         </x-nav-link>
                     @endif
-                    {{--}}
-                    @if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
+                    
+                    {{-- @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('confirm') }}" :active="request()->routeIs('admin.booking.confirm')">
                         {{ __('Room information') }}
                         </x-nav-link>
+                        @endif --}}
+                    {{--}}
                     @endif@if(Auth::user()->usertype == 'admin')
                     <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
                         {{ __('Booking') }}

@@ -8,25 +8,31 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             BOOKING INFORMATION
-            @foreach ($bookings as $booking)
-                <p>{{ $booking->guest->name }} booked {{ $booking->room->name }} - Status: {{ $booking->status }}</p>
+    <h1>Booking List</h1>
 
-                @if ($booking->status == 'รอยืนยัน')
-                <form action="/admin/bookings/{{ $booking->id }}/status" method="POST">
-            @csrf
-            <input type="hidden" name="status" value="จองสำเร็จ">
-            <button type="submit">Confirm Booking</button>
-                </form>
-                @endif
-                @endforeach
-                @foreach ($bookings as $booking)
-    <!-- ปุ่มลบการจอง -->
-    <form action="/admin/bookings/{{ $booking->id }}/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this booking?');">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete Booking</button>
-    </form>
-@endforeach
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Guest Name</th>
+                <th>Booking Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($bookings as $booking)
+                <tr>
+                    <td>
+                        <!-- กดที่เลขห้องเพื่อไปยังหน้าที่ยืนยันการจอง -->
+                        <a href="{{ route('admin.booking.confirm', $booking->id) }}">
+                            {{ $booking->room->name }}
+                        </a>
+                    </td>
+                    <td>{{ $booking->guest->name }}</td>
+                    <td>{{ $booking->status }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
         </div>
     </div>
 </x-app-layout>

@@ -2,6 +2,7 @@
 use App\Models\rooms;
 use App\Models\Booking;
 use GuzzleHttp\Middleware;
+use App\Http\Controllers\AdminComtroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookingController;
@@ -26,10 +27,16 @@ Route::middleware([
         return view('Roomdetails');
     })->name('Roomdetails');
 });
-Route::delete('/admin/bookings/{booking}/delete', [BookingController::class, 'destroy'])->Middleware('admin');
+
+Route::post('/guest/bookings/{booking}/pay', [BookingController::class, 'payBooking']);
+
 Route::post('/guest/book', [BookingController::class, 'create']);
+
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
+
 route::get('/home',[HomeController::class,'index']);
+
+Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
 
 route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
 
@@ -46,6 +53,16 @@ Route::get('/select', function () {
 })->name('select');
 
 Route::post('/guest/bookings/{booking}/pay', [BookingController::class, 'pay']);
+
+
+Route::get('/admin/booking/confirm/{id}', [AdminComtroller::class, 'showConfirmBooking'])->name('admin.booking.confirm')->Middleware('admin');
+
+Route::post('/admin/booking/confirm/{id}', [AdminComtroller::class, 'confirmBooking'])->name('admin.booking.confirm.post')->Middleware('admin');
+
+Route::post('/admin/booking/delete/{id}', [AdminComtroller::class, 'deleteBooking'])->name('admin.booking.delete')->Middleware('admin');
+
+Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking'])->name('admin.create.user')->Middleware('admin');
+
 
 
 
