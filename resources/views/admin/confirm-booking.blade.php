@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <p>Room: {{ $booking->room->name }}</p>
+            <p>Room: {{ $booking->room->room_number }}</p>
     <p>Guest: {{ $booking->guest->name }}</p>
     <p>Status: {{ $booking->status }}</p>
     @if ($booking->status == 'รอชำระเงิน')

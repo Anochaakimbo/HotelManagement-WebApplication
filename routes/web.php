@@ -33,13 +33,13 @@ Route::post('/guest/book', [BookingController::class, 'create']);
 
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
 
-route::get('/home',[HomeController::class,'index']);
+route::get('/home',[HomeController::class,'index'])->name('home');
 
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
 
 route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
 
-route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->name('adminpage');
+route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('admin')->name('guestpage');
 

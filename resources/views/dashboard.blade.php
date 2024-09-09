@@ -11,8 +11,7 @@
                 <x-welcome />
                 <h1>Your Room</h1>
 @if (Auth::user()->room)
-    <p>Room Name: {{ Auth::user()->room->name }}</p>
-    <p>Room Capacity: {{ Auth::user()->room->capacity }}</p>
+    <p>Room Name: {{ Auth::user()->room->room_number }}</p>
 @else
     <p>You do not have any rooms assigned.</p>
 @endif
