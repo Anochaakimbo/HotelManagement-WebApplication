@@ -17,6 +17,7 @@ return new class extends Migration
         $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
         $table->enum('status', ['รอชำระเงิน', 'รอยืนยัน', 'จองสำเร็จ'])->default('รอชำระเงิน');
         $table->timestamps();
+        $table->softDeletes();
     });
 }
 

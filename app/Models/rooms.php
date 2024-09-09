@@ -25,4 +25,8 @@ public function billings()
 {
     return $this->hasMany(Billing::class, 'room_id');
 }
+public function roomType()
+{
+    return $this->belongsTo(RoomType::class, 'room_type_id');
+}
 }
