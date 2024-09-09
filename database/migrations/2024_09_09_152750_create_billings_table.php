@@ -21,7 +21,9 @@ return new class extends Migration
             $table->decimal('water_charge', 10, 2);
             $table->decimal('electric_charge', 10, 2);
             $table->decimal('total_charge', 10, 2);
+            $table->enum('status', ['ส่งไปยังผู้ใช้แล้ว', 'รอชำระเงิน', 'รอยืนยัน', 'ชำระค่าห้องแล้ว'])->default('ส่งไปยังผู้ใช้แล้ว');
             $table->timestamps();
+            $table->softDeletes();
         
             // สร้าง foreign key constraints
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');

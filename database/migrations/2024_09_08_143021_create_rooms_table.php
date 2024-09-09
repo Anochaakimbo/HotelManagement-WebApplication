@@ -14,8 +14,8 @@ return new class extends Migration
     Schema::create('rooms', function (Blueprint $table) {
         $table->id();
         $table->string('room_number');
-        $table->integer('capacity');
         $table->text('description')->nullable();
+        $table->boolean('is_available')->default(true); // เพิ่มคอลัมน์ is_available
         $table->timestamps();
         $table->softDeletes();
     });

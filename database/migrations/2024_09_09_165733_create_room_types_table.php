@@ -13,6 +13,7 @@ class CreateRoomTypesTable extends Migration
             $table->string('room_description');   // ชื่อลักษณะห้อง
             $table->decimal('room_price', 10, 2); // ราคาห้อง
             $table->text('furniture_details');    // รายละเอียดเฟอร์นิเจอร์
+            $table->decimal('deposit_price', 10, 2);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -20,6 +21,11 @@ class CreateRoomTypesTable extends Migration
 
     public function down()
     {
+        Schema::table('billings', function (Blueprint $table) {
+            $table->dropSoftDeletes(); // ลบคอลัมน์ deleted_at
+        });
+    
         Schema::dropIfExists('room_types');
     }
+    
 }

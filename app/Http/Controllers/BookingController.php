@@ -6,7 +6,7 @@ use App\Models\Booking;
 use App\Models\Guest;
 use App\Models\rooms;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class BookingController extends Controller
 {
     public function create(Request $request)
@@ -89,5 +89,19 @@ public function payBooking($id)
 
     return redirect()->back()->with('error', 'Invalid booking status.');
 }
+
+
+
+public function assignUserToRoom($roomId, $userId)
+{
+    // ดึงข้อมูลห้องจาก room_id
+    $room = rooms::findOrFail($roomId);
+
+    // อัปเดต user_id และบันทึกวันที่ contract
+    $room->user_id = $userId;
+    $room->contract = Carbon::now(); // บันทึกวันที่ปัจจุบัน
+    $room->save();
+}
+
 
 }
