@@ -22,6 +22,41 @@
             </header>
             
             <section class="invoice-section">
+                <h1>สรุปค่าใช้จ่ายของผู้ใช้: {{ Auth::user()->name }}</h1>
+
+@if ($billings->isNotEmpty())
+    @foreach ($billings as $billing)
+        <p>ห้อง: {{ $billing->room->room_number }}</p>
+        <p>ค่าน้ำ: {{ $billing->water_charge }} บาท (หน่วย: {{ $billing->water_units }})</p>
+        <p>ค่าไฟ: {{ $billing->electric_charge }} บาท (หน่วย: {{ $billing->electric_units }})</p>
+        <p>ค่าห้อง: {{ $billing->room_price }} บาท</p>
+        <p>ค่าใช้จ่ายรวม: {{ $billing->total_charge }} บาท</p>
+
+        @if ($billing->status == 'ส่งไปยังผู้ใช้แล้ว')
+            <form action="{{ route('payBilling', $billing->id) }}" method="POST">
+                @csrf
+                <button type="submit">ชำระเงิน</button>
+            </form>
+        @endif
+
+        <hr>
+    @endforeach
+@else
+    <p>ขณะนี้คุณไม่มียอดค้างชำระ</p>
+@endif
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+                
                 <h1>ชำระค่าห้อง</h1>
                 <div class="invoice">
                     <table>

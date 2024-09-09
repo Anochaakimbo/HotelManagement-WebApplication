@@ -21,4 +21,8 @@ class rooms extends Model
 {
     return $this->belongsTo(User::class);
 }
+public function billings()
+{
+    return $this->hasMany(Billing::class, 'room_id');
+}
 }

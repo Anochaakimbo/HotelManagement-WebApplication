@@ -2,6 +2,7 @@
 use App\Models\rooms;
 use App\Models\Booking;
 use GuzzleHttp\Middleware;
+use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\AdminComtroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -20,9 +21,7 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/Report', function () {
         return view('Report');})->name('Report');
-    Route::get('/Payrent', function () {
-        return view('Payrent');
-    })->name('Payrent');
+        Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
     Route::get('/Roomdetails', function () {
         return view('Roomdetails');
     })->name('Roomdetails');
@@ -63,7 +62,15 @@ Route::post('/admin/booking/delete/{id}', [AdminComtroller::class, 'deleteBookin
 
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking'])->name('admin.create.user')->Middleware('admin');
 
+Route::post('/calculateCharges', [ChargeController::class, 'calculate'])->name('calculateCharges');
 
+Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling');
+
+Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
+
+Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name('payBilling');
+
+Route::get('/history', [ChargeController::class, 'showPaymentHistory'])->name('history')->Middleware('admin');
 
 
 // Route::get('/Roomdetails', function () {
