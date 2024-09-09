@@ -29,7 +29,7 @@ Route::get('/select', function () {
 });
 
 Route::get('/Roomdetails', function () {
-    return view('Roomdetails');  // ชื่อไฟล์ต้องตรงกันกับที่อยู่ใน views
+    return view('Roomdetails');  
 })->name('Roomdetails');
 
 Route::get('/Payrent', function () {
