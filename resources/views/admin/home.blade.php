@@ -10,4 +10,9 @@
             THIS IS ADMIN PAGE
         </div>
     </div>
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 </x-app-layout>
