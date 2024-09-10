@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Logo">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo">
         </div>
         <nav>
             <ul>
