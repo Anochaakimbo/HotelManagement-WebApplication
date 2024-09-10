@@ -31,7 +31,7 @@
             <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="#book">การจอง</a></li>
-            <li><a href="#contact">ติดต่อเรา</a></li>
+            <li><a href="#contactus">ติดต่อเรา</a></li>
             <li><a href="/login">ล็อกอิน</a></li>
         </ul>
     </nav>
@@ -89,7 +89,12 @@
 
     <br>
 <img src="./img/facilities.jpg" alt="" class="footerfac">
-<footer>  
+<footer id="contactus">  
+    <ul>
+        <a href="#contactus"><li>ติดต่อสอบถาม</li></a>
+        <a href="#faq"><li>รวมคำถาม F.A.Q</li></a>
+        <a href="#aboutus"><li>เกี่ยวกับเรา</li></a>
+    </ul>
 ©Copyright 2024 All right reserved.
 </footer>
 </body>
