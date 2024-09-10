@@ -4,6 +4,10 @@ body{ /*สำหรับคอมนะจ๊ะ*/
     background-color: #FFF7EC;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 .image-container {
     position: relative;
     color: white;
@@ -118,6 +122,59 @@ footer{
     margin-right: auto;
     height: auto;
 }
+
+.image-type{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+}
+
+.image-type img {
+    max-width: 100%;
+    height: auto;
+    opacity: 60%;
+    transition: 0.2s;
+}
+
+.image-type img:hover{
+    opacity: 100%;
+    transition: 0.2s;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.gym{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    align-items: center;
+}
+
+.gym img{
+    width: auto;
+    height: auto;
+}
+
+.desgym{
+    margin-left: 20%;
+}
+
+.lift{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    align-items: center;
+}
+
+.lift img{
+    width: auto;
+    height: auto;
+    margin-left: 15%;
+}
+
+
+
+
 @media (max-width: 768px) {  /*สำหรับมือถือนะจ๊ะ*/
     nav ul li {
         display: block;
@@ -220,10 +277,60 @@ footer{
     
     .footerfac{
         display: block;
-        width: 50%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         height: auto;
     }
+
+    
+.image-type{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+}
+
+.image-type img {
+    max-width: 100%;
+    height: auto;
+    opacity: 60%;
+    transition: 0.2s;
+}
+
+.image-type img:hover{
+    opacity: 100%;
+    transition: 0.2s;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.gym{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    align-items: center;
+}
+
+.gym img{
+    width: 30%;
+    height: auto;
+}
+
+.desgym{
+    margin-left: 10%;
+}
+
+.lift{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    align-items: center;
+}
+
+.lift img{
+    width: 30%;
+    height: auto;
+    margin-right: 10%;
+}
 
 }

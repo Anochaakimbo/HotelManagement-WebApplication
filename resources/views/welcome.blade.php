@@ -29,7 +29,7 @@
         <ul>
             <li><a href="#home" class="active">หน้าหลัก</a></li>
             <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
-            <li><a href="#type">ประเภทห้อง</a></li>
+            <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="#book">การจอง</a></li>
             <li><a href="#contact">ติดต่อเรา</a></li>
             <li><a href="/login">ล็อกอิน</a></li>
@@ -49,7 +49,45 @@
     <h1 class="typeroomtext">ประเภทห้อง</h1>
     
     
-    
+<div class="image-type" id="roomtype">
+    <div class="typeone">
+        <a href="#type1"><img src="./img/singlebedroom1.jpg" alt=""></a>
+    </div>
+    <div class="typetwo">
+        <a href="#type2"><img src="./img/twinbedroom2.jpg" alt=""></a>
+    </div>
+    <div class="typethree">
+        <a href="#type3"><img src="./img/premiumroom1.jpg" alt=""></a>
+    </div>
+</div>
+
+    <h1 class="typeroomtext">สิ่งอำนวยความสะดวก</h1>
+
+    <div class="gym">
+        <img src="./img/gym.jpg" alt="">
+        <div class="desgym">
+            <p>เติมเต็มตัวเองด้วยการออกกำลังกายสุดแกร่ง<br>
+        หอพักโกลเด้นซิตี้มีบริการฟิตเนสตลอด24ชั่วโมง<br>
+        คุณสามารถออกกำลังกายโดยไม่จำกัดเวลา<br>
+        จนคุณจะกลายเป็นพรี่ๆสุดหล่อ
+            </p>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="lift">
+        <div>
+            <p class="deslift">
+            ไม่ต้องเหนื่อยเดินขึ้นลงกับบรรไดอีกต่อไป<br>
+            หอพักโกลเด้นซิตี้มีบริการลิฟท์ให้ผู้พักได้ใช้งานตลอดเวลา<br>
+            และยังมีระบบขอความช่วยเหลือได้ตลอดเวลา
+            </p>
+        </div>
+        <img src="./img/lift.jpg" alt="">
+    </div>
+
+    <br>
 <img src="./img/facilities.jpg" alt="" class="footerfac">
 <footer>  
 ©Copyright 2024 All right reserved.
