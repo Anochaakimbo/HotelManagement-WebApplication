@@ -6,7 +6,11 @@ use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\AdminComtroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+<<<<<<< HEAD
 use App\Http\Controllers\BookingController;
+=======
+use PHPUnit\Framework\Attributes\Group;
+>>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,6 +23,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+<<<<<<< HEAD
     Route::get('/Report', function () {
         return view('Report');})->name('Report');
         Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
@@ -30,6 +35,20 @@ Route::middleware([
 Route::post('/SendBillingToUser', [ChargeController::class, 'calculate'])->name('EASYOKOK');
 
 Route::post('/guest/book', [BookingController::class, 'create']);
+=======
+    Route::get('/Roomdetails', function () {
+        return view('Roomdetails');  // ชื่อไฟล์ต้องตรงกันกับที่อยู่ใน views
+    })->name('Roomdetails');
+    Route::get('/Payrent', function () {
+        return view('Payrent');
+    })->name('Payrent');
+    Route::get('/Report', function () {
+        return view('Report');
+    })->name('Report');
+});
+
+route::get('/home',[HomeController::class,'index'])->name('home');
+>>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49
 
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
 
@@ -41,11 +60,12 @@ route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admi
 
 route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
 
-route::get('/guestpage',[HomeController::class,'guest'])->Middleware('admin')->name('guestpage');
+route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
 
 route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
 
 Route::get('/select', function () {
+<<<<<<< HEAD
     $rooms = rooms::all();
     $bookings = Booking::all();
     return view('selectbook',['rooms' => $rooms],['bookings' => $bookings]);
@@ -78,3 +98,7 @@ Route::get('/history', [ChargeController::class, 'showPaymentHistory'])->name('h
 // Route::get('/Payrent', function () {
 //     return view('Payrent');
 // })->name('Payrent');
+=======
+    return view('selectbook');
+});
+>>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49
