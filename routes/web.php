@@ -27,7 +27,7 @@ Route::middleware([
     })->name('Report');
 });
 
-route::get('/home',[HomeController::class,'index']);
+route::get('/home',[HomeController::class,'index'])->name('home');
 
 route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->name('adminpage');
 
