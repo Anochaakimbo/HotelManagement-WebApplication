@@ -32,7 +32,7 @@
                 </button>
             </form>
             <div class="user-info dropdown">
-                <span class="dropbtn">ผู้ใช้: {{ Auth::user()->name }}</span>
+                <span class="dropbtn">User: {{ Auth::user()->name }}</span>
                 <div class="dropdown-content">
                     <div class="block px-4 py-2 text-xs text-gray-400">
                         {{ __('Manage Account') }}
@@ -60,7 +60,7 @@
                 @if ($bookings->isNotEmpty())
                     <ul>
                         @foreach ($bookings as $booking)
-                            <li>ห้อง {{ $booking->room_number }} โดย {{ $booking->user->name }} - วันที่จอง {{ $booking->created_at }}</li>
+                            <li>ห้อง {{ $booking->room->room_number }} โดย {{ $booking->guest->name }} - วันที่จอง {{ $booking->created_at }}</li>
                         @endforeach
                     </ul>
                 @else
@@ -83,16 +83,6 @@
                     <p>ไม่มีรายการเรียกเก็บเงิน</p>
                 @endif
             </div>
-            </div>
-
-            <!-- รายละเอียดการจองห้อง -->
-            <div class="recent-bookings">
-                <h3>การจองห้องล่าสุด</h3>
-                <ul>
-                    @foreach ($bookings as $booking)
-                        <li>ห้อง {{ $booking->room_number }} โดย {{ $booking->user->name }} - วันที่จอง {{ $booking->created_at }}</li>
-                    @endforeach
-                </ul>
             </div>
         </div>
     </div>

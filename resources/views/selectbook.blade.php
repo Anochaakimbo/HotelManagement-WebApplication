@@ -98,7 +98,7 @@
         </div>
     </main>
     @foreach ($rooms as $room)
-    <p>{{ $room->name }} 
+    <p>{{ $room->room_number }} 
     - Status: {{ $room->is_available ? 'ห้องว่าง' : 'ห้องไม่ว่าง' }}</p>
 
     @if ($room->is_available)
@@ -123,7 +123,7 @@
     @endif
 @endforeach
 @foreach ($bookings as $booking)
-    <p>{{ $booking->room->name }} - Status: {{ $booking->status }}</p>
+    <p>{{ $booking->room->room_number }} - Status: {{ $booking->status }}</p>
 
     @if ($booking->status == 'รอชำระเงิน')
         <form action="/guest/bookings/{{ $booking->id }}/pay" method="POST">

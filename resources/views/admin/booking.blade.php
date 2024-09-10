@@ -32,7 +32,7 @@
         </form>
         <div class="user-info dropdown">
             <!-- ปุ่มสำหรับ dropdown -->
-            <span class="dropbtn">ผู้ใช้: {{ Auth::user()->name }}</span>
+            <span class="dropbtn">User: {{ Auth::user()->name }}</span>
             <!-- เนื้อหาของ dropdown -->
             <div class="dropdown-content">
                 <div class="block px-4 py-2 text-xs text-gray-400">
@@ -46,13 +46,13 @@
         <div class="room-info">
             <div class="details">
                 BOOKING INFORMATION
-                <table border="1">
+                <table border ="1" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>Room Number</th>
-                            <th>Guest Name</th>
-                            <th>Booking Status</th>
-                        </tr>
+                      <tr>
+                        <th>Room number</th>
+                        <th>Guest Name</th>
+                        <th>Booking Status</th>
+                      </tr>
                     </thead>
                     <tbody>
                         @foreach ($bookings as $booking)

@@ -27,7 +27,7 @@ Route::middleware([
     })->name('Roomdetails');
 });
 
-Route::post('/guest/bookings/{booking}/pay', [BookingController::class, 'payBooking']);
+Route::post('/SendBillingToUser', [ChargeController::class, 'calculate'])->name('EASYOKOK');
 
 Route::post('/guest/book', [BookingController::class, 'create']);
 
@@ -53,7 +53,6 @@ Route::get('/select', function () {
 
 Route::post('/guest/bookings/{booking}/pay', [BookingController::class, 'pay']);
 
-
 Route::get('/admin/booking/confirm/{id}', [AdminComtroller::class, 'showConfirmBooking'])->name('admin.booking.confirm')->Middleware('admin');
 
 Route::post('/admin/booking/confirm/{id}', [AdminComtroller::class, 'confirmBooking'])->name('admin.booking.confirm.post')->Middleware('admin');
@@ -62,9 +61,8 @@ Route::post('/admin/booking/delete/{id}', [AdminComtroller::class, 'deleteBookin
 
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking'])->name('admin.create.user')->Middleware('admin');
 
-Route::post('/calculateCharges', [ChargeController::class, 'calculate'])->name('calculateCharges');
 
-Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling');
+Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling')->Middleware('admin');
 
 Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
 

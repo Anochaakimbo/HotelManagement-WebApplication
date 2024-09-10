@@ -9,8 +9,7 @@ class rooms extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'capacity',
+        'room_number',
         'description',
     ];
     public function bookings()
@@ -28,6 +27,10 @@ public function billings()
 public function roomType()
 {
     return $this->belongsTo(RoomType::class, 'room_type_id');
+}
+public function getRoomPriceAttribute()
+{
+    return $this->roomType->room_price ?? 0; // หากไม่มี room_type จะให้ราคาเป็น 0
 }
 protected static function boot()
     {

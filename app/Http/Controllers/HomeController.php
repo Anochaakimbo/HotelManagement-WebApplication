@@ -17,7 +17,8 @@ class HomeController extends Controller
         }
     }
     public function page(){
-        return view ('admin.adminpage');
+         $bookings = Booking::withTrashed()->get();
+        return view('admin.adminpage', compact('bookings'));
     }
 
     public function guest(){

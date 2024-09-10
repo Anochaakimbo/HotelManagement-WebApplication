@@ -21,7 +21,6 @@ class AdminComtroller extends Controller
     {
         $booking = Booking::findOrFail($id);
 
-        // เปลี่ยนสถานะการจองเป็น "จองสำเร็จ"
         $booking->status = 'จองสำเร็จ';
         $booking->save();
 
@@ -43,20 +42,10 @@ class AdminComtroller extends Controller
         $guest->delete();
     }
 
-    // ลบ User ที่สร้างขึ้นจาก Guest
-    $user = User::where('email', $guest->email)->first();
-    if ($user) {
-        $user->delete();
-    }
-
-    // เปลี่ยนสถานะห้องให้เป็นว่าง (is_available = 1)
     $room->is_available = 1;
     $room->save();
-
-    // ลบการจอง
     $booking->delete();
 
-    // Redirect กลับไปที่หน้า booking list หรือหน้าอื่น ๆ หลังจากลบสำเร็จ
     return redirect()->back()->with('message', 'Booking deleted and room is now available.');
 }
 
@@ -84,7 +73,12 @@ class AdminComtroller extends Controller
         $booking->room->user_id = $user->id;
         $booking->room->save();
 
-        return redirect()->back()->with('message', 'User created and assigned to room successfully.');
+        $guest = $booking->guest;
+        if ($guest) {
+        $guest->delete();
+        }
+        $booking->delete();
+        return redirect()->route('booking')->with('message', 'User created and assigned to room successfully.');
     }
     public function index()
     {

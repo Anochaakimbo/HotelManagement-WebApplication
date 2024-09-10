@@ -22,16 +22,17 @@
 <div class="content">
     <!-- Header -->
     <div class="header">
-        <div class="user-info">หน้าโฮมนะ กดจาก โลโก้</div>
+        <div class="user-info">
         <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
             @csrf
             <button @click.prevent="$root.submit();" class="ml-4">
                 {{ __('ล็อคเอาท์') }}
             </button>
         </form>
+    </div>
         <div class="user-info dropdown">
             <!-- ปุ่มสำหรับ dropdown -->
-            <span class="dropbtn">ผู้ใช้: {{ Auth::user()->name }}</span>
+            <span class="dropbtn">User: {{ Auth::user()->name }}</span>
             <!-- เนื้อหาของ dropdown -->
             <div class="dropdown-content">
                 <div class="block px-4 py-2 text-xs text-gray-400">
@@ -39,4 +40,7 @@
                 </div>
                 <a href="{{ route('profile.show') }}">{{ __('Profile') }}</a>
     </div>
+</div>
+</div>
+
 </body>
