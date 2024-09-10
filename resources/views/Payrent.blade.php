@@ -50,11 +50,6 @@
     </div>
 @endif
 
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
 
                 
                 <h1>ชำระค่าห้อง</h1>

@@ -13,7 +13,7 @@
     <div class="sidebar">
         <a href="{{ route('home') }}">
             <img src="./img/หอ-2.png" alt="Logo" class="logo">
-        </a>        
+        </a>
     <a href="{{ route('adminpage') }}">Dashboard</a>
     <a href="{{ route('guestpage') }}">Guest</a>
     <a href="{{ route('customerproblem') }}">Customer problem</a>
@@ -56,11 +56,6 @@
     </div>
 @endif
 
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
 
 <form action="{{ route('EASYOKOK') }}" method="POST">
     @csrf
@@ -70,16 +65,16 @@
             <option value="{{ $room->id }}">ห้อง {{ $room->room_number }} - ผู้ใช้: {{ $room->user->name }}</option>
         @endforeach
     </select>
-    
+
     <label for="water_units">หน่วยน้ำที่ใช้:</label>
     <input type="number" id="water_units" name="water_units" min="0" required>
-    
+
     <label for="electric_units">หน่วยไฟที่ใช้:</label>
     <input type="number" id="electric_units" name="electric_units" min="0" required>
-    
+
     <label for="room_price">ค่าห้อง:</label>
     <input type="number" id="room_price" name="room_price" required>
-    
+
     <button type="submit">ส่งค่าห้อง</button>
 </form>
 
