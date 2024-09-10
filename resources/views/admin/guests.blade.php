@@ -9,7 +9,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="{{ route('home') }}">
@@ -42,13 +41,4 @@
                 <a href="{{ route('profile.show') }}">{{ __('Profile') }}</a>
     </div>
 </body>
-=======
-    <h1>Guest Admin</h1>
-</body>
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-</html>
->>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49
+
