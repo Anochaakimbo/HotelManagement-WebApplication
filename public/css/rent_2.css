@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     background-color: #F5F0EB;
+
 }
 
 header {
@@ -73,52 +74,74 @@ nav ul li a {
 }
 
 .step.active .step-line {
-    background: linear-gradient(to right, #b0904e 25%, #ddd 75%);
+    background: linear-gradient(to right, #b0904e 50%, #ddd 50%);
 }
 
-.form-section label{
-    font-size: large;
-    width: 150px;
-    float: left;
-    text-align: right;
-    margin-right:5px;
-}
-
-.form-section input{
-    width: 200px;
-    height: 25px;
-}
-
-.form-section h2 {
-    font-size: 24px;
+.container {
     margin: 50px;
+    margin-left:auto ;
+    margin-right: auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
     text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
+.payment-option {
+    margin-bottom: 20px;
+}
 
-form {
+.option-btn {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 800px; 
-    margin: 0 auto;
-    gap: 60px 10px;
-}
-
-.btn {
-    width: 202px;
-    height: 51px;
-    background-color: #c9a94b;
-    color: white;
-    border-radius: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
     cursor: pointer;
-    align-self: flex-end;
-    margin-left: auto;
-    text-decoration: none;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
+.option-btn img {
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.option-btn span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.option-btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.next-button {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.next-button button {
+    width: 120px;
+    padding: 15px;
+    background-color: #b0904e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.next-button button:hover {
     background-color: #916d39;
 }

@@ -24,10 +24,22 @@
         </nav>
     </header>
     <div class="step-progress">
-        <div class="step active">1</div>
-        <div class="step">2</div>
-        <div class="step">3</div>
-        <div class="step">4</div>
+        <div class="step active">
+            <div class="step-line"></div>
+            <div class="step-circle">1</div>
+        </div>
+        <div class="step">
+            <div class="step-line"></div>
+            <div class="step-circle">2</div>
+        </div>
+        <div class="step">
+            <div class="step-line"></div>
+            <div class="step-circle">3</div>
+        </div>
+        <div class="step">
+            <div class="step-line"></div>
+            <div class="step-circle">4</div>
+        </div>
     </div>
 
     <div class="form-section">
@@ -57,7 +69,7 @@
             <label for="deposit">ค่าประกัน :</label>
             <input type="text" id="deposit" name="deposit" required>
 
-            <button type="submit">ต่อไป</button>
+            <a href="{{ route('rent_2') }}" class="btn">ต่อไป</a>
         </form>
     </div>
 </body>

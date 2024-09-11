@@ -43,4 +43,8 @@ Route::get('/Roomdetail_Guest', function () {
 
 Route::get('/Rent_1', function () {
     return view('rent_1');
-});
+})->name('rent_1');;
+
+Route::get('/Rent_2', function () {
+    return view('rent_2');
+})->name('rent_2');
