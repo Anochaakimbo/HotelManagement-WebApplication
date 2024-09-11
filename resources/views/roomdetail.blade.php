@@ -69,7 +69,7 @@
                     <p>ค่าห้อง: </p>
                     <p>ค่ามัดจำ: </p>
                 </div>
-                <button class="book-room">จองห้อง</button>
+                <a href="{{ route('selectbook') }}" class="btn">จองห้อง</a>
             </section>
     </div>
 </body>

@@ -93,9 +93,7 @@
             <button>...</button>
             <button>หน้าสุดท้าย</button>
         </div>
-        <div class="continue">
-            <button>ต่อไป</button>
-        </div>
+        <a href="{{ route('rent_1') }}" class="btn">ต่อไป</a>
     </main>
 </body>
 </html>

@@ -101,17 +101,21 @@ nav ul li a {
     margin-bottom: 10px;
 }
 
-.book-room {
+.btn {
+    margin-left: 5%;
     width: 202px;
     height: 51px;
     background-color: #c9a94b;
     color: white;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin-left: 20px;
+    align-self: flex-end;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 
-.book-room:hover {
-    background-color: #b8903d;
+.btn:hover {
+    background-color: #916d39;
 }

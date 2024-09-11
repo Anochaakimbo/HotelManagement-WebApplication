@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/rent_2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/rent_3.css') }}">
 </head>
 <body>
     <header>
@@ -32,7 +32,7 @@
             <div class="step-line"></div>
             <div class="step-circle">2</div>
         </div>
-        <div class="step">
+        <div class="step active">
             <div class="step-line"></div>
             <div class="step-circle">3</div>
         </div>
@@ -42,21 +42,30 @@
         </div>
     </div>
 
-    <div class="container">
-        <h2>เลือกประเภทจ่ายค่าจอง</h2>
+    <h2>ใบเสร็จชำระเงิน</h2>
 
-        <div class="payment-option">
-            <button class="option-btn">
-                <img src="./img/creditcard.png" alt="Credit/Debit Card">
-                <span>บัตรเครดิต/เดบิต</span>
-            </button>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ชื่อ</th>
+                    <th>เลขห้อง</th>
+                    <th>ประเภทของห้อง</th>
+                    <th>ระยะสัญญา</th>
+                    <th>ช่องทางชำระเงิน</th>
+                    <th>ยอดชำระ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>อรรถนนท์</td>
+                    <td>502</td>
+                    <td>เตียงเดี่ยว</td>
+                    <td>12 เดือน</td>
+                    <td>สแกนคิวอาร์โค้ด</td>
+                    <td>7,000 บาท</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <div class="payment-option">
-            <button class="option-btn">
-                <img src="./img/qrcode.png" alt="QR Code">
-                <span>สแกนคิวอาร์โค้ด</span>
-            </button>
-        </div>
-        <a href="{{ route('rent_3') }}" class="btn">ต่อไป</a>
-    </div>
+
+    <a href="{{ route('rent_3') }}" class="btn">ต่อไป</a>

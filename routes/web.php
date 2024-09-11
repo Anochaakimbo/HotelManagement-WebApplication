@@ -35,11 +35,11 @@ route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->na
 
 Route::get('/select', function () {
     return view('selectbook');
-});
+})->name('selectbook');
 
 Route::get('/Roomdetail_Guest', function () {
     return view('roomdetail');
-});
+})->name('roomdetail');
 
 Route::get('/Rent_1', function () {
     return view('rent_1');
@@ -48,3 +48,7 @@ Route::get('/Rent_1', function () {
 Route::get('/Rent_2', function () {
     return view('rent_2');
 })->name('rent_2');
+
+Route::get('/Rent_3', function () {
+    return view('rent_3');
+})->name('rent_3');

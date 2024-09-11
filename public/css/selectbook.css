@@ -121,3 +121,22 @@ button.now{
 tbody tr:hover{
     background-color: rgb(216, 215, 215);
 }
+
+.btn {
+    width: 202px;
+    height: 51px;
+    background-color: #c9a94b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-left: auto;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.btn:hover {
+    background-color: #916d39;
+}
