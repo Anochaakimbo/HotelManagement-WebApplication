@@ -6,9 +6,8 @@ use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\AdminComtroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\Roomdetailcontroller;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,9 +24,7 @@ Route::middleware([
     Route::get('/Report', function () {
         return view('Report');})->name('Report');
         Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
-    Route::get('/Roomdetails', function () {
-        return view('Roomdetails');
-    })->name('Roomdetails');
+        Route::get('/Roomdetails', [Roomdetailcontroller::class, 'showRoomdetail'])->name('Roomdetails');
 });
 
 Route::post('/SendBillingToUser', [ChargeController::class, 'calculate'])->name('EASYOKOK');

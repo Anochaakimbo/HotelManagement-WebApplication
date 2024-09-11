@@ -30,7 +30,6 @@
             </button>
         </form>
     </div>
-<<<<<<< HEAD
         <div class="user-info dropdown">
             <!-- ปุ่มสำหรับ dropdown -->
             <span class="dropbtn">User: {{ Auth::user()->name }}</span>
@@ -45,11 +44,3 @@
 </div>
 
 </body>
-=======
-    @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-</x-app-layout>
->>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49

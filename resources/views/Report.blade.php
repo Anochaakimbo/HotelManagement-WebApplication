@@ -29,7 +29,7 @@
                 <label for="room">ห้อง</label>
                 <input type="text" id="room" name="room" value="A502" readonly>
 
-                 <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
+                <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
                 <select id="main-category" name="main-category">
                     <option value="">เลือกหมวดงานซ่อมหลัก</option>
                     <option value="aircon">เครื่องปรับอากาศ (แอร์)</option>

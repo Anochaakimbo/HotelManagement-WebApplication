@@ -32,6 +32,20 @@ public function getRoomPriceAttribute()
 {
     return $this->roomType->room_price ?? 0; // หากไม่มี room_type จะให้ราคาเป็น 0
 }
+public function getRoomWaterUnit()
+{
+    return $this->roomType->water_unit ?? 0;
+}
+public function getRoomElectricUnit()
+{
+    return $this->roomType->electric_unit ?? 0;
+}
+
+public function getRoomDesription(){
+    return $this->roomType->room_description ?? '';
+}
+
+
 protected static function boot()
     {
         parent::boot();

@@ -87,14 +87,5 @@
         </div>
     </div>
 </body>
-<<<<<<< HEAD
+</html>
 
-</html>
-=======
-@if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-</html>
->>>>>>> b8fa68c75a1e1d11083af8849620d21a9b994f49
