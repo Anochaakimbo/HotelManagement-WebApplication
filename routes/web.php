@@ -35,13 +35,8 @@ route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->na
 
 Route::get('/select', function () {
     return view('selectbook');
-<<<<<<< HEAD
-    });
-
-=======
 });
 
 Route::get('/Roomdetail_Guest', function () {
     return view('roomdetail');
 });
->>>>>>> 5a256be97468ac527b0aeb0fa5b772b9d5253522
