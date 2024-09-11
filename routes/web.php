@@ -40,3 +40,7 @@ Route::get('/select', function () {
 Route::get('/Roomdetail_Guest', function () {
     return view('roomdetail');
 });
+
+Route::get('/Rent_1', function () {
+    return view('rent_1');
+});
