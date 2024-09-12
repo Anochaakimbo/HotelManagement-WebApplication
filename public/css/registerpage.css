@@ -1,0 +1,74 @@
+
+body{
+    background-color: #FFF7EC;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0; 
+}
+
+.registerbox{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    height: auto;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.registerbox img{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.head{
+    text-align: center;
+    color: #000000;
+}
+
+.register{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button.register {
+    display: flex;
+    width: 100%; 
+    height: 50px; 
+    font-size: x-large; 
+    padding: 1%; 
+    justify-content: center;
+    align-items: center; 
+    background-color: #FFF7EC;
+    transition: 0.2s;
+    border-radius: 25px;
+}
+
+button.register:hover{
+    background-color: #ffecd2;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+input{
+    width: 100%;
+    height: auto;
+    font-size: xx-large;
+    margin-bottom: 5%;  
+}
+
+.haveAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    color: black;
+}
