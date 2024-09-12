@@ -37,9 +37,17 @@ Route::get('/select', function () {
     return view('selectbook');
 })->name('selectbook');
 
-Route::get('/Roomdetail_Guest', function () {
-    return view('roomdetail');
-})->name('roomdetail');
+Route::get('/Roomdetail_Guest_SingleBed', function () {
+    return view('roomdetail-1');
+})->name('roomdetail-1');
+
+Route::get('/Roomdetail_Guest_TwoBed', function () {
+    return view('roomdetail-2');
+})->name('roomdetail-2');
+
+Route::get('/Roomdetail_Guest_PremiumBed', function () {
+    return view('roomdetail-3');
+})->name('roomdetail-3');
 
 Route::get('/Rent_1', function () {
     return view('rent_1');
