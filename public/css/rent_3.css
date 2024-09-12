@@ -77,6 +77,26 @@ nav ul li a {
     background: linear-gradient(to right, #b0904e 50%, #ddd 50%);
 }
 
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+th,td {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid #b0904e;
+}
+
+
+
 .btn {
     width: 202px;
     height: 51px;

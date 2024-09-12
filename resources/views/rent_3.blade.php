@@ -68,4 +68,7 @@
         </table>
 
 
-    <a href="{{ route('rent_3') }}" class="btn">ต่อไป</a>
+    <a href="{{ route('rent_4') }}" class="btn">ต่อไป</a>
+
+</body>
+</html>

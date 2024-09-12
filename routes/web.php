@@ -52,3 +52,7 @@ Route::get('/Rent_2', function () {
 Route::get('/Rent_3', function () {
     return view('rent_3');
 })->name('rent_3');
+
+Route::get('/Rent_4', function () {
+    return view('rent_4');
+})->name('rent_4');

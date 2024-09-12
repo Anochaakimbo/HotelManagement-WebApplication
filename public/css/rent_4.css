@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     background-color: #F5F0EB;
+
 }
 
 header {
@@ -73,35 +74,66 @@ nav ul li a {
 }
 
 .step.active .step-line {
-    background: linear-gradient(to right, #b0904e 25%, #ddd 75%);
+    background: #b0904e;
 }
 
-.form-section label{
-    font-size: large;
-    width: 150px;
-    float: left;
-    text-align: right;
-    margin-right:5px;
+.payment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.form-section input{
-    width: 200px;
-    height: 25px;
-}
-
-.form-section h2 {
-    font-size: 24px;
+h2 {
+    text-align: center;
     margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.qr-code {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
+.qr-code img {
+    width: 225px;
+    height: auto;
+}
 
-form {
+.amount {
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.note {
+    font-size: 12px;
+    color: #666;
+}
+
+.slip {
+    background-color: white;
+    border: 1px solid #d3a944;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: #333;
+    display: inline-block;
+    text-align: center;
+}
+
+.slip:hover {
+    background-color: #f0f0f0;
+}
+
+footer {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 800px; 
-    margin: 0 auto;
-    gap: 60px 10px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .btn {
@@ -111,8 +143,6 @@ form {
     color: white;
     border-radius: 8px;
     cursor: pointer;
-    align-self: flex-end;
-    margin-left: auto;
     text-decoration: none;
     display: flex;
     justify-content: center; 

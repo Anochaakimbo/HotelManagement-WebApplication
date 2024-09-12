@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/rent_2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/rent_4.css') }}">
 </head>
 <body>
     <header>
@@ -32,33 +32,29 @@
             <div class="step-line"></div>
             <div class="step-circle">2</div>
         </div>
-        <div class="step">
+        <div class="step active">
             <div class="step-line"></div>
             <div class="step-circle">3</div>
         </div>
-        <div class="step">
+        <div class="step active">
             <div class="step-line"></div>
             <div class="step-circle">4</div>
         </div>
     </div>
-
-    <div class="container">
-        <h2>เลือกประเภทจ่ายค่าจอง</h2>
-
-        <div class="payment-option">
-            <button class="option-btn">
-                <img src="./img/creditcard.png" alt="Credit/Debit Card">
-                <span>บัตรเครดิต/เดบิต</span>
-            </button>
+    
+    <section class="payment-section">
+        <h2>สแกนคิวอาร์โค้ด</h2>
+        <div class="qr-code">
+            <img src="./img/qr code pay.png" alt="QR Code">
+            <div class="amount">ยอดชำระ: 7000 บาท</div>
+            <div class="amount">แนบสลิปการโอนเงิน:</div>
+            <input type="file" id="file-upload" class="slip" >
+            <p class="note">*หมายเหตุ กรุณาแนบสลิปการโอนเงินไม่เช่นนั้นจะถือว่าการชำระไม่สำเร็จ</p>
+            
         </div>
-
-        <div class="payment-option">
-            <button class="option-btn">
-                <img src="./img/qrcode.png" alt="QR Code">
-                <span>สแกนคิวอาร์โค้ด</span>
-            </button>
-        </div>
-        <a href="{{ route('rent_3') }}" class="btn">ต่อไป</a>
-    </div>
+    </section>
+    <footer>
+        <a href="{{ route('rent_4') }}" class="btn">ยืนยัน</a>
+    </footer>
 </body>
 </html>
