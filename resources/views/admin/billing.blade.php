@@ -11,25 +11,25 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="./img/หอ-2.png" alt="Logo" class="logo">
+        <a href="{{ route('home') }}">
+            <img src="./img/หอ-2.png" alt="Logo" class="logo">
+        </a>
     <a href="{{ route('adminpage') }}">Dashboard</a>
     <a href="{{ route('guestpage') }}">Guest</a>
     <a href="{{ route('customerproblem') }}">Customer problem</a>
     <a href="{{ route('booking') }}">Booking</a>
-    <a href="{{ route('adminbilling') }}">Billing</a>
+    <a href="{{ route('adminbilling') }}"class="active">Billing</a>
 </div>
 <!-- Content -->
 <div class="content">
     <!-- Header -->
     <div class="header">
-        <div class="user-info">
         <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
             @csrf
             <button @click.prevent="$root.submit();" class="ml-4">
                 {{ __('ล็อคเอาท์') }}
             </button>
         </form>
-    </div>
         <div class="user-info dropdown">
             <!-- ปุ่มสำหรับ dropdown -->
             <span class="dropbtn">User: {{ Auth::user()->name }}</span>
@@ -41,7 +41,5 @@
                 <a href="{{ route('profile.show') }}">{{ __('Profile') }}</a>
     </div>
 </div>
-</div>
-
 </body>
-
+</html>

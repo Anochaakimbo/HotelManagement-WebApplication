@@ -35,7 +35,7 @@ route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->na
 
 Route::get('/select', function () {
     return view('selectbook');
-});
+})->name('selectbook');
 
 Route::get('/Roomdetail_Guest', function () {
     return view('roomdetail');
