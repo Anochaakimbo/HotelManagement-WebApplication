@@ -33,6 +33,21 @@ route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->na
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
 
+route::get('/customerproblem',function (){
+    return view('admin.csp');
+})->name('customerproblem');
+
+
+route::get('/bookingadmin',function (){
+    return view('admin.booking');
+})->name('booking');
+
+
+route::get('/billingadmin',function (){
+    return view('admin.billing');
+})->name('adminbilling');
+
+
 Route::get('/select', function () {
     return view('selectbook');
 })->name('selectbook');
