@@ -87,17 +87,30 @@ tbody tr.selected {
 
 .page {
     display: flex;
+    list-style-type: none;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+}
+.page li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 5px;
+    cursor: pointer;
+}
+.page .active {
+    background-color: black;
+    color: white;
 }
 
-.page button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    cursor: pointer;
+.page-item-t:active{
+    background-color: black;
+    color: white;
+}
+
+.page-item:active{
+    background-color: black;
+    color: white;
 }
 
 .continue {

@@ -86,26 +86,58 @@
                 </tr>
             </tbody>
         </table>
-        <div class="page">
-            <button>หน้าแรก</button>
-            <button class = "now">1</button>
-            <button>2</button>
-            <button>...</button>
-            <button>หน้าสุดท้าย</button>
-        </div>
+        <ul class="page">
+            <li data-page="first" class="page-item">หน้าแรก</li>
+            <li data-page="1" class="page-item">1</li>
+            <li data-page="2" class="page-item">2</li>
+            <li data-page="last" class="page-item">หน้าสุดท้าย</li>
+        </ul>
         <a href="{{ route('rent_1') }}" class="btn">ต่อไป</a>
     </main>
 
     <script>
-
+        // อันที่คลิ๊กเปลี่ยน สีพื้นหลัง
         const rows = document.querySelectorAll('tbody tr');
-    
         rows.forEach(row => {
             row.addEventListener('click', () => {
-                rows.forEach(r => r.classList.remove('selected')); 
+                rows.forEach(r => r.classList.remove('selected'));
                 row.classList.add('selected');
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+        let currentPage = 1; // ตั้งค่าหน้าปัจจุบัน (หน้า 2 ในตอนเริ่มต้น)
+        const pageItems = document.querySelectorAll('.page-item');
+
+        function updateActivePage(pageNum) {
+            pageItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-page') == pageNum) {
+                    item.classList.add('active');
+                }
+            });
+            currentPage = pageNum; // อัปเดตหน้าปัจจุบัน
+        }
+
+        // ตั้งค่าให้หน้าเริ่มต้นเป็นหน้าที่ถูกเลือก
+        updateActivePage(currentPage);
+
+        pageItems.forEach(item => {
+            const pageNum = item.getAttribute('data-page');
+
+            // เพิ่ม event เมื่อคลิกที่ปุ่มต่างๆ
+            item.addEventListener('click', function () {
+                if (pageNum === 'first') {
+                    // ถ้าคลิกปุ่มหน้าแรก ให้เลือกหน้า 1
+                    updateActivePage(1);
+                } else if (!isNaN(pageNum)) {
+                    // ถ้าคลิกที่ปุ่มตัวเลข ให้เปลี่ยนไปยังหน้าที่คลิก
+                    updateActivePage(parseInt(pageNum));
+                }
+            });
+        });
+    });
+
     </script>
 </body>
 </html>
