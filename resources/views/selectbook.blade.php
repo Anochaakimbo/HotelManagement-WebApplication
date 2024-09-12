@@ -95,5 +95,17 @@
         </div>
         <a href="{{ route('rent_1') }}" class="btn">ต่อไป</a>
     </main>
+
+    <script>
+
+        const rows = document.querySelectorAll('tbody tr');
+    
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                rows.forEach(r => r.classList.remove('selected')); 
+                row.classList.add('selected');
+            });
+        });
+    </script>
 </body>
 </html>

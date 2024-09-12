@@ -77,6 +77,14 @@ tbody tr:nth-child(even) {
     font-weight: bold;
 }
 
+tbody tr:hover{
+    background-color: rgb(216, 215, 215);
+}
+
+tbody tr.selected {
+    background-color: rgb(216, 215, 215);
+}
+
 .page {
     display: flex;
     justify-content: center;
@@ -116,10 +124,6 @@ button.now{
 .logo img{
     width: 100px;
     height: auto;
-}
-
-tbody tr:hover{
-    background-color: rgb(216, 215, 215);
 }
 
 .btn {

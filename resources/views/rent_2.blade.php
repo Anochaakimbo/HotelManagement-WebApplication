@@ -59,6 +59,5 @@
             </button>
         </div>
         <a href="{{ route('rent_3') }}" class="btn">ต่อไป</a>
-    </div>
 </body>
 </html>
