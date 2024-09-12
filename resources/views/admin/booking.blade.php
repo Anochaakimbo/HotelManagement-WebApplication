@@ -13,7 +13,7 @@
     <div class="sidebar">
         <a href="{{ route('home') }}">
             <img src="{{ asset('img/หอ-2.png') }}" alt="Logo" class="logo">
-        </a>        
+        </a>
     <a href="{{ route('adminpage') }}">Dashboard</a>
     <a href="{{ route('guestpage') }}">Guest</a>
     <a href="{{ route('customerproblem') }}">Customer problem</a>
@@ -42,35 +42,8 @@
     </div>
         </div>
     </div>
-    <div class="main-content">
-        <div class="room-info">
-            <div class="details">
-                BOOKING INFORMATION
-                <table border ="1" class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Room number</th>
-                        <th>Guest Name</th>
-                        <th>Booking Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($bookings as $booking)
-                            <tr>
-                                <td>
-                                    <!-- กดที่เลขห้องเพื่อไปยังหน้าที่ยืนยันการจอง -->
-                                    <a href="{{ route('admin.booking.confirm', $booking->id) }}">
-                                        {{ $booking->room->room_number }}
-                                    </a>
-                                </td>
-                                <td>{{ $booking->guest->name }}</td>
-                                <td>{{ $booking->status }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
-        </div>
-    </div>
-    
+
+
+
 </body>
