@@ -36,17 +36,17 @@
                 </div>
             </div>
         <div class="room-info">
-                <h2>เตียงเดี่ยว</h2>
+                <h2>เตียงเดี่ยวพิเศษ</h2>
                 <div class="room-description-service">
                     <div class="room-description">
                         <h3>รายละเอียดห้อง</h3>
                         <ul>
-                            <li>เตียงเดี่ยวขนาด 3.5 ฟุต</li>
+                            <li>เตียงเดี่ยวขนาด 7 ฟุต</li>
                             <li>โต๊ะและเก้าอี้แบบพรีเมียม</li>
                             <li>เฟอร์นิเจอร์-ตู้</li>
                             <li>เครื่องทำน้ำอุ่น</li>
                             <li>เครื่องปรับอากาศ</li>
-                            <li>ขนาดห้อง 28.5 ตร.ม.</li>
+                            <li>ขนาดห้อง 30 ตร.ม.</li>
                         </ul>
                     </div>
                     <div class="room-service">
