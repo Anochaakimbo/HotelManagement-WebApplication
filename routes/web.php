@@ -31,7 +31,10 @@ Route::middleware([
     })->name('Roomdetails');
 });
 
-Route::post('/SendBillingToUser', [ChargeController::class, 'calculate'])->name('EASYOKOK');
+// routes/web.php
+
+// ตรวจสอบว่าเส้นทาง 'EASYOKOK' ถูกกำหนดไว้แล้ว
+Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EASYOKOK');
 
 Route::post('/guest/book', [BookingController::class, 'create']);
 
