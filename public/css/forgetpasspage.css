@@ -1,0 +1,83 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
+body {
+    font-family: ProjectFont;
+    font-size: larger;
+    background-color: #FFF7EC;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0; 
+}
+
+.forgetpassbox{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    height: auto;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.forgetpassbox img{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description{
+    font-size: xx-large;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    font-weight: bold;
+}
+
+.forgetbutton{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input{
+    width: 100%;
+    height: auto;
+    font-size: x-large;
+    padding: 15px;
+    margin-bottom: 5%; 
+    font-family: ProjectFont;
+}
+
+button.forgetbutton:hover{
+    background-color: #916D39;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+button.forgetbutton {
+    display: flex;
+    width: 50%; 
+    height: 50px; 
+    font-size: x-large; 
+    padding: 1%; 
+    justify-content: center;
+    align-items: center; 
+    background-color: #b0904e;
+    transition: 0.2s;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    font-family: ProjectFont;
+    font-size: xx-large;
+}

@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F5F0EB;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid black;
+    background-color: #ffffff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.logo img{
+    width: 100px;
+    height: auto;
+}
+
+.step-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.step-line {
+    width: 150px;
+    height: 4px;
+    background-color: #ddd;
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    z-index: 1;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left:50px;
+    background-color: #ddd;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    z-index: 2;
+    position: relative;
+}
+
+.step.active .step-circle {
+    background-color: #b0904e; 
+    color: white;
+}
+
+.step.active .step-line {
+    background: #b0904e;
+}
+
+.payment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.qr-code {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.qr-code img {
+    width: 225px;
+    height: auto;
+}
+
+.amount {
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.note {
+    font-size: 12px;
+    color: #666;
+}
+
+.slip {
+    background-color: white;
+    border: 1px solid #d3a944;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: #333;
+    display: inline-block;
+    text-align: center;
+}
+
+.slip:hover {
+    background-color: #f0f0f0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 202px;
+    height: 51px;
+    background-color: #c9a94b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.btn:hover {
+    background-color: #916d39;
+}

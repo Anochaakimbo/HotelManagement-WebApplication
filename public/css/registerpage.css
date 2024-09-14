@@ -1,0 +1,86 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
+
+body{
+    font-family: ProjectFont;
+    font-size: larger;
+    background-color: #FFF7EC;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0; 
+}
+
+.registerbox{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: auto;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);   
+}
+
+.registerbox img{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.head{
+    text-align: center;
+    color: #000000;
+}
+
+.register{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button.register {
+    display: flex;
+    width: 50%;
+    height: 50px; 
+    font-size: x-large; 
+    padding: 1%; 
+    justify-content: center;
+    align-items: center; 
+    background-color: #b0904e;
+    color: white;
+    transition: 0.2s;
+    border-radius: 15px;
+    border: none;
+    font-family: ProjectFont;
+    font-size: xx-large;
+}
+
+button.register:hover{
+    background-color: #916D39;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+input{
+    width: 100%;
+    height: auto;
+    font-size: x-large;
+    margin-bottom: 5%;  
+}
+
+.haveAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    color: black;
+}
