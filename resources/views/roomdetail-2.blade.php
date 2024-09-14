@@ -64,12 +64,14 @@
             </div>
             </section>
             <section class="booking">
+                @foreach($rooms as $room)
                 <div class="booking-info">
-                    <p>ระยะเวลาเช่า: </p>
-                    <p>ค่าห้อง: </p>
-                    <p>ค่ามัดจำ: </p>
+                    <p>ระยะเวลาเช่า: {{ $room->contact_date }} เดือน</p>
+                    <p>ค่าห้อง: {{ $room->room_price }} บาท</p>
+                    <p>ค่ามัดจำ: {{ $room->deposit_price }} บาท</p>
                 </div>
-                <a href="{{ route('selectbook') }}" class="btn">จองห้อง</a>
+                @endforeach
+                <a href="{{ route('selectbook', ['bedType' => 'two']) }}" class="btn">จองห้อง</a>
             </section>
     </div>
 </body>

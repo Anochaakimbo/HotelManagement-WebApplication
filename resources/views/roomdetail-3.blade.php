@@ -36,7 +36,7 @@
                 </div>
             </div>
         <div class="room-info">
-                <h2>เตียงเดี่ยวพิเศษ</h2>
+                <h2>เตียงเดี่ยวพรีเมี่ยม</h2>
                 <div class="room-description-service">
                     <div class="room-description">
                         <h3>รายละเอียดห้อง</h3>
@@ -64,12 +64,14 @@
             </div>
             </section>
             <section class="booking">
+                @foreach($rooms as $room)
                 <div class="booking-info">
-                    <p>ระยะเวลาเช่า: </p>
-                    <p>ค่าห้อง: </p>
-                    <p>ค่ามัดจำ: </p>
+                    <p>ระยะเวลาเช่า: {{ $room->contact_date }} เดือน</p>
+                    <p>ค่าห้อง: {{ $room->room_price }} บาท</p>
+                    <p>ค่ามัดจำ: {{ $room->deposit_price }} บาท</p>
                 </div>
-                <a href="{{ route('selectbook') }}" class="btn">จองห้อง</a>
+                @endforeach
+                <a href="{{ route('selectbook', ['bedType' => 'pre']) }}" class="btn">จองห้อง</a>
             </section>
     </div>
 </body>

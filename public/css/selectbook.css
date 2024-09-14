@@ -145,7 +145,6 @@ button.now{
     background-color: #c9a94b;
     color: white;
     border-radius: 8px;
-    cursor: pointer;
     align-self: flex-end;
     margin-left: auto;
     text-decoration: none;
@@ -156,4 +155,8 @@ button.now{
 
 .btn:hover {
     background-color: #916d39;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }

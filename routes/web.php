@@ -4,6 +4,12 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use PHPUnit\Framework\Attributes\Group;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomtypeController;
+use App\Http\Controllers\RoompreController;
+use App\Http\Controllers\RoomsingleController;
+use App\Http\Controllers\RoomtwinController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,21 +39,13 @@ route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->na
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
 
-Route::get('/select', function () {
-    return view('selectbook');
-})->name('selectbook');
+Route::get('/selectbook', [RoomtypeController::class, 'showAvailableRooms'])->name('selectbook');
 
-Route::get('/Roomdetail_Guest_SingleBed', function () {
-    return view('roomdetail-1');
-})->name('roomdetail-1');
+Route::get('/Roomdetail_Guest_SingleBed', [RoomsingleController::class, 'showSingleBed'])->name('roomdetail-1');
 
-Route::get('/Roomdetail_Guest_TwoBed', function () {
-    return view('roomdetail-2');
-})->name('roomdetail-2');
+Route::get('/Roomdetail_Guest_TwoBed', [RoomtwinController::class, 'showTwinBed'])->name('roomdetail-2');
 
-Route::get('/Roomdetail_Guest_PremiumBed', function () {
-    return view('roomdetail-3');
-})->name('roomdetail-3');
+Route::get('/Roomdetail_Guest_PremiumBed', [RoompreController::class, 'showPremiumBed'])->name('roomdetail-3');
 
 Route::get('/Rent_1', function () {
     return view('rent_1');

@@ -25,17 +25,18 @@
 
     <main>
         <div class="filter">
-            <select>
+            <select id="filterStatus">
                 <option value="ทั้งหมด">ทั้งหมด</option>
                 <option value="ว่าง">ว่าง</option>
                 <option value="ไม่ว่าง">ไม่ว่าง</option>
             </select>
         </div>
+
+        
         <h2>เลือกห้องที่ต้องการจอง</h2>
         <table>
             <thead>
                 <tr>
-                    <th>ลำดับ</th>
                     <th>เลขห้อง</th>
                     <th>ประเภทห้อง</th>
                     <th>ชั้น</th>
@@ -43,101 +44,115 @@
                     <th>สถานะห้อง</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>A101</td>
-                    <td>เตียงเดี่ยว</td>
-                    <td>1</td>
-                    <td>5000</td>
-                    <td class="available">ว่าง</td>
+            <tbody id="roomTable">
+                @foreach($rooms as $index => $room)
+                <tr data-room-type="{{ $room->roomType->room_description }}" 
+                    data-room-status="{{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }}">
+
+                    <td>{{ $room->room_number }}</td> <!-- เลขห้อง -->
+                    <td>
+                        @if($room->roomType->room_description === 'Pre')
+                            Premium Bed
+                        @elseif($room->roomType->room_description === 'Sing')
+                            Single Bed
+                        @elseif($room->roomType->room_description === 'Two')
+                            Two Bed
+                        @else
+                            {{ $room->roomType->room_description }}
+                        @endif
+                    </td> <!-- ประเภทห้อง -->
+                    <td>{{ $room->floor }}</td> <!-- ชั้น -->
+                    <td>{{ $room->roomType->room_price }}</td> <!-- ราคา -->
+                    <td class="{{ $room->is_available ? 'available' : 'unavailable' }}">
+                        {{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }} <!-- สถานะห้อง -->
+                    </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>A202</td>
-                    <td>เตียงเดี่ยว</td>
-                    <td>2</td>
-                    <td>5000</td>
-                    <td class="available">ว่าง</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>B103</td>
-                    <td>เตียงคู่</td>
-                    <td>1</td>
-                    <td>6000</td>
-                    <td class="unavailable">ไม่ว่าง</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>K304</td>
-                    <td>เตียงคิงไซส์</td>
-                    <td>3</td>
-                    <td>6500</td>
-                    <td class="unavailable">ไม่ว่าง</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>K305</td>
-                    <td>เตียงคิงไซส์</td>
-                    <td>3</td>
-                    <td>6500</td>
-                    <td class="available">ว่าง</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
-        <ul class="page">
-            <li data-page="first" class="page-item">หน้าแรก</li>
-            <li data-page="1" class="page-item">1</li>
-            <li data-page="2" class="page-item">2</li>
-            <li data-page="last" class="page-item">หน้าสุดท้าย</li>
-        </ul>
         <a href="{{ route('rent_1') }}" class="btn">ต่อไป</a>
     </main>
-
     <script>
-        // อันที่คลิ๊กเปลี่ยน สีพื้นหลัง
-        const rows = document.querySelectorAll('tbody tr');
+        document.addEventListener('DOMContentLoaded', function () {
+        
+        function getBedTypeFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('bedType'); // รับค่า bedType จาก URL
+        }
+    
+        const bedType = getBedTypeFromUrl(); // รับค่าประเภทเตียงจาก URL
+        console.log("Selected bed type: ", bedType); // ตรวจสอบค่า bedType ใน console
+    
+        const rows = document.querySelectorAll('#roomTable tr'); // เลือกทุกแถวในตาราง
+        const filterStatus = document.getElementById('filterStatus'); // ตัวกรองสถานะห้อง
+        const nextLink = document.querySelector('.btn'); // ลิงก์ "ต่อไป"
+    
+        function filterRooms() {
+            const selectedStatus = filterStatus.value; // รับค่าที่เลือกในฟิลเตอร์ ('ว่าง', 'ไม่ว่าง', 'ทั้งหมด')
+            console.log("Selected status: ", selectedStatus); // ตรวจสอบค่า selectedStatus ใน console
+    
+            rows.forEach(row => {
+                const roomType = row.dataset.roomType; // ดึงค่าประเภทห้องจาก data-room-type
+                const roomStatus = row.dataset.roomStatus; // ดึงค่าสถานะห้องจาก data-room-status
+    
+                console.log("Room Type: ", roomType, "Room Status: ", roomStatus);
+    
+                // เงื่อนไขการแสดงผลตามประเภทเตียงและสถานะห้อง
+                const showByBedType = (bedType === 'sing' && roomType === 'Single Bed') ||
+                                      (bedType === 'two' && roomType === 'Two Bed') ||
+                                      (bedType === 'pre' && roomType === 'Premium Bed');
+    
+                const showByStatus = filterByRoomStatus(roomStatus, selectedStatus);
+    
+                // แสดงเฉพาะแถวที่ตรงกับประเภทเตียงและสถานะห้อง
+                if (showByStatus) {
+                    row.style.display = ''; // แสดงแถวที่ตรง
+                } else {
+                    row.style.display = 'none'; // ซ่อนแถวที่ไม่ตรง
+                }
+            });
+        }
+    
+        // ฟังก์ชันเพื่อกรองตามสถานะห้อง
+        function filterByRoomStatus(roomStatus, selectedStatus) {
+            if (selectedStatus === 'ทั้งหมด') {
+                return true; // แสดงทุกห้องถ้าเลือก 'ทั้งหมด'
+            }
+    
+            // เงื่อนไขการกรองสถานะห้อง
+            return roomStatus === selectedStatus;
+        }
+    
+        // เรียกใช้ฟังก์ชันกรองเมื่อหน้าโหลดเสร็จ
+        filterRooms();
+    
+        // เรียกใช้ฟังก์ชันกรองเมื่อมีการเปลี่ยนแปลงค่าในฟิลเตอร์สถานะห้อง
+        filterStatus.addEventListener('change', filterRooms);
+    
+        // ฟังก์ชันสำหรับคลิกแถวเพื่อเปลี่ยนสีพื้นหลังและเช็คสถานะห้อง
         rows.forEach(row => {
             row.addEventListener('click', () => {
+                const roomStatus = row.dataset.roomStatus;
+    
+                // เอาคลาส 'selected' ออกจากแถวอื่น
                 rows.forEach(r => r.classList.remove('selected'));
+                // เพิ่มคลาส 'selected' ให้กับแถวที่คลิก
                 row.classList.add('selected');
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-        let currentPage = 1; // ตั้งค่าหน้าปัจจุบัน (หน้า 2 ในตอนเริ่มต้น)
-        const pageItems = document.querySelectorAll('.page-item');
-
-        function updateActivePage(pageNum) {
-            pageItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-page') == pageNum) {
-                    item.classList.add('active');
-                }
-            });
-            currentPage = pageNum; // อัปเดตหน้าปัจจุบัน
-        }
-
-        // ตั้งค่าให้หน้าเริ่มต้นเป็นหน้าที่ถูกเลือก
-        updateActivePage(currentPage);
-
-        pageItems.forEach(item => {
-            const pageNum = item.getAttribute('data-page');
-
-            // เพิ่ม event เมื่อคลิกที่ปุ่มต่างๆ
-            item.addEventListener('click', function () {
-                if (pageNum === 'first') {
-                    // ถ้าคลิกปุ่มหน้าแรก ให้เลือกหน้า 1
-                    updateActivePage(1);
-                } else if (!isNaN(pageNum)) {
-                    // ถ้าคลิกที่ปุ่มตัวเลข ให้เปลี่ยนไปยังหน้าที่คลิก
-                    updateActivePage(parseInt(pageNum));
+    
+                // เช็คสถานะห้อง: ถ้าไม่ว่าง ให้ disable ลิงก์ "ต่อไป"
+                if (roomStatus === 'ไม่ว่าง') {
+                    nextLink.style.pointerEvents = 'none'; // ปิดการคลิก
+                    nextLink.style.opacity = '0.5'; // ทำให้ลิงก์จางลงเพื่อให้เห็นว่าไม่สามารถกดได้
+                    nextLink.style.cursor = 'not-allowed'; // เปลี่ยนเคอร์เซอร์เมื่อไม่สามารถกดได้
+                } else {
+                    nextLink.style.pointerEvents = 'auto'; // เปิดการคลิก
+                    nextLink.style.opacity = '1'; // คืนค่าลิงก์ให้กดได้
+                    nextLink.style.cursor = 'pointer'; // เปลี่ยนเคอร์เซอร์ให้กลับมากดได้
                 }
             });
         });
-    });
-
+    
+        });
     </script>
 </body>
 </html>
