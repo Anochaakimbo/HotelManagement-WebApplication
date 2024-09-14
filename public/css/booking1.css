@@ -1,4 +1,11 @@
 /* ตาราง */
+
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
 .styled-table {
     border-collapse: collapse;
     margin: 25px 0;
@@ -45,10 +52,11 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     background-color: #f5f5f5;
     display: flex;
     height: 100vh;
+    font-family: ProjectFont;
+    font-size: large;
 }
 
 /* Sidebar */
@@ -117,6 +125,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: ProjectFont;
 }
 
 .logout-button:hover {
@@ -184,10 +193,72 @@ body {
 }
 .header button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 24px;
     background-color: #f7b366;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: ProjectFont;
+}
+
+.header button:hover{
+    transition: 0.2s;
+    background-color: #f28a40;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.submitbutton{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    background-color: #f7b366;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: large;
+}
+
+.submitbutton:hover{
+    transition: 0.2s;
+    background-color: #f28a40;
+    cursor: pointer;
+}
+
+label{
+    font-size: 32px;
 }

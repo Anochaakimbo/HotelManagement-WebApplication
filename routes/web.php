@@ -15,7 +15,6 @@ use App\Http\Controllers\RoompreController;
 use App\Http\Controllers\RoomsingleController;
 use App\Http\Controllers\RoomtwinController;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -44,6 +43,22 @@ Route::middleware([
 Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EASYOKOK');
 Route::post('/guest/book', [BookingController::class, 'create']);
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
+
+// Routes from arnoldtest2 branch
+route::get('/home',[HomeController::class,'index'])->name('home');
+Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
+route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
+route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
+route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
+route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
+
+// Merged route for selectbook and bookings
+Route::get('/select', function () {
+    $rooms = rooms::all();
+    $bookings = Booking::all();
+    return view('selectbook', ['rooms' => $rooms], ['bookings' => $bookings]);
+})->name('select');
+
 Route::post('/guest/bookings/{booking}/pay', [BookingController::class, 'pay']);
 
 // Admin routes
@@ -91,8 +106,8 @@ Route::get('/Rent_4', function () {
     return view('rent_4');
 })->name('rent_4');
 
-Route::get('/select', function () {
-    $rooms = rooms::all();
-    $bookings = Booking::all();
-    return view('selectbook', ['rooms' => $rooms], ['bookings' => $bookings]);
-})->name('select');
+// Additional routes from arnoldtest2 branch
+Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');    
+Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
+Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
+Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');

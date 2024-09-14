@@ -19,6 +19,8 @@
         <a href="{{ route('customerproblem') }}">Customer problem</a>
         <a href="{{ route('booking') }}">Booking</a>
         <a href="{{ route('adminbilling') }}" class="active">Billing</a>
+        <a href="{{ route('roomdetail') }}">Room Detail</a>
+        <a href="{{ route('Addroom') }}">Add Room</a>
     </div>
 
     <!-- Content -->

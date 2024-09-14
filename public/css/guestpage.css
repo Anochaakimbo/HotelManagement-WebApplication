@@ -1,7 +1,14 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
 body{ /*สำหรับคอมนะจ๊ะ*/
     margin: 0;
     padding: 0;
     background-color: #FFF7EC;
+    font-family: ProjectFont;
 }
 
 html{
@@ -180,6 +187,10 @@ footer ul li{
     width: auto;
     height: auto;
     margin-left: 15%;
+}
+
+ul li{
+    font-size: xx-large;
 }
 
 

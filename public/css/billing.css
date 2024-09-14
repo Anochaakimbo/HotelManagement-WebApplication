@@ -1,7 +1,14 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: ProjectFont;
+    font-size: large;
 }
 
 body {
@@ -120,11 +127,17 @@ body {
 }
 .header button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 24px;
     background-color: #f7b366;
     color: white;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.header button:hover{
+    transition: 0.2s;
+    background-color: #f28a40;
     cursor: pointer;
 }
 .header {
