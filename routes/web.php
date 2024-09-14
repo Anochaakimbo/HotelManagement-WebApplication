@@ -4,6 +4,12 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use PHPUnit\Framework\Attributes\Group;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomtypeController;
+use App\Http\Controllers\RoompreController;
+use App\Http\Controllers\RoomsingleController;
+use App\Http\Controllers\RoomtwinController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,28 +39,26 @@ route::get('/adminpage',[HomeController::class,'page'])->Middleware('admin')->na
 
 route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
 
-route::get('/customerproblem',function (){
+Route::get('/selectbook', [RoomtypeController::class, 'showAvailableRooms'])->name('selectbook');
+
+Route::get('/Roomdetail_Guest_SingleBed', [RoomsingleController::class, 'showSingleBed'])->name('roomdetail-1');
+
+Route::get('/Roomdetail_Guest_TwoBed', [RoomtwinController::class, 'showTwinBed'])->name('roomdetail-2');
+
+Route::get('/customerproblem', function () {
     return view('admin.csp');
 })->name('customerproblem');
 
-
-route::get('/bookingadmin',function (){
+Route::get('/bookingadmin', function () {
     return view('admin.booking');
 })->name('booking');
 
-
-route::get('/billingadmin',function (){
+Route::get('/billingadmin', function () {
     return view('admin.billing');
 })->name('adminbilling');
 
 
-Route::get('/select', function () {
-    return view('selectbook');
-})->name('selectbook');
-
-Route::get('/Roomdetail_Guest', function () {
-    return view('roomdetail');
-})->name('roomdetail');
+Route::get('/Roomdetail_Guest_PremiumBed', [RoompreController::class, 'showPremiumBed'])->name('roomdetail-3');
 
 Route::get('/Rent_1', function () {
     return view('rent_1');
