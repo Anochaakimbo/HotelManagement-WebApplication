@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F5F0EB;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid black;
+    background-color: #ffffff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.logo img{
+    width: 100px;
+    height: auto;
+}
+
+.step-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.step-line {
+    width: 150px;
+    height: 4px;
+    background-color: #ddd;
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    z-index: 1;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left:50px;
+    background-color: #ddd;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    z-index: 2;
+    position: relative;
+}
+
+.step.active .step-circle {
+    background-color: #b0904e; 
+    color: white;
+}
+
+.step.active .step-line {
+    background: linear-gradient(to right, #b0904e 50%, #ddd 50%);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+th,td {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid #b0904e;
+}
+
+
+
+.btn {
+    width: 202px;
+    height: 51px;
+    background-color: #c9a94b;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-left: auto;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.btn:hover {
+    background-color: #916d39;
+}

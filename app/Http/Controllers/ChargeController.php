@@ -29,21 +29,29 @@ public function showAdminForm()
     return view('admin.billing', compact('rooms', 'billings'));
 }
 
-    
-public function calculate(Request $request)
-    {
-        // รับค่าจากฟอร์ม
-        $room_id = $request->input('room_id');
-        $water_units = $request->input('water_units');
-        $electric_units = $request->input('electric_units');
 
-        // ดึงข้อมูลห้องและผู้ใช้
-        $room = rooms::with('roomType')->findOrFail($room_id);  // ดึงข้อมูล room_type ด้วย
+    public function calculate(Request $request)
+    {
+        // รับค่า room_id จากฟอร์ม
+        
+        $room_id = $request->input('room_id');
+
+        // ดึงข้อมูลห้องที่เชื่อมโยงกับ RoomType และ User
+        $room = rooms::with('roomType', 'user')->findOrFail($room_id);
+
+        // ดึงข้อมูลผู้ใช้จากห้อง
         $user = $room->user;
 
-        // ดึง room_price จาก room_type
+        // ดึง room_price จาก RoomType ที่เชื่อมโยงกับห้องนี้
         $room_price = $room->roomType->room_price;
 
+        // ดึงข้อมูลอื่น ๆ จากฟอร์ม
+        $water_units = $request->input("water_units.$room_id");
+        $electric_units = $request->input("electric_units.$room_id");
+        $request->validate([
+            "water_units.$room_id" => 'required|integer|min:0',
+            "electric_units.$room_id" => 'required|integer|min:0',
+        ]);
         // คำนวณค่าน้ำ
         if ($water_units <= 15) {
             $water_charge = 200;
@@ -56,15 +64,6 @@ public function calculate(Request $request)
 
         // คำนวณค่าใช้จ่ายรวม
         $total_charge = $water_charge + $electric_charge + $room_price;
-
-        // ตรวจสอบว่ามีการส่งข้อมูลให้ผู้ใช้นี้แล้วหรือไม่
-        $existingBilling = Billing::where('user_id', $user->id)
-            ->where('status', 'ส่งไปยังผู้ใช้แล้ว')
-            ->first();
-
-        if ($existingBilling) {
-            return redirect()->route('adminbilling')->with('error', 'ไม่สามารถส่งข้อมูลให้ผู้ใช้เดิมซ้ำได้');
-        }
 
         // บันทึกข้อมูลลงในตาราง billings
         Billing::create([
@@ -82,6 +81,8 @@ public function calculate(Request $request)
         // Redirect กลับไปที่หน้า admin พร้อมกับ flash message
         return redirect()->route('adminbilling')->with('success', 'ส่งค่าห้องสำเร็จ');
     }
+
+
 
 public function confirmPayment($id)
 {

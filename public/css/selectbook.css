@@ -77,19 +77,40 @@ tbody tr:nth-child(even) {
     font-weight: bold;
 }
 
-.page {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+tbody tr:hover{
+    background-color: rgb(216, 215, 215);
 }
 
-.page button {
+tbody tr.selected {
+    background-color: rgb(216, 215, 215);
+}
+
+.page {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+}
+.page li {
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 5px;
     cursor: pointer;
+}
+.page .active {
+    background-color: black;
+    color: white;
+}
+
+.page-item-t:active{
+    background-color: black;
+    color: white;
+}
+
+.page-item:active{
+    background-color: black;
+    color: white;
 }
 
 .continue {
@@ -118,6 +139,24 @@ button.now{
     height: auto;
 }
 
-tbody tr:hover{
-    background-color: rgb(216, 215, 215);
+.btn {
+    width: 202px;
+    height: 51px;
+    background-color: #c9a94b;
+    color: white;
+    border-radius: 8px;
+    align-self: flex-end;
+    margin-left: auto;
+    text-decoration: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.btn:hover {
+    background-color: #916d39;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }

@@ -22,7 +22,6 @@
         <a href="{{ route('roomdetail') }}">Room Detail</a>
         <a href="{{ route('Addroom') }}">Add Room</a>
     </div>
-
     <!-- Content -->
     <div class="content">
         <!-- Header -->

@@ -12,10 +12,11 @@ class CreateRoomTypesTable extends Migration
             $table->id();
             $table->string('room_description');   // ชื่อลักษณะห้อง
             $table->decimal('room_price', 10, 2); // ราคาห้อง
+            $table->integer('contact_date');      // ระยะสัญญา (Contract Duration)
             $table->text('furniture_details');    // รายละเอียดเฟอร์นิเจอร์
-            $table->decimal('deposit_price', 10, 2);
+            $table->decimal('deposit_price', 10, 2); // ราคามัดจำ
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes(); // For soft deleting
         });
     }
 
@@ -24,8 +25,7 @@ class CreateRoomTypesTable extends Migration
         Schema::table('billings', function (Blueprint $table) {
             $table->dropSoftDeletes(); // ลบคอลัมน์ deleted_at
         });
-    
-        Schema::dropIfExists('room_types');
+
+        Schema::dropIfExists('room_types'); // ลบตาราง room_types
     }
-    
 }
