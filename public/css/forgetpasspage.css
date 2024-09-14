@@ -15,11 +15,11 @@ body {
     margin: 0; 
 }
 
-.loginbox{
+.forgetpassbox{
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
+    width: 40%;
     height: auto;
     padding: 1em;
     background-color: #ffffff;
@@ -27,12 +27,24 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.head{
-    text-align: center;
-    color: #000000;
+.forgetpassbox img{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.login{
+.description{
+    font-size: xx-large;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    font-weight: bold;
+}
+
+.forgetbutton{
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -42,53 +54,30 @@ input{
     width: 100%;
     height: auto;
     font-size: x-large;
-    margin-bottom: 5%;  
-}
-
-
-button.login {
+    padding: 15px;
+    margin-bottom: 5%; 
     font-family: ProjectFont;
-    display: flex;
-    width: 50%; 
-    height: 50px; 
-    font-size: xx-large; 
-    padding: 1%; 
-    justify-content: center;
-    align-items: center; 
-    background-color: #b0904e;
-    color: white;
-    transition: 0.2s;
-    border-radius: 15px;
-    border: none;
 }
 
-button.login:hover{
+button.forgetbutton:hover{
     background-color: #916D39;
     transition: 0.2s;
     cursor: pointer;
 }
 
-.loginbox img{
+button.forgetbutton {
     display: flex;
-    width: 50%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.rememfor{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.remembercheckbox {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    margin-bottom: 10px;
-}
-
-.forgetpassbox a{
-    color: black;
+    width: 50%; 
+    height: 50px; 
+    font-size: x-large; 
+    padding: 1%; 
+    justify-content: center;
+    align-items: center; 
+    background-color: #b0904e;
+    transition: 0.2s;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    font-family: ProjectFont;
+    font-size: xx-large;
 }
