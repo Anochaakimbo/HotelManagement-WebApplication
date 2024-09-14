@@ -49,6 +49,7 @@ route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->na
 
 route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
 
+
 Route::get('/select', function () {
 
     $rooms = rooms::all();
@@ -75,6 +76,10 @@ Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name(
 
 Route::get('/history', [ChargeController::class, 'showPaymentHistory'])->name('history')->Middleware('admin');
 
+Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');    
+Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
+Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
+Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');
 
 // Route::get('/Roomdetails', function () {
 //     return view('Roomdetails');

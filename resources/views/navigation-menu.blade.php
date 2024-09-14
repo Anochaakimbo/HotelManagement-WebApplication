@@ -5,42 +5,16 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ Auth::user()->usertype == 'admin' ? route('home') : route('dashboard') }}">
+                    <a href="{{ route('dashboard') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ Auth::user()->usertype == 'admin' ? route('adminpage') : route('dashboard') }}" :active="request()->routeIs(Auth::user()->usertype == 'admin' ? 'adminpage' : 'dashboard')">
-                        {{ Auth::user()->usertype == 'admin' ? __('Dashboard') : __('Dashboard') }}
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
                     </x-nav-link>
-                    @if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('guestpage') }}" :active="request()->routeIs('guestpage')">
-                        {{ __('Guest') }}
-                        </x-nav-link>
-                    @endif
-                    @if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('customerproblem') }}" :active="request()->routeIs('customerproblem')">
-                        {{ __('CustomerProblem') }}
-                        </x-nav-link>
-                    @endif
-                    @if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('booking') }}" :active="request()->routeIs('booking')">
-                        {{ __('Booking') }}
-                        </x-nav-link>
-                    @endif
-                    @if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('adminbilling') }}" :active="request()->routeIs('adminbilling')">
-                        {{ __('adminbilling') }}
-                        </x-nav-link>
-                        @endif
-                    {{--}}
-                    @endif@if(Auth::user()->usertype == 'admin')
-                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
-                        {{ __('Booking') }}
-                        </x-nav-link>
-                    @endif --}}
                 </div>
             </div>
 
@@ -137,16 +111,16 @@
                             <div class="border-t border-gray-200"></div>
 
                             <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
 
+                                <x-dropdown-link href="{{ route('logout') }}"
+                                         @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
                         </x-slot>
                     </x-dropdown>
-                    <form method="POST" action="{{ route('logout') }}" x-data class="inline">
-                        @csrf
-                        <x-dropdown-link href="{{ route('logout') }}"
-                                 @click.prevent="$root.submit();" class="ml-4">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
-                    </form>
                 </div>
             </div>
 

@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Booking;
 use App\Models\rooms;
+use App\Models\RoomType;
+
 class HomeController extends Controller
 {
     public function index(){
@@ -36,5 +38,26 @@ class HomeController extends Controller
     {
         $rooms = rooms::all();
         return view('admin.csp', ['rooms' => $rooms]);
+    }
+
+    public function addRoom(Request $request){
+        $new_room = new rooms;
+        $new_room->room_type_id = $request->room_type_id;
+        $new_room->room_number = $request->room_number;
+        $new_room->description = $request->description;
+        $new_room->save();
+        $rooms = rooms::all();
+
+        return redirect('/Addroom');
+    }
+
+    public function roomdetail(){
+        $rooms = rooms::all();
+        return view ('admin.admin_roomdetail', ['rooms' => $rooms]);
+    }
+
+    public function preparetoAdd(){
+        $rooms = RoomType::all();
+        return view('admin.admin_addroom',['rooms' => $rooms]);
     }
 }

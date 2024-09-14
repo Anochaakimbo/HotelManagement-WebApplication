@@ -1,48 +1,52 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @import url( {{asset('css/loginpage.css')}});
+    </style>
+</head>
+<body>
+    <div class="loginbox">
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <img src="./img/Logo.png" alt="">
+        <h1 class="head">เข้าสู่ระบบ</h1>
 
-        <x-validation-errors class="mb-4" />
+        <div class="emailbox">
+            <label for="email" value="{{ __('อีเมล') }}">อีเมล:
+            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        </div>
 
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ $value }}
-            </div>
-        @endsession
+        <div class="passwordbox">
+            <label for="password" value="{{ __('รหัสผ่าน') }}">รหัสผ่าน:
+            <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+        </div>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
+        <div class="rememfor">
+            <div class="remembercheckbox">
+                <input type="checkbox" id="remember_me" name="remember" />
                 <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ms-2 text-sm text-gray-600">{{ __('จดจำฉัน') }}</span>
                 </label>
             </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
+            <div class="forgetpassbox">
+            @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('ลืมรหัสผ่าน?') }}
                     </a>
                 @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        </div>
+
+        <button class="login">
+            {{ __('เข้าสู่ระบบ') }}
+        </button>
+    </form>
+    </div>
+
+</body>
+</html>
