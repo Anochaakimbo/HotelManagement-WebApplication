@@ -5,7 +5,6 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
@@ -15,6 +14,32 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('guestpage') }}" :active="request()->routeIs('guestpage')">
+                        {{ __('Guest') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('customerproblem') }}" :active="request()->routeIs('customerproblem')">
+                        {{ __('CustomerProblem') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('booking') }}" :active="request()->routeIs('booking')">
+                        {{ __('Booking') }}
+                        </x-nav-link>
+                    @endif
+                    @if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('adminbilling') }}" :active="request()->routeIs('adminbilling')">
+                        {{ __('adminbilling') }}
+                        </x-nav-link>
+                        @endif
+                    {{--}}
+                    @endif@if(Auth::user()->usertype == 'admin')
+                    <x-nav-link href="{{ route('') }}" :active="request()->routeIs('')">
+                        {{ __('Booking') }}
+                        </x-nav-link>
+                    @endif --}}
                 </div>
             </div>
 

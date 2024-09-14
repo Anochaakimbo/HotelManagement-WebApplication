@@ -12,22 +12,22 @@
 <body>
 
     <nav>
-    @if (Route::has('login'))
-    @auth
-        @if (Auth::user()->usertype == 'admin')
-            <a href="{{ url('/dashboard') }}">Dashboard</a>
-        @else
-            <a href="{{ url('/dashboard') }}">Dashboard</a>
-        @endif
-    @endauth
-    @endif  
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="material-icons">&#xe896;</i>
         </label>
             <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
         <ul>
-            <li><a href="#home" class="active">หน้าหลัก</a></li>
+            <li>
+                @if (Route::has('login'))
+    @auth
+        @if (Auth::user()->usertype == 'admin')
+            <a href="{{ url('/home') }}">หน้าหลัก</a>
+        @else
+            <a href="{{ url('/dashboard') }}">Dashboard</a>
+        @endif
+    @endauth
+    @endif  </li>
             <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="#book">การจอง</a></li>
