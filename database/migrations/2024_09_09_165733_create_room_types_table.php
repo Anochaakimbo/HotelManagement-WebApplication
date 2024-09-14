@@ -25,7 +25,7 @@ class CreateRoomTypesTable extends Migration
         Schema::table('billings', function (Blueprint $table) {
             $table->dropSoftDeletes(); // ลบคอลัมน์ deleted_at
         });
-    
+
         Schema::dropIfExists('room_types');
     }
     

@@ -45,6 +45,19 @@ Route::get('/Roomdetail_Guest_SingleBed', [RoomsingleController::class, 'showSin
 
 Route::get('/Roomdetail_Guest_TwoBed', [RoomtwinController::class, 'showTwinBed'])->name('roomdetail-2');
 
+Route::get('/customerproblem', function () {
+    return view('admin.csp');
+})->name('customerproblem');
+
+Route::get('/bookingadmin', function () {
+    return view('admin.booking');
+})->name('booking');
+
+Route::get('/billingadmin', function () {
+    return view('admin.billing');
+})->name('adminbilling');
+
+
 Route::get('/Roomdetail_Guest_PremiumBed', [RoompreController::class, 'showPremiumBed'])->name('roomdetail-3');
 
 Route::get('/Rent_1', function () {

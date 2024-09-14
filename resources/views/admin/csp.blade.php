@@ -13,7 +13,7 @@
     <div class="sidebar">
         <a href="{{ route('home') }}">
             <img src="./img/หอ-2.png" alt="Logo" class="logo">
-        </a>        
+        </a>
     <a href="{{ route('adminpage') }}">Dashboard</a>
     <a href="{{ route('guestpage') }}">Guest</a>
     <a href="{{ route('customerproblem') }}"class="active">Customer problem</a>

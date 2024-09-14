@@ -15,7 +15,7 @@
     @if (Route::has('login'))
     @auth
         @if (Auth::user()->usertype == 'admin')
-            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/dashboard') }}">Dashboard</a>
         @else
             <a href="{{ url('/dashboard') }}">Dashboard</a>
         @endif

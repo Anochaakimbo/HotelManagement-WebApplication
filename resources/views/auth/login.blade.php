@@ -17,13 +17,13 @@
         <h1 class="head">เข้าสู่ระบบ</h1>
 
         <div class="emailbox">
-            <label for="email" value="{{ __('อีเมล') }}">
-            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="อีเมล" />
+            <label for="email" value="{{ __('อีเมล') }}">อีเมล:
+            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
         </div>
 
         <div class="passwordbox">
-            <label for="password" value="{{ __('รหัสผ่าน') }}">
-            <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="รหัสผ่าน"/>
+            <label for="password" value="{{ __('รหัสผ่าน') }}">รหัสผ่าน:
+            <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
         </div>
 
         <div class="rememfor">
