@@ -9,33 +9,54 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 class BookingController extends Controller
 {
-    public function create(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email',
-        'phone' => 'required|string|max:15',
-        'room_id' => 'required|exists:rooms,id',
-    ]);
+    public function store(Request $request)
+    {
+        // Validate ข้อมูล
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:15',
+            'room_number' => 'required',
+        ]);
 
-    $guest = Guest::create([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'phone' => $request->input('phone'),
-    ]);
+        // ตรวจสอบว่าห้องนี้ถูกจองไปแล้วหรือยัง
+        $room = rooms::where('room_number', $request->input('room_number'))->firstOrFail();
+        $existingBooking = Booking::where('room_id', $room->id)->where('status', '!=', 'ยกเลิก')->first();
 
-    $booking = Booking::create([
-        'guest_id' => $guest->id,
-        'room_id' => $request->input('room_id'),
-        'status' => 'รอชำระเงิน', 
-    ]);
+        if ($existingBooking) {
+            // ถ้ามีการจองห้องนี้ไปแล้ว
+            return redirect()->back()->with('error', 'ห้องนี้ถูกจองไปแล้ว');
+        }
 
-    $room = rooms::findOrFail($request->input('room_id'));
-    $room->is_available = 0; 
-    $room->save();
+        // ตรวจสอบว่าผู้ใช้นี้ได้ทำการจองไปแล้วหรือไม่ (เช็คจากอีเมล)
+        $existingGuest = Guest::where('email', $request->input('email'))->first();
+        if ($existingGuest) {
+            return redirect()->back()->with('error', 'คุณได้ทำการจองไปแล้ว');
+        }
 
-    return redirect()->back()->with('message', 'Booking created successfully, room is now unavailable.');
-}
+        // สร้างข้อมูล Guest
+        $guest = Guest::create([
+            'name' => $request->input('firstname') . ' ' . $request->input('lastname'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+        ]);
+
+        // สร้างข้อมูล Booking
+        $booking = Booking::create([
+            'guest_id' => $guest->id,
+            'room_id' => $room->id,
+            'status' => 'รอชำระเงิน',
+        ]);
+
+        // ทำให้ห้องไม่ว่าง
+        $room->is_available = 0;
+        $room->save();
+
+        // Redirect ไปยังหน้า rent2 พร้อมข้อความ
+        return redirect()->route('rent_2')->with('message', 'จองสำเร็จ,กำลังพาคุณไปหน้าชำระเงิน.');
+    }
+
 
     public function updateStatus(Request $request, Booking $booking)
 {
@@ -44,7 +65,7 @@ class BookingController extends Controller
 
     if ($booking->status == 'จองสำเร็จ') {
         $room = $booking->room;
-        $room->is_available = false; 
+        $room->is_available = false;
         $room->save();
     }
 
@@ -52,7 +73,7 @@ class BookingController extends Controller
 }
 public function pay(Request $request, $id)
 {
- 
+
     $booking = Booking::findOrFail($id);
 
     if ($booking->status == 'รอชำระเงิน') {
