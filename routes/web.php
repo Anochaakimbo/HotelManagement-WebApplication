@@ -71,8 +71,6 @@ Route::post('/admin/booking/delete/{id}', [AdminComtroller::class, 'deleteBookin
 Route::get('/admin/booking', [HomeController::class, 'booking'])->Middleware('admin')->name('booking');
 Route::get('/adminpage', [AdminComtroller::class, 'index'])->Middleware('admin')->name('adminpage');
 
-// Guest view routes
-Route::get('/guestpage', [HomeController::class, 'guest'])->Middleware('auth')->name('guest.page');
 
 // Routes for Room and Roomtype controllers
 Route::get('/selectbook', [RoomtypeController::class, 'showAvailableRooms'])->name('selectbook');
