@@ -13,7 +13,7 @@ class CreateRoomTypesTable extends Migration
             $table->string('room_description');   // ชื่อลักษณะห้อง
             $table->decimal('room_price', 10, 2); // ราคาห้อง
             $table->text('furniture_details');    // รายละเอียดเฟอร์นิเจอร์
-            $table->decimal('deposit_price', 10, 2)->after('room_price');
+            $table->decimal('deposit_price', 10, 2);
             $table->timestamps();
             $table->softDeletes();
         });
