@@ -7,21 +7,37 @@
     <link rel="stylesheet" href="{{ asset('css/selectbook.css') }}">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">หน้าหลัก</a></li>
-                <li><a href="#">ตรวจสอบห้องว่าง</a></li>
-                <li><a href="#">ประเภทห้อง</a></li>
-                <li><a href="#">การจอง</a></li>
-                <li><a href="#">ติดต่อเรา</a></li>
-                <li><a href="#">ล็อกอิน</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
+    <ul>
+        <li>
+            @if (Route::has('login'))
+    @auth
+        @if (Auth::user()->usertype == 'admin')
+            <a href="{{ url('/home') }}">จัดการห้อง</a>
+            <style>
+                .presstologin{
+                    display:none;
+                }
+            </style>
+        @else
+        <style>
+            .presstologin{
+                display:none;
+            }
+        </style>
+        
+        @endif
+    @endauth
+    @endif  
+    </li>
+            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
+            <li><a href="#roomtype">ประเภทห้อง</a></li>
+            <li><a href="#book">การจอง</a></li>
+            <li><a href="#contactus">ติดต่อเรา</a></li>
+            <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
+        </ul>
+    </nav>
 
     <main>
         <div class="filter">
@@ -70,9 +86,29 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ route('rent_1') }}" class="btn">ต่อไป</a>
+        <a id="nextLink" href="#" class="btn" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;">ต่อไป</a>
     </main>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const nextLink = document.getElementById('nextLink');
+        const rows = document.querySelectorAll('#roomTable tr');
+        let selectedRoomData = {};
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                selectedRoomData = {
+                    room_number: row.cells[0].innerText,
+                    room_type: row.cells[1].innerText,
+                    contract_duration: "12 เดือน", // กำหนดระยะสัญญาเริ่มต้น
+                    deposit: row.cells[3].innerText
+                };
+
+                nextLink.href = `{{ route('rent_1') }}?room_number=${selectedRoomData.room_number}&room_type=${selectedRoomData.room_type}&contract_duration=${selectedRoomData.contract_duration}&deposit=${selectedRoomData.deposit}`;
+                nextLink.style.pointerEvents = 'auto'; // เปิดการคลิก
+                nextLink.style.opacity = '1'; // คืนค่าลิงก์ให้กดได้
+                nextLink.style.cursor = 'pointer'; // เปลี่ยนเคอร์เซอร์ให้กลับมากดได้
+            });
+        });
+    });
         document.addEventListener('DOMContentLoaded', function () {
         
         function getBedTypeFromUrl() {
@@ -151,7 +187,16 @@
                 }
             });
         });
-    
+
+            document.addEventListener('click', function(event) {
+            if (!event.target.closest('#roomTable tr')) {
+                // เอาคลาส 'selected' ออกจากแถวทุกแถว
+                rows.forEach(row => row.classList.remove('selected'));
+                nextLink.style.pointerEvents = 'none'; // ปิดการคลิก "ต่อไป" เมื่อไม่มีแถวที่เลือก
+                nextLink.style.opacity = '0.5';
+                nextLink.style.cursor = 'not-allowed';
+            }
+        });
         });
     </script>
 </body>

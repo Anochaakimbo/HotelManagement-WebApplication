@@ -1,32 +1,67 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
 
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: ProjectFont;
     background-color: #F5F0EB;
 }
 
-header {
+li a{
+    text-decoration: none;
+}
+
+nav img{
+    height: auto;
+    margin-left: 1%;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+    margin-right: 1%;
+    z-index: 1000;
+    position: relative;
+    
+}
+
+nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: solid black;
-    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    position: relative; 
+    background-color: white;
 }
-
-nav ul {
+nav ul li{
     list-style: none;
-    display: flex;
-    gap: 20px;
+    display: inline-block;
+    margin:0 5px;
+    
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+nav ul li a{
+    color: black;
+    font-size: x-large;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+a:hover{
+    background-color: #ffd190;
+    transition: 0.2s;
+}
+
+
+main{
+    font-size: 24px;
 }
 
 h2 {
-    margin: 20px 0;
+    font-size: 36px;
+    margin: 20px 105px;
     color: #333;
 }
 
@@ -39,8 +74,9 @@ h2 {
 }
 
 .filter select{
+    font-family:ProjectFont;
     padding: 10px;
-    font-size: 16px;
+    font-size: 28px;
     border-radius: 5px;
     border: 1px solid #ddd;
 }
@@ -98,46 +134,7 @@ tbody tr.selected {
     margin: 0 5px;
     cursor: pointer;
 }
-.page .active {
-    background-color: black;
-    color: white;
-}
 
-.page-item-t:active{
-    background-color: black;
-    color: white;
-}
-
-.page-item:active{
-    background-color: black;
-    color: white;
-}
-
-.continue {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.continue button {
-    width: 220px;
-    padding: 14px 80px;
-    background-color: #C89C2B;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: large;
-}
-
-button.now{
-    color: rgb(255, 255, 255);
-    background-color: black;
-}
-
-.logo img{
-    width: 100px;
-    height: auto;
-}
 
 .btn {
     width: 202px;
