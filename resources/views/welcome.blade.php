@@ -12,27 +12,38 @@
 <body>
 
     <nav>
-    @if (Route::has('login'))
-    @auth
-        @if (Auth::user()->usertype == 'admin')
-            <a href="{{ url('/home') }}">Home</a>
-        @else
-            <a href="{{ url('/dashboard') }}">Dashboard</a>
-        @endif
-    @endauth
-    @endif  
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="material-icons">&#xe896;</i>
         </label>
             <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
         <ul>
-            <li><a href="#home" class="active">หน้าหลัก</a></li>
+            <li>
+                @if (Route::has('login'))
+    @auth
+        @if (Auth::user()->usertype == 'admin')
+            <a href="{{ url('/home') }}">จัดการห้อง</a>
+            <style>
+                .presstologin{
+                    display:none;
+                }
+            </style>
+        @else
+        <style>
+            .presstologin{
+                display:none;
+            }
+        </style>
+        
+        @endif
+    @endauth
+ @endif  
+</li>
             <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="#book">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
-            <li><a href="/login">ล็อกอิน</a></li>
+            <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
     </nav>
 
@@ -79,7 +90,7 @@
     <div class="lift">
         <div>
             <p class="deslift">
-            ไม่ต้องเหนื่อยเดินขึ้นลงกับบรรไดอีกต่อไป<br>
+            ไม่ต้องเหนื่อยเดินขึ้นลงกับบันไดอีกต่อไป<br>
             หอพักโกลเด้นซิตี้มีบริการลิฟท์ให้ผู้พักได้ใช้งานตลอดเวลา<br>
             และยังมีระบบขอความช่วยเหลือได้ตลอดเวลา
             </p>
@@ -91,9 +102,9 @@
 <img src="./img/facilities.jpg" alt="" class="footerfac">
 <footer id="contactus">  
     <ul>
-        <a href="#contactus"><li>ติดต่อสอบถาม</li></a>
-        <a href="#faq"><li>รวมคำถาม F.A.Q</li></a>
-        <a href="#aboutus"><li>เกี่ยวกับเรา</li></a>
+        <li><a href="#contactus">ติดต่อสอบถาม</li></a>
+        <li><a href="#faq">รวมคำถาม F.A.Q</li></a>
+        <li><a href="#aboutus">เกี่ยวกับเรา</li></a>
     </ul>
 ©Copyright 2024 All right reserved.
 </footer>

@@ -1,5 +1,13 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
 
 body{
+    font-family: ProjectFont;
+    font-size: xx-large;
     background-color: #FFF7EC;
     display: flex;
     justify-content: center; 
@@ -12,12 +20,12 @@ body{
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: fit-content;
+    width: 20%;
     height: auto;
     padding: 1em;
     background-color: #ffffff;
     border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);   
 }
 
 .registerbox img{
@@ -41,19 +49,23 @@ body{
 
 button.register {
     display: flex;
-    width: 100%; 
+    width: 50%;
     height: 50px; 
     font-size: x-large; 
     padding: 1%; 
     justify-content: center;
     align-items: center; 
-    background-color: #FFF7EC;
+    background-color: #b0904e;
+    color: white;
     transition: 0.2s;
-    border-radius: 25px;
+    border-radius: 15px;
+    border: none;
+    font-family: ProjectFont;
+    font-size: xx-large;
 }
 
 button.register:hover{
-    background-color: #ffecd2;
+    background-color: #916D39;
     transition: 0.2s;
     cursor: pointer;
 }
@@ -61,7 +73,7 @@ button.register:hover{
 input{
     width: 100%;
     height: auto;
-    font-size: xx-large;
+    font-size: x-large;
     margin-bottom: 5%;  
 }
 
@@ -71,4 +83,5 @@ input{
     align-items: center;
     margin-top: 5%;
     color: black;
-}
+{
+

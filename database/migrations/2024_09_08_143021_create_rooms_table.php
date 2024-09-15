@@ -15,6 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('room_number');
         $table->text('description')->nullable();
+        $table->string('floor');
         $table->boolean('is_available')->default(true); // เพิ่มคอลัมน์ is_available
         $table->timestamps();
         $table->softDeletes();

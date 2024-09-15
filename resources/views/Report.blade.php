@@ -1,24 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แจ้งปัญหา</title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/report.css')}}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const subCategories = {
+                aircon: [
+                    { value: 'aircon1', text: 'ไม่เย็น' },
+                    { value: 'aircon2', text: 'รั่วซึม' },
+                    { value: 'aircon3', text: 'เสียงดัง' }
+                ],
+                'water-heater': [
+                    { value: 'water-heater1', text: 'ไม่ทำงาน' },
+                    { value: 'water-heater2', text: 'รั่วซึม' },
+                    { value: 'water-heater3', text: 'น้ำไม่ร้อน' }
+                ],
+                electricity: [
+                    { value: 'electricity1', text: 'หลอดไฟเสีย' },
+                    { value: 'electricity2', text: 'สวิตช์ไฟไม่ทำงาน' },
+                    { value: 'electricity3', text: 'ปลั๊กไฟหลวม' }
+                ],
+                'door-window': [
+                    { value: 'door-window1', text: 'ลูกบิดประตูเสีย' },
+                    { value: 'door-window2', text: 'ประตูหรือหน้าต่างปิดไม่สนิท' },
+                    { value: 'door-window3', text: 'บานพับชำรุด' }
+                ],
+                furniture: [
+                    { value: 'furniture1', text: 'โต๊ะชำรุดหรือเสียหาย' },
+                    { value: 'furniture2', text: 'เก้าอี้ชำรุดหรือเสียหาย' },
+                    { value: 'furniture3', text: 'ตู้เสื้อผ้าชำรุดหรือเสียหาย' }
+                ],
+                plumbing: [
+                    { value: 'plumbing1', text: 'ท่อน้ำรั่ว' },
+                    { value: 'plumbing2', text: 'น้ำไม่ไหล' },
+                    { value: 'plumbing3', text: 'ก๊อกน้ำหรือสายชำระเสีย' }
+                ],
+                bathroom: [
+                    { value: 'bathroom1', text: 'ชักโครกเสีย' },
+                    { value: 'bathroom2', text: 'อ่างล้างหน้าอุดตัน' },
+                    { value: 'bathroom3', text: 'ระบายน้ำช้า' }
+                ],
+                'washing-machine': [
+                    { value: 'washing-machine1', text: 'เครื่องไม่ทำงาน' },
+                    { value: 'washing-machine2', text: 'ปั่นไม่หมาด' }
+                ],
+                'wall-floor': [
+                    { value: 'wall-floor1', text: 'ผนังร้าว' },
+                    { value: 'wall-floor2', text: 'พื้นเสียหายหรือหลุดร่อน' }
+                ],
+                'internet-tv': [
+                    { value: 'internet-tv1', text: 'อินเทอร์เน็ตไม่เชื่อมต่อ' },
+                    { value: 'internet-tv2', text: 'โทรทัศน์สัญญาณขัดข้อง' }
+                ]
+            };
+
+            const mainCategorySelect = document.getElementById('main-category');
+            const subCategorySelect = document.getElementById('sub-category');
+
+            mainCategorySelect.addEventListener('change', function() {
+                const selectedCategory = this.value;
+                const subCategoriesForMain = subCategories[selectedCategory] || [];
+
+                // Clear the subcategory options
+                subCategorySelect.innerHTML = '<option value="">เลือกหมวดงานซ่อมย่อย</option>';
+
+                // Populate subcategory options based on the selected main category
+                subCategoriesForMain.forEach(function(subCategory) {
+                    const option = document.createElement('option');
+                    option.value = subCategory.value;
+                    option.textContent = subCategory.text;
+                    subCategorySelect.appendChild(option);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
- <!-- Sidebar -->
-   <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
         <img src="./img/หอ-2.png" alt="Logo" class="logo">
-    <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
-    <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
-    <a href="{{ route('Report') }}"class="active">แจ้งปัญหา</a>
-</div>
+        <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
+        <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
+        <a href="{{ route('Report') }}"class="active">แจ้งปัญหา</a>
+    </div>
+
     <!-- Content -->
     <div class="content">
         <!-- Header -->
         <div class="header">
-            <div class="user-info">ผู้ใช้</div>
+            <div class="user-info">ผู้ใช้ : {{ Auth::user()->name }}</div>
             <button>ล็อกเอาท์</button>
         </div>
 
@@ -26,10 +99,11 @@
         <div class="form-container">
             <h2>แจ้งปัญหา</h2>
             <form>
+                <!-- Dynamically show room number from user data -->
                 <label for="room">ห้อง</label>
-                <input type="text" id="room" name="room" value="A502" readonly>
+                <input type="text" id="room" name="room" value="{{ Auth::user()->room->room_number }}" readonly>
 
-                 <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
+                <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
                 <select id="main-category" name="main-category">
                     <option value="">เลือกหมวดงานซ่อมหลัก</option>
                     <option value="aircon">เครื่องปรับอากาศ (แอร์)</option>
@@ -44,57 +118,11 @@
                     <option value="internet-tv">อินเทอร์เน็ตและโทรทัศน์</option>
                 </select>
 
-
-        <label for="sub-category">เลือกหมวดงานซ่อมย่อย</label>
-     <select id="sub-category" name="sub-category">
-    <option value="">เลือกหมวดงานซ่อมย่อย</option>
-    <!-- งานซ่อมย่อยสำหรับเครื่องปรับอากาศ (แอร์) -->
-    <option value="aircon1">ไม่เย็น</option>
-    <option value="aircon2">รั่วซึม</option>
-    <option value="aircon3">เสียงดัง</option>
-
-    <!-- งานซ่อมย่อยสำหรับเครื่องทำน้ำอุ่น -->
-    <option value="water-heater1">ไม่ทำงาน</option>
-    <option value="water-heater2">รั่วซึม</option>
-    <option value="water-heater3">น้ำไม่ร้อน</option>
-
-    <!-- งานซ่อมย่อยสำหรับไฟฟ้าและหลอดไฟ -->
-    <option value="electricity1">หลอดไฟเสีย</option>
-    <option value="electricity2">สวิตช์ไฟไม่ทำงาน</option>
-    <option value="electricity3">ปลั๊กไฟหลวม</option>
-
-    <!-- งานซ่อมย่อยสำหรับประตูและหน้าต่าง -->
-    <option value="door-window1">ลูกบิดประตูเสีย</option>
-    <option value="door-window2">ประตูหรือหน้าต่างปิดไม่สนิท</option>
-    <option value="door-window3">บานพับชำรุด</option>
-
-    <!-- งานซ่อมย่อยสำหรับเฟอร์นิเจอร์ -->
-    <option value="furniture1">โต๊ะชำรุดหรือเสียหาย</option>
-    <option value="furniture2">เก้าอี้ชำรุดหรือเสียหาย</option>
-    <option value="furniture3">ตู้เสื้อผ้าชำรุดหรือเสียหาย</option>
-
-    <!-- งานซ่อมย่อยสำหรับระบบประปา -->
-    <option value="plumbing1">ท่อน้ำรั่ว</option>
-    <option value="plumbing2">น้ำไม่ไหล</option>
-    <option value="plumbing3">ก๊อกน้ำหรือสายชำระเสีย</option>
-
-    <!-- งานซ่อมย่อยสำหรับห้องน้ำ -->
-    <option value="bathroom1">ชักโครกเสีย</option>
-    <option value="bathroom2">อ่างล้างหน้าอุดตัน</option>
-    <option value="bathroom3">ระบายน้ำช้า</option>
-
-    <!-- งานซ่อมย่อยสำหรับเครื่องซักผ้า -->
-    <option value="washing-machine1">เครื่องไม่ทำงาน</option>
-    <option value="washing-machine2">ปั่นไม่หมาด</option>
-
-    <!-- งานซ่อมย่อยสำหรับผนังและพื้นห้อง -->
-    <option value="wall-floor1">ผนังร้าว</option>
-    <option value="wall-floor2">พื้นเสียหายหรือหลุดร่อน</option>
-
-    <!-- งานซ่อมย่อยสำหรับอินเทอร์เน็ตและโทรทัศน์ -->
-    <option value="internet-tv1">อินเทอร์เน็ตไม่เชื่อมต่อ</option>
-    <option value="internet-tv2">โทรทัศน์สัญญาณขัดข้อง</option>
-</select>
+                <label for="sub-category">เลือกหมวดงานซ่อมย่อย</label>
+                <select id="sub-category" name="sub-category">
+                    <option value="">เลือกหมวดงานซ่อมย่อย</option>
+                    <!-- Sub-categories will be populated dynamically -->
+                </select>
 
                 <label for="problem-description">อาการ/ปัญหา</label>
                 <textarea id="problem-description" name="problem-description" rows="4" placeholder="อาการหรือปัญหา..."></textarea>

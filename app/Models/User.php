@@ -62,4 +62,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function room()
+{
+    return $this->hasOne(rooms::class);
+}
+public function billing()
+{
+    return $this->hasOne(Billing::class);
+}
 }

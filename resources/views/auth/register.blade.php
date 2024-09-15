@@ -19,23 +19,23 @@
         <h1 class="head">สมัครสมาชิก</h1>
 
         <div class="namebox">
-            <label for="name" value="{{ __('Name') }}" />
-            <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="ชื่อผู้ใช้"/>
+            <label for="name" value="{{ __('Name') }}">ชื่อผู้ใช้:
+            <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"/>
         </div>
 
         <div class="emailbox">
-            <label for="email" value="{{ __('Email') }}" >
-            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="อีเมล" />
+            <label for="email" value="{{ __('Email') }}" >อีเมล:
+            <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username"/>
         </div>
 
         <div class="passwordbox">
-            <label for="password" value="{{ __('Password') }}" />
-            <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" placeholder="รหัสผ่าน"/>
+            <label for="password" value="{{ __('Password') }}">รหัสผ่าน:
+            <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password"/>
         </div>
 
         <div class="comfirmpassbox">
-            <label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-            <input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="ยืนยันรหัสผ่าน" />
+            <label for="password_confirmation" value="{{ __('Confirm Password') }}">ยืนยันรหัสผ่าน
+            <input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
         </div>
 
         @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
