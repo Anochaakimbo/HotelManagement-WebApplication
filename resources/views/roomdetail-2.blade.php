@@ -7,21 +7,37 @@
     <link rel="stylesheet" href="{{ asset('css/roomdetail.css') }}">
 </head>
 <body>
-<header>
-        <div class="logo">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">หน้าหลัก</a></li>
-                <li><a href="#">ตรวจสอบห้องว่าง</a></li>
-                <li><a href="#">ประเภทห้อง</a></li>
-                <li><a href="#">การจอง</a></li>
-                <li><a href="#">ติดต่อเรา</a></li>
-                <li><a href="#">ล็อกอิน</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
+    <ul>
+        <li>
+            @if (Route::has('login'))
+    @auth
+        @if (Auth::user()->usertype == 'admin')
+            <a href="{{ url('/home') }}">จัดการห้อง</a>
+            <style>
+                .presstologin{
+                    display:none;
+                }
+            </style>
+        @else
+        <style>
+            .presstologin{
+                display:none;
+            }
+        </style>
+        
+        @endif
+    @endauth
+    @endif  
+    </li>
+            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
+            <li><a href="#roomtype">ประเภทห้อง</a></li>
+            <li><a href="#book">การจอง</a></li>
+            <li><a href="#contactus">ติดต่อเรา</a></li>
+            <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
+        </ul>
+    </nav>
     <div class="container">
         <section class="room-details">
             <div class="room-image">
@@ -46,18 +62,18 @@
                             <li>เฟอร์นิเจอร์-ตู้</li>
                             <li>เครื่องทำน้ำอุ่น</li>
                             <li>เครื่องปรับอากาศ</li>
-                            <li>ขนาดห้อง 30 ตร.ม.</li>
+                            <li>ขนาดห้อง 40 ตร.ม.</li>
                         </ul>
                     </div>
                     <div class="room-service">
                         <h3>บริการหอพัก</h3>
                         <ul>
-                            <li>เตียงเดี่ยวขนาด 3.5 ฟุต</li>
-                            <li>โต๊ะและเก้าอี้แบบพรีเมียม</li>
-                            <li>เฟอร์นิเจอร์-ตู้</li>
-                            <li>เครื่องทำน้ำอุ่น</li>
-                            <li>เครื่องปรับอากาศ</li>
-                            <li>ขนาดห้อง 28.5 ตร.ม.</li>
+                            <li>ทำความสะอาดห้องพัก</li>
+                            <li>ซ่อมบำรุงฉุกเฉิน 24 ชั่วโมง</li>
+                            <li>อินเทอร์เน็ตความเร็วสูง</li>
+                            <li>รักษาความปลอดภัยตลอด 24 ชั่วโมง</li>
+                            <li>บริการซักรีด</li>
+                            <li>บริการฟิตเนสและพื้นที่ออกกำลังกาย</li>
                         </ul>
                     </div>
                 </div>

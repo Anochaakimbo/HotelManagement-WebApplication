@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomdetailsController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Rent_3Controller;
 use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
@@ -98,13 +99,13 @@ Route::get('/Rent_2', function () {
     return view('rent_2');
 })->name('rent_2');
 
-Route::get('/Rent_3', function () {
-    return view('rent_3');
-})->name('rent_3');
+Route::get('/rent_3', [Rent_3Controller::class, 'showPaymentPage'])->name('rent_3');
 
-Route::get('/Rent_4', function () {
-    return view('rent_4');
-})->name('rent_4');
+Route::get('/rent_4', [Rent_3Controller::class, 'showRent4'])->name('rent_4');
+
+Route::get('/Rent_4_2', function () {
+    return view('rent_4_2');
+})->name('rent_4_2');
 
 // Additional routes from arnoldtest2 branch
 Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');    
