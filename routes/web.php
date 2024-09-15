@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomdetailsController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Rent_3Controller;
 use PHPUnit\Framework\Attributes\Group;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
@@ -27,7 +28,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     Route::get('/Report', function () {
         return view('Report');
     })->name('Report');
@@ -40,11 +41,11 @@ Route::middleware([
 });
 
 // Routes for ChargeController and BookingController
-Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EASYOKOK');
-Route::post('/guest/book', [BookingController::class, 'create']);
+
+Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
 
-// Routes from arnoldtest2 branch
+
 route::get('/home',[HomeController::class,'index'])->name('home');
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
 route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
@@ -71,7 +72,7 @@ Route::get('/admin/booking', [HomeController::class, 'booking'])->Middleware('ad
 Route::get('/adminpage', [AdminComtroller::class, 'index'])->Middleware('admin')->name('adminpage');
 
 // Guest view routes
-Route::get('/guestpage', [HomeController::class, 'guest'])->Middleware('auth')->name('guestpage');
+Route::get('/guestpage', [HomeController::class, 'guest'])->Middleware('auth')->name('guest.page');
 
 // Routes for Room and Roomtype controllers
 Route::get('/selectbook', [RoomtypeController::class, 'showAvailableRooms'])->name('selectbook');
@@ -84,6 +85,7 @@ Route::get('/customerproblem', [HomeController::class, 'customerprob'])->Middlew
 Route::get('/admin/booking/confirm/{id}', [AdminComtroller::class, 'showConfirmBooking'])->name('admin.booking.confirm')->Middleware('admin');
 
 // Billing routes
+Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EASYOKOK')->Middleware('admin');
 Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling')->Middleware('admin');
 Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
 Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name('payBilling');
@@ -98,16 +100,16 @@ Route::get('/Rent_2', function () {
     return view('rent_2');
 })->name('rent_2');
 
-Route::get('/Rent_3', function () {
-    return view('rent_3');
-})->name('rent_3');
+Route::get('/rent_3', [Rent_3Controller::class, 'showPaymentPage'])->name('rent_3');
 
-Route::get('/Rent_4', function () {
-    return view('rent_4');
-})->name('rent_4');
+Route::get('/rent_4', [Rent_3Controller::class, 'showRent4'])->name('rent_4');
+
+Route::get('/Rent_4_2', function () {
+    return view('rent_4_2');
+})->name('rent_4_2');
 
 // Additional routes from arnoldtest2 branch
-Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');    
+Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');
 Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
 Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
 Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');
