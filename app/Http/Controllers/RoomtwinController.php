@@ -10,7 +10,7 @@ class RoomtwinController extends Controller
     public function showTwinBed()
     {
         // ดึงข้อมูลห้องทั้งหมดจากฐานข้อมูล
-        $rooms = Roomtwin::where('room_description', 'Two')->get();
+        $rooms = Roomtwin::where('room_description', 'Twin')->get();
 
         // ส่งข้อมูลไปยัง view
         return view('roomdetail-2', ['rooms' => $rooms]);

@@ -15,6 +15,8 @@ use App\Http\Controllers\RoomtypeController;
 use App\Http\Controllers\RoompreController;
 use App\Http\Controllers\RoomsingleController;
 use App\Http\Controllers\RoomtwinController;
+use App\Http\Controllers\PaymentCreditController;
+use App\Http\Controllers\BookingDetailController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -94,9 +96,7 @@ Route::get('/Rent_1', function () {
     return view('rent_1');
 })->name('rent_1');
 
-Route::get('/Rent_2', function () {
-    return view('rent_2');
-})->name('rent_2');
+Route::get('/rent_2/{guest_id}', [Rent_3Controller::class, 'showRent2'])->name('rent_2');
 
 Route::get('/rent_3', [Rent_3Controller::class, 'showPaymentPage'])->name('rent_3');
 
@@ -106,9 +106,21 @@ Route::get('/Rent_4_2', function () {
     return view('rent_4_2');
 })->name('rent_4_2');
 
+Route::post('/payment-process', [PaymentCreditController::class, 'processPayment'])->name('payment_process');
+
 // Additional routes from arnoldtest2 branch
 Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');
 Route::get('/roomdetail/delete/{room_id}',[HomeController::class,'delete'])->name('roomdelete');
 Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
 Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
 Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');
+
+
+
+
+
+
+
+
+
+Route::get('/booking_detail', [BookingDetailController::class, 'showBookings'])->name('booking_detail');

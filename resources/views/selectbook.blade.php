@@ -31,9 +31,8 @@
     @endauth
     @endif  
     </li>
-            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
-            <li><a href="#book">การจอง</a></li>
+            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
@@ -67,11 +66,11 @@
 
                     <td>{{ $room->room_number }}</td> <!-- เลขห้อง -->
                     <td>
-                        @if($room->roomType->room_description === 'Pre')
+                        @if($room->roomType->room_description === 'Premium')
                             Premium Bed
-                        @elseif($room->roomType->room_description === 'Sing')
+                        @elseif($room->roomType->room_description === 'Single')
                             Single Bed
-                        @elseif($room->roomType->room_description === 'Two')
+                        @elseif($room->roomType->room_description === 'Twin')
                             Two Bed
                         @else
                             {{ $room->roomType->room_description }}
@@ -134,9 +133,9 @@
                 console.log("Room Type: ", roomType, "Room Status: ", roomStatus);
     
                 // เงื่อนไขการแสดงผลตามประเภทเตียงและสถานะห้อง
-                const showByBedType = (bedType === 'sing' && roomType === 'Single Bed') ||
-                                      (bedType === 'two' && roomType === 'Two Bed') ||
-                                      (bedType === 'pre' && roomType === 'Premium Bed');
+                const showByBedType = (bedType === 'single' && roomType === 'Single Bed') ||
+                                      (bedType === 'twin' && roomType === 'Two Bed') ||
+                                      (bedType === 'premium' && roomType === 'Premium Bed');
     
                 const showByStatus = filterByRoomStatus(roomStatus, selectedStatus);
     
