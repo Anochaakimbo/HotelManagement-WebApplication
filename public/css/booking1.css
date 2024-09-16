@@ -37,7 +37,6 @@
 }
 
 .styled-table tbody tr td a {
-    color: #6a0dad;
     text-decoration: none;
     font-weight: bold;
 }
@@ -262,3 +261,25 @@ body {
 label{
     font-size: 32px;
 }
+
+.deletebutton {
+    text-decoration: none;
+    background-color: red;
+    color: white; /* สีตัวอักษร */
+    padding: 10px 20px; /* เพิ่มพื้นที่ภายในให้ดูเหมือนปุ่ม */
+    border-radius: 5px; /* ให้มุมมน */
+    display: inline-block; /* เพื่อให้ลิงก์ดูเหมือนบล็อกปุ่ม */
+    font-weight: bold;
+    text-align: center;
+}
+
+.deletecolumn{
+    text-align: center; /* จัดกลางแนวนอน */
+    vertical-align: middle; /* จัดกลางแนวตั้ง */
+}
+
+.deletebutton:hover {
+    background-color: darkred; /* เปลี่ยนสีเมื่อเอาเมาส์ไปวาง */
+    color: white;
+}
+

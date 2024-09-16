@@ -67,6 +67,9 @@
             <input type="text" name="room_number">
             <br>
             <br>
+            <label for="">Floor:</label><br>
+            <input type="number" name="floor" id="">
+            <br>
             <label for="">Description:</label>
             <br>
             <textarea name="description" id="" cols="30" rows="10" required></textarea>

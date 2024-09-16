@@ -53,7 +53,7 @@
                             <th>Room number</th>
                             <th>Room Type</th>
                             <th>Description</th>
-                            <th>Status</th>
+                            <th colspan="2">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +76,10 @@
                             @else
                                 <p style="color:red">Occupied</p>
                             @endif 
-                        </td>
+                            </td>
+                            <td class="deletecolumn">
+                                <a href="{{ route ('roomdelete',$rooms->id)}}" class="deletebutton" onclick="return confirm('Are you sure you want to delete this room?')">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                     @endforeach

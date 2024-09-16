@@ -45,6 +45,7 @@ class HomeController extends Controller
         $new_room->room_type_id = $request->room_type_id;
         $new_room->room_number = $request->room_number;
         $new_room->description = $request->description;
+        $new_room->floor = $request->floor;
         $new_room->save();
         $rooms = rooms::all();
 
@@ -59,5 +60,12 @@ class HomeController extends Controller
     public function preparetoAdd(){
         $rooms = RoomType::all();
         return view('admin.admin_addroom',['rooms' => $rooms]);
+    }
+
+    public function delete($id){
+        $rooms = rooms::findOrFail($id);
+        $rooms->destroy($id);
+        $rooms = rooms::all();
+        return redirect('/roomdetail');
     }
 }
