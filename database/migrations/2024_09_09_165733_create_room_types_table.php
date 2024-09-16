@@ -14,7 +14,7 @@ class CreateRoomTypesTable extends Migration
             $table->decimal('room_price', 10, 2); // ราคาห้อง
             $table->integer('contact_date');      // ระยะสัญญา (Contract Duration)
             $table->text('furniture_details');    // รายละเอียดเฟอร์นิเจอร์
-            $table->decimal('deposit_price', 10, 2); // ราคามัดจำ
+            $table->decimal('deposit_price', 10, 2);
             $table->timestamps();
             $table->softDeletes(); // For soft deleting
         });

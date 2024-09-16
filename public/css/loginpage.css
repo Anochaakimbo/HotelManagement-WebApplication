@@ -6,7 +6,7 @@
 
 body {
     font-family: ProjectFont;
-    font-size: larger;
+    font-size: xx-large;
     background-color: #FFF7EC;
     display: flex;
     justify-content: center; 
@@ -19,7 +19,7 @@ body {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
+    width: fit-content;
     height: auto;
     padding: 1em;
     background-color: #ffffff;
@@ -92,4 +92,3 @@ button.login:hover{
 .forgetpassbox a{
     color: black;
 }
-

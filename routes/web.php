@@ -108,6 +108,7 @@ Route::get('/Rent_4_2', function () {
 
 // Additional routes from arnoldtest2 branch
 Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');
+Route::get('/roomdetail/delete/{room_id}',[HomeController::class,'delete'])->name('roomdelete');
 Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
 Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
 Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');

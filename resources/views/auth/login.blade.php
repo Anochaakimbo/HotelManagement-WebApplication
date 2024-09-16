@@ -15,17 +15,18 @@
         @csrf
         <img src="./img/Logo.png" alt="">
         <h1 class="head">เข้าสู่ระบบ</h1>
-
+    <div class="logininput">
         <div class="emailbox">
             <label for="email" value="{{ __('อีเมล') }}">อีเมล:
             <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
         </div>
 
+    
         <div class="passwordbox">
             <label for="password" value="{{ __('รหัสผ่าน') }}">รหัสผ่าน:
             <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
         </div>
-
+    </div> 
         <div class="rememfor">
             <div class="remembercheckbox">
                 <input type="checkbox" id="remember_me" name="remember" />
@@ -41,12 +42,10 @@
                 @endif
             </div>
         </div>
-
         <button class="login">
             {{ __('เข้าสู่ระบบ') }}
         </button>
     </form>
     </div>
-
 </body>
 </html>
