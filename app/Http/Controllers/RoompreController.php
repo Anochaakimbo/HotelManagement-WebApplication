@@ -10,7 +10,7 @@ class RoompreController extends Controller
     public function showPremiumBed()
     {
         // ดึงข้อมูลห้องทั้งหมดจากฐานข้อมูล
-         $rooms = Roompre::where('room_description', 'Pre')->get();
+         $rooms = Roompre::where('room_description', 'Premium')->get();
 
         // ส่งข้อมูลไปยัง view
         return view('roomdetail-3', ['rooms' => $rooms]);

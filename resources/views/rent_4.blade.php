@@ -8,21 +8,36 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/rent_4.css') }}">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">หน้าหลัก</a></li>
-                <li><a href="#">ตรวจสอบห้องว่าง</a></li>
-                <li><a href="#">ประเภทห้อง</a></li>
-                <li><a href="#">การจอง</a></li>
-                <li><a href="#">ติดต่อเรา</a></li>
-                <li><a href="#">ล็อกอิน</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
+    <ul>
+        <li>
+            @if (Route::has('login'))
+    @auth
+        @if (Auth::user()->usertype == 'admin')
+            <a href="{{ url('/home') }}">จัดการห้อง</a>
+            <style>
+                .presstologin{
+                    display:none;
+                }
+            </style>
+        @else
+        <style>
+            .presstologin{
+                display:none;
+            }
+        </style>
+        
+        @endif
+    @endauth
+    @endif  
+    </li>
+            <li><a href="#roomtype">ประเภทห้อง</a></li>
+            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
+            <li><a href="#contactus">ติดต่อเรา</a></li>
+            <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
+        </ul>
+    </nav>
     <div class="step-progress">
         <div class="step active">
             <div class="step-line"></div>
@@ -54,7 +69,27 @@
         </div>
     </section>
     <footer>
-        <a href="{{ route('rent_4') }}" class="btn">ยืนยัน</a>
+        <button id="submit-button" class="btn" onclick="checkFileUpload()">ยืนยัน</button>
     </footer>
+
+    <script>
+
+            // ฟังก์ชันตรวจสอบเมื่อกดปุ่มยืนยัน
+            function checkFileUpload() {
+            var fileInput = document.getElementById('file-upload');
+            
+            // ตรวจสอบว่ามีการเลือกไฟล์หรือไม่
+            if (fileInput.files.length === 0) {
+                alert('กรุณาแนบไฟล์ก่อนที่จะยืนยันการชำระเงิน');
+                return false;
+            }
+
+            // แสดงข้อความยืนยันเมื่อมีไฟล์แล้ว
+            alert('ชำระเงินเสร็จเรียบร้อยแล้ว');
+            window.location.href = "/"; //หลับไปหน้าแรก
+            return true; // ดำเนินการต่อ (ส่งฟอร์มหรือไปที่ขั้นตอนถัดไป)
+        }
+
+    </script>
 </body>
 </html>

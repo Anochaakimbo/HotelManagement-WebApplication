@@ -39,9 +39,8 @@
     @endauth
  @endif  
 </li>
-            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
-            <li><a href="#book">การจอง</a></li>
+            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
@@ -62,13 +61,13 @@
     
 <div class="image-type" id="roomtype">
     <div class="typeone">
-        <a href="#type1"><img src="./img/singlebedroom1.jpg" alt=""></a>
+        <a href="{{ route('roomdetail-1') }}"><img src="./img/singlebedroom1.jpg" alt=""></a>
     </div>
     <div class="typetwo">
-        <a href="#type2"><img src="./img/twinbedroom2.jpg" alt=""></a>
+        <a href="{{ route('roomdetail-2') }}"><img src="./img/twinbedroom2.jpg" alt=""></a>
     </div>
     <div class="typethree">
-        <a href="#type3"><img src="./img/premiumroom1.jpg" alt=""></a>
+        <a href="{{ route('roomdetail-3') }}"><img src="./img/premiumroom1.jpg" alt=""></a>
     </div>
 </div>
 

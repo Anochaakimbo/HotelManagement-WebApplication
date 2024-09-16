@@ -54,7 +54,7 @@ class BookingController extends Controller
         $room->save();
 
         // Redirect ไปยังหน้า rent2 พร้อมข้อความ
-        return redirect()->route('rent_2')->with('message', 'จองสำเร็จ,กำลังพาคุณไปหน้าชำระเงิน.');
+        return redirect()->route('rent_2', ['guest_id' => $guest->id])->with('message', 'จองสำเร็จ,กำลังพาคุณไปหน้าชำระเงิน.');
     }
 
 

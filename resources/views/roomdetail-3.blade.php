@@ -31,9 +31,8 @@
     @endauth
     @endif  
     </li>
-            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
-            <li><a href="#book">การจอง</a></li>
+            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
@@ -87,7 +86,7 @@
                     <p>ค่ามัดจำ: {{ $room->deposit_price }} บาท</p>
                 </div>
                 @endforeach
-                <a href="{{ route('selectbook', ['bedType' => 'pre']) }}" class="btn">จองห้อง</a>
+                <a href="{{ route('selectbook', ['bedType' => 'premium']) }}" class="btn">จองห้อง</a>
             </section>
     </div>
 </body>

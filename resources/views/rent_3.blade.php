@@ -32,13 +32,13 @@
     @endauth
     @endif  
     </li>
-            <li><a href="#check">ตรวจสอบห้องว่าง</a></li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
-            <li><a href="#book">การจอง</a></li>
+            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
     </nav>
+    
     <div class="step-progress">
         <div class="step active">
             <div class="step-line"></div>
@@ -69,17 +69,31 @@
                         <th>ประเภทของห้อง</th>
                         <th>ระยะสัญญา</th>
                         <th>ช่องทางชำระเงิน</th>
-                        <th>ยอดชำระ</th>
+                        <th>ยอดชำระการจอง</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>อรรถนนท์</td>
-                        <td>502</td>
-                        <td>เตียงเดี่ยว</td>
-                        <td>12 เดือน</td>
-                        <td>สแกนคิวอาร์โค้ด</td>
-                        <td>7,000 บาท</td>
+                        <td>{{ $guest->name }}</td>
+                        <td>{{ $room->room_number }}</td>
+                        <td>
+                            @if($roomType->room_description == 'Premium')
+                                เตียงเดี่ยวพรีเมี่ยม
+                            @elseif($roomType->room_description == 'Single')
+                                เตียงเดี่ยว
+                            @elseif($roomType->room_description == 'Twin')
+                                เตียงคู่
+                            @endif
+                        </td>
+                        <td>{{ $roomType->contact_date }} เดือน</td>
+                        <td>
+                            @if($paymentMethod == 'qr')
+                                สแกนคิวอาร์โค้ด
+                            @elseif($paymentMethod == 'credit')
+                                บัตรเครดิต/เดบิต
+                            @endif
+                        </td>
+                        <td>{{ $roomType->deposit_price }} บาท</td>
                     </tr>
                 </tbody>
             </table>
