@@ -105,5 +105,11 @@ public function assignUserToRoom($roomId, $userId)
     $room->contract = Carbon::now(); // บันทึกวันที่ปัจจุบัน
     $room->save();
 }
+public function historybooking()
+    {
+        $bookings = Booking::onlyTrashed()->with('room', 'guest')->get();
+
+        return view('admin.booking_history', compact('bookings'));
+    }
 
 }

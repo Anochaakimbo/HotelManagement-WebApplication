@@ -29,11 +29,24 @@ public function showAdminForm()
     return view('admin.billing', compact('rooms', 'billings'));
 }
 
+public function showAdminForm1()
+{
+    $rooms = rooms::whereNotNull('user_id')
+        ->whereDoesntHave('billings', function ($query) {
+            $query->where('status', 'ส่งไปยังผู้ใช้แล้ว')
+                  ->whereNull('deleted_at');
+        })
+        ->with('user')
+        ->get();
+    $billings = Billing::with('room', 'user')->get();
+    return view('admin.billing-confirm', compact('rooms', 'billings'));
+}
+
 
     public function calculate(Request $request)
     {
         // รับค่า room_id จากฟอร์ม
-        
+
         $room_id = $request->input('room_id');
 
         // ดึงข้อมูลห้องที่เชื่อมโยงกับ RoomType และ User
@@ -87,7 +100,7 @@ public function showAdminForm()
 public function confirmPayment($id)
 {
     $billing = Billing::findOrFail($id);
-    
+
     $billing->status = 'ชำระค่าห้องแล้ว';
     $billing->save();
 
@@ -105,12 +118,12 @@ public function showPaymentHistory()
 }
 public function payBilling($id)
 {
-    // ดึงข้อมูล billing จาก id
+    
     $billing = Billing::findOrFail($id);
 
-    // ตรวจสอบว่าสถานะเป็น "ส่งไปยังผู้ใช้แล้ว"
+
     if ($billing->status == 'ส่งไปยังผู้ใช้แล้ว') {
-        // เปลี่ยนสถานะเป็น "รอยืนยัน"
+
         $billing->status = 'รอยืนยัน';
         $billing->save();
 
