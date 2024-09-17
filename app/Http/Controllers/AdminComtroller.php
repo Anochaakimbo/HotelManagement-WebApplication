@@ -82,7 +82,7 @@ class AdminComtroller extends Controller
     }
     public function index()
     {
-        // ดึงข้อมูลการจองห้องทั้งหมดจากฐานข้อมูล
+
         $bookings = Booking::all();
         $usersCount = User::count(); // นับจำนวนผู้ใช้
         //$pendingIssuesCount = Issue::where('status', 'pending')->count(); // นับปัญหาที่รอดำเนินการ
@@ -91,16 +91,17 @@ class AdminComtroller extends Controller
                                    ->groupBy('month')
                                    ->pluck('total', 'month')->toArray();
 
-        // เตรียมข้อมูลของเดือนที่ต้องการแสดง (หากบางเดือนยังไม่มีข้อมูล ให้กำหนดค่าเป็น 0)
-        $months = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
-        $bookingsData = [];
 
-        for ($i = 1; $i <= 12; $i++) {
-            $bookingsData[] = $bookingsPerMonth[$i] ?? 0;
-        }
+
 
         // ส่งข้อมูลไปยัง view
-        return view('admin.adminpage', compact('bookings', 'usersCount','billings','months','bookingsData'));
+        return view('admin.adminpage', compact('bookings', 'usersCount','billings'));
+    }
+    public function guest(){
+
+    }
+    public function CustomerProblem(){
+
     }
 }
 

@@ -1,15 +1,7 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('ADMIN Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            eiei
-            <h1>ประวัติการชำระเงิน</h1>
-
+@extends('layouts.sidebar-admin')
+@section('content')
+<div class="billing-history">
+    <h1>Billing History</h1>
 @if ($billings->isNotEmpty())
     <table>
         <thead>
@@ -38,9 +30,9 @@
         </tbody>
     </table>
 @else
-    <p>ไม่มีประวัติการชำระเงินที่ถูกลบ</p>
+    <p>No payment history</p>
 @endif
 
         </div>
     </div>
-</x-app-layout>
+@endsection

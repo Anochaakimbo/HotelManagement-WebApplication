@@ -72,6 +72,7 @@ Route::post('/admin/booking/delete/{id}', [AdminComtroller::class, 'deleteBookin
 // Admin view routes
 Route::get('/admin/booking', [HomeController::class, 'booking'])->Middleware('admin')->name('booking');
 Route::get('/adminpage', [AdminComtroller::class, 'index'])->Middleware('admin')->name('adminpage');
+Route::get('/booking-history', [BookingController::class, 'historybooking'])->Middleware('admin')->name('bookinghistory');
 
 
 // Routes for Room and Roomtype controllers
@@ -87,9 +88,10 @@ Route::get('/admin/booking/confirm/{id}', [AdminComtroller::class, 'showConfirmB
 // Billing routes
 Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EASYOKOK')->Middleware('admin');
 Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling')->Middleware('admin');
+Route::get('/billing-confirm', [ChargeController::class, 'showAdminForm1'])->name('confirmbill')->Middleware('admin');
 Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
 Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name('payBilling');
-Route::get('/history', [ChargeController::class, 'showPaymentHistory'])->name('history')->Middleware('admin');
+Route::get('/payment-history', [ChargeController::class, 'showPaymentHistory'])->name('paymenthistory')->Middleware('admin');
 
 // Rental views (multiple options)
 Route::get('/Rent_1', function () {
@@ -109,11 +111,11 @@ Route::get('/Rent_4_2', function () {
 Route::post('/payment-process', [PaymentCreditController::class, 'processPayment'])->name('payment_process');
 
 // Additional routes from arnoldtest2 branch
-Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('auth')->name('roomdetail');
+Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('admin')->name('roomdetail');
 Route::get('/roomdetail/delete/{room_id}',[HomeController::class,'delete'])->name('roomdelete');
 Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
 Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
-Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('auth')->name('Addroom');
+Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('admin')->name('Addroom');
 
 
 
