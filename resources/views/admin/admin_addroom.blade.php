@@ -8,11 +8,11 @@
                 @foreach ($rooms as $room )
                 <option value="{{ $room->id }}">
                     @if ($room->id == "1")
-                    Twin Bed Room
-                @elseif ($room->id == "2")
-                    Single Bed Room
-                @elseif ($room->id == "3")
                     Premium Bed Room
+                @elseif ($room->id == "2")
+                    Twin Bed Room
+                @elseif ($room->id == "3")
+                    Single Bed Room
                 @endif
                 </option>
                 @endforeach

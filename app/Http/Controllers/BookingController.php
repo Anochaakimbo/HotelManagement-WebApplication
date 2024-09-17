@@ -107,7 +107,9 @@ public function assignUserToRoom($roomId, $userId)
 }
 public function historybooking()
     {
-        $bookings = Booking::onlyTrashed()->with('room', 'guest')->get();
+        $bookings = Booking::onlyTrashed()->with(['room', 'guest' => function ($query) {
+            $query->withTrashed(); 
+        }])->get();
 
         return view('admin.booking_history', compact('bookings'));
     }

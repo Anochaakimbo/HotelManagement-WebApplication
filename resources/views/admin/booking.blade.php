@@ -1,5 +1,7 @@
 @extends('layouts.sidebar-admin')
 @section('content')
+<div class="billing-history">
+    <h1>Booking</h1>
         <div class="main-content">
             <div class="room-info">
                 <div class="details">
