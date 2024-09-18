@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Guest;
+use App\Models\Booking;
+use App\Models\rooms;
 class PaymentCreditController extends Controller
 {
     public function processPayment(Request $request)
-    {
-        // รับข้อมูลบัตรเครดิตจากฟอร์ม
-        $cardNumber = $request->input('card_number');
-        $cardName = $request->input('card_name');
-        $expiryDate = $request->input('expiry_date');
-        $cvv = $request->input('cvv');
+{
+    $guestId = $request->input('guest_id');
+    $guest = Guest::find($guestId);
 
-        // ตรงนี้คุณสามารถประมวลผลการชำระเงินจริงได้ เช่น ส่งข้อมูลไปยัง API ของธนาคาร
-
-        // ตัวอย่างแสดงผลหลังการประมวลผล
-        return redirect('/')->with('message', 'การชำระเงินสำเร็จแล้ว');
+    if (!$guest) {
+        return redirect()->back()->with('error', 'ไม่พบข้อมูลผู้ใช้');
     }
+
+    $booking = Booking::where('guest_id', $guest->id)->first();
+    if (!$booking) {
+        return redirect()->back()->with('error', 'ไม่พบข้อมูลการจอง');
+    }
+
+    // อัปเดตสถานะการจอง
+    $booking->status = 'รอยืนยัน';
+    $booking->save();
+
+    return redirect('/')->with('message', 'การชำระเงินสำเร็จแล้ว');
+}
 }

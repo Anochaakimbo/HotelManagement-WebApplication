@@ -57,19 +57,38 @@ class Rent_3Controller extends Controller
     }
 
     public function showRent4(Request $request)
-    {
-        // นำผู้ใช้ไปยังหน้า rent_4 สำหรับ QR หรือ rent_4_2 สำหรับ credit
-        $paymentMethod = $request->input('payment_method');
+{
+    $guestId = $request->query('guest_id');
+    $paymentMethod = $request->query('payment_method');
 
-        if ($paymentMethod === 'qr') {
-            return view('rent_4');  // สำหรับ QR Code
-        } elseif ($paymentMethod === 'credit') {
-            return view('rent_4_2');  // สำหรับบัตรเครดิต/เดบิต
-        }
+    // ตรวจสอบค่าที่ได้รับก่อนการ redirect
 
-        // กรณีไม่พบวิธีการจ่ายเงินที่ถูกต้อง
-        return redirect()->route('rent_3')->with('error', 'กรุณาเลือกวิธีการชำระเงิน');
+    if ($paymentMethod === 'credit') {
+        return redirect()->route('rent_4_2', ['guest_id' => $guestId, 'payment_method' => $paymentMethod]);
     }
-}
 
+    return redirect()->back()->with('error', 'ไม่พบวิธีการชำระเงินที่ถูกต้อง');
+}
+public function showRent4_2(Request $request)
+{
+    // ดึง guest_id และ payment_method จาก query string
+    $guestId = $request->query('guest_id');
+    $paymentMethod = $request->query('payment_method');
+
+    // ตรวจสอบ guest
+    $guest = Guest::find($guestId);
+    if (!$guest) {
+        return redirect()->back()->with('error', 'ไม่พบข้อมูลผู้ใช้');
+    }
+
+    // ดึง booking ที่เชื่อมโยงกับ guest
+    $booking = Booking::where('guest_id', $guestId)->first();
+    if (!$booking) {
+        return redirect()->back()->with('error', 'ไม่พบข้อมูลการจอง');
+    }
+
+    // ส่งข้อมูลไปยัง view
+    return view('rent_4_2', compact('guest', 'booking', 'paymentMethod'));
+}
+}
 

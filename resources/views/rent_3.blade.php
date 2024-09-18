@@ -27,10 +27,10 @@
                 display:none;
             }
         </style>
-        
+
         @endif
     @endauth
-    @endif  
+    @endif
     </li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
@@ -38,7 +38,7 @@
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
     </nav>
-    
+
     <div class="step-progress">
         <div class="step active">
             <div class="step-line"></div>
@@ -100,6 +100,7 @@
         </main>
 
         <form action="{{ route('rent_4') }}" method="get">
+            <input type="hidden" name="guest_id" value="{{ $guest->id }}">
             <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
             <button type="submit" class="btn">ต่อไป</button>
         </form>

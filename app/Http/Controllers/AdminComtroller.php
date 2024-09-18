@@ -46,7 +46,7 @@ class AdminComtroller extends Controller
     $room->save();
     $booking->delete();
 
-    return redirect()->back()->with('message', 'Booking deleted and room is now available.');
+    return view('admin.booking')->with('message', 'Booking deleted and room is now available.');
 }
 
     // ฟังก์ชันสร้างผู้ใช้จากการจอง
@@ -78,7 +78,7 @@ class AdminComtroller extends Controller
         $guest->delete();
         }
         $booking->delete();
-        return redirect()->route('booking')->with('message', 'User created and assigned to room successfully.');
+        return redirect()->route('admin.booking')->with('message', 'User created and assigned to room successfully.');
     }
     public function index()
     {

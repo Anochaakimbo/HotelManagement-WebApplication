@@ -111,14 +111,13 @@ public function confirmPayment($id)
 }
 public function showPaymentHistory()
 {
-    // ดึงเฉพาะข้อมูลที่ถูก soft delete ทั้งหมด
     $billings = Billing::onlyTrashed()->get();
 
     return view('admin.payment_history', compact('billings'));
 }
 public function payBilling($id)
 {
-    
+
     $billing = Billing::findOrFail($id);
 
 
