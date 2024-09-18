@@ -26,10 +26,10 @@
                 display:none;
             }
         </style>
-        
+
         @endif
     @endauth
-    @endif  
+    @endif
     </li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="#book">การจอง</a></li>
@@ -56,7 +56,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $booking->room->room_number }}</td> <!-- แสดงเลขห้องจากตาราง rooms -->
-                         
+
                         <td>
                             @if( $booking->room->roomType->room_description == 'Premium')
                                 เตียงเดี่ยวพรีเมี่ยม
@@ -70,7 +70,7 @@
                         <td>
                             @if ($booking->status == 'จองสำเร็จ')
                                 <span class="status-confirmed">จองสำเร็จ</span>
-                            @elseif ($booking->status == 'รอชำระเงิน')
+                            @elseif ($booking->status == 'รอยืนยัน')
                                 <span class="status-pending">รอยืนยันการชำระเงิน</span>
                             @endif
                         </td>
