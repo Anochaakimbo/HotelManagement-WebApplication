@@ -1,6 +1,12 @@
 @extends('layouts.sidebar-admin')
 @section('content')
     <div class="main-content">
+        @if (session('alert'))
+            <script>
+                alert("{{ session('alert') }}");
+            </script>
+        @endif
+        
         <form action="/Addroom/addroom" method="POST">
             @csrf
             <label for="">Room Type:</label><br>

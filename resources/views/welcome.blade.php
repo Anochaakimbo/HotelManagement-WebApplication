@@ -27,12 +27,20 @@
                 .presstologin{
                     display:none;
                 }
+                .logoutbutton {
+                    display: inline !important; 
+                    cursor: pointer;
+                }
             </style>
         @else
         <style>
             .presstologin{
                 display:none;
             }
+            .logoutbutton{
+                    display: inline !important;
+                    cursor: pointer;
+                }
         </style>
         
         @endif
@@ -43,6 +51,14 @@
             <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
+            <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
+                @csrf
+                <li @click.prevent="$root.submit();" class="logoutbutton" style="display: none" onclick="document.getElementById('logout-form').submit();">
+                    <a href="javascript:void(0);">
+                        {{ __('ออกจากระบบ') }}
+                    </a>
+                </li>
+            </form>
         </ul>
     </nav>
 
