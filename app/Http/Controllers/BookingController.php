@@ -71,28 +71,7 @@ class BookingController extends Controller
 
     return redirect()->back()->with('message', 'Booking status updated.');
 }
-public function pay(Request $request, $id)
-{
 
-    $booking = Booking::findOrFail($id);
-
-    if ($booking->status == 'รอชำระเงิน') {
-
-        $booking->status = 'รอยืนยัน';
-        $booking->save();
-
-
-        $room = $booking->room;
-        if ($room) {
-            $room->is_available = 0;
-            $room->save();
-        }
-
-        return redirect()->back()->with('message', 'Payment completed and room is now unavailable. Waiting for confirmation.');
-    }
-
-    return redirect()->back()->with('error', 'Invalid booking status.');
-}
 
 
 
@@ -108,7 +87,7 @@ public function assignUserToRoom($roomId, $userId)
 public function historybooking()
     {
         $bookings = Booking::onlyTrashed()->with(['room', 'guest' => function ($query) {
-            $query->withTrashed(); 
+            $query->withTrashed();
         }])->get();
 
         return view('admin.booking_history', compact('bookings'));
