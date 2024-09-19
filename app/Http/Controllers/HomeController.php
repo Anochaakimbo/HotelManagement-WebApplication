@@ -40,7 +40,16 @@ class HomeController extends Controller
         return view('admin.csp', ['rooms' => $rooms]);
     }
 
-    public function addRoom(Request $request){
+    public function addRoom(Request $request)
+    {
+        $checkroom= rooms::where('room_number',$request->room_number)->first();
+
+        if($checkroom){
+            return back()->with('alert', 'มีห้องนี้อยู่ในระบบแล้ว')->withInput();
+        }
+
+
+
         $new_room = new rooms;
         $new_room->room_type_id = $request->room_type_id;
         $new_room->room_number = $request->room_number;
