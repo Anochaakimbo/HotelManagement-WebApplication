@@ -17,6 +17,7 @@ use App\Http\Controllers\RoomsingleController;
 use App\Http\Controllers\RoomtwinController;
 use App\Http\Controllers\PaymentCreditController;
 use App\Http\Controllers\BookingDetailController;
+use App\Http\Controllers\PaymentQrcodeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -106,8 +107,8 @@ Route::get('/rent_4', [Rent_3Controller::class, 'showRent4'])->name('rent_4');
 
 Route::get('/Rent_4_2', [Rent_3Controller::class, 'showRent4_2'])->name('rent_4_2');
 
-
-Route::post('/payment-process', [PaymentCreditController::class, 'processPayment'])->name('payment_process');
+Route::post('/payment-process-Qr', [PaymentQrcodeController::class, 'processQrPayment'])->name('payment_process_qr');
+Route::post('/payment-process-CreditCard', [PaymentCreditController::class, 'processPayment'])->name('payment_process');
 
 // Additional routes from arnoldtest2 branch
 Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('admin')->name('roomdetail');

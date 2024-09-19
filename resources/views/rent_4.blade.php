@@ -59,18 +59,22 @@
     
     <section class="payment-section">
         <h2>สแกนคิวอาร์โค้ด</h2>
-        <div class="qr-code">
-            <img src="./img/qr code pay.png" alt="QR Code">
-            <div class="amount">ยอดชำระ: 7000 บาท</div>
-            <div class="amount">แนบสลิปการโอนเงิน:</div>
-            <input type="file" id="file-upload" class="slip" >
-            <p class="note">*หมายเหตุ กรุณาแนบสลิปการโอนเงินไม่เช่นนั้นจะถือว่าการชำระไม่สำเร็จ</p>
-            
-        </div>
+        <form id="qrPaymentForm" action="{{ route('payment_process_qr') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="qr-code">
+                <img src="./img/qr code pay.png" alt="QR Code">
+                <div class="amount">ยอดชำระ: 7000 บาท</div>
+                <div class="amount">แนบสลิปการโอนเงิน:</div>
+                <input type="file" id="file-upload" class="slip" name="payment_slip" required>
+                <p class="note">*หมายเหตุ กรุณาแนบสลิปการโอนเงินไม่เช่นนั้นจะถือว่าการชำระไม่สำเร็จ</p>
+            </div>
+            <footer>
+                <input type="hidden" name="guest_id" value="{{ $guest->id }}">
+                <input type="hidden" name="payment_method" value="qr_code">
+                <button type="submit" class="btn" id="submitButton">ยืนยัน</button>
+            </footer>
+        </form>
     </section>
-    <footer>
-        <button id="submit-button" class="btn" onclick="checkFileUpload()">ยืนยัน</button>
-    </footer>
 
     <script>
 
