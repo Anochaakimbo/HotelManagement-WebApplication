@@ -23,10 +23,6 @@ class HomeController extends Controller
         return view('admin.adminpage', compact('bookings'));
     }
 
-    public function guest(){
-        $bookings = Booking::all();
-        return view ('admin.guests', ['bookings' => $bookings]);
-    }
     public function booking(){
         $bookings = Booking::all();
         return view ('admin.booking', ['bookings' => $bookings]);
