@@ -6,11 +6,8 @@ use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\AdminComtroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RoomdetailsController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Rent_3Controller;
-use PHPUnit\Framework\Attributes\Group;
-use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomtypeController;
 use App\Http\Controllers\RoompreController;
 use App\Http\Controllers\RoomsingleController;
@@ -53,7 +50,7 @@ route::get('/home',[HomeController::class,'index'])->name('home');
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
 route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
 route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
-route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
+route::get('/guestpage',[AdminComtroller::class,'guest'])->Middleware('auth')->name('guestpage');
 route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
 
 // Merged route for selectbook and bookings
@@ -91,6 +88,7 @@ Route::post('/submit-billing', [ChargeController::class, 'calculate'])->name('EA
 Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminbilling')->Middleware('admin');
 Route::get('/billing-confirm', [ChargeController::class, 'showAdminForm1'])->name('confirmbill')->Middleware('admin');
 Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
+Route::post('/billing/deny/{id}', [ChargeController::class, 'denyPayment'])->name('denyPayment');
 Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name('payBilling');
 Route::get('/payment-history', [ChargeController::class, 'showPaymentHistory'])->name('paymenthistory')->Middleware('admin');
 
@@ -117,12 +115,6 @@ Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
 Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
 Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('admin')->name('Addroom');
 
-
-
-
-
-
-
-
-
 Route::get('/booking_detail', [BookingDetailController::class, 'showBookings'])->name('booking_detail');
+
+Route::get('/room/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.details');

@@ -14,6 +14,10 @@ class rooms extends Model
         'room_number',
         'description',
     ];
+    public function billing()
+{
+    return $this->hasOne(Billing::class,'room_id'); // assuming one room has one billing
+}
     public function bookings()
     {
         return $this->hasMany(Booking::class);
