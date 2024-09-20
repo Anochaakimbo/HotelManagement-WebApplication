@@ -36,7 +36,7 @@
             <br>
             <textarea name="description" id="" cols="30" rows="10" required></textarea>
             <br>
-            <button type="submit" onclick="return confirm('Are you sure you want to add room?')" class="submitbutton">Submit</button>
+            <button type="submit" onclick="return confirm('Are you sure you want to add room?')" class="addroombutton">Submit</button>
 
 
         </form>

@@ -118,3 +118,6 @@ Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('admin
 Route::get('/booking_detail', [BookingDetailController::class, 'showBookings'])->name('booking_detail');
 
 Route::get('/room/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.details');
+
+Route::get('/roomdetail/updated',[HomeController::class,'showDetailroom']);
+Route::post('/roomdetail/updated', [HomeController::class, 'updateroom'])->name('roomdetail.update');
