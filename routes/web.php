@@ -102,7 +102,7 @@ Route::get('/Rent_1', function () {
 Route::get('/rent_2/{guest_id}', [Rent_3Controller::class, 'showRent2'])->name('rent_2');
 Route::get('/rent_3', [Rent_3Controller::class, 'showPaymentPage'])->name('rent_3');
 Route::get('/rent_4', [Rent_3Controller::class, 'showRent4'])->name('rent_4');
-Route::get('/Rent_4_2', [Rent_3Controller::class, 'showRent4_2'])->name('rent_4_2');
+Route::get('/Rent_4_2', [Rent_3Controller::class, 'showRent4'])->name('rent_4_2');
 
 // Payment processing routes
 Route::post('/payment-process-Qr', [PaymentQrcodeController::class, 'processQrPayment'])->name('payment_process_qr');
