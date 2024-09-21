@@ -302,3 +302,62 @@ body {
       .dropdown:hover .dropdown-content {display: block;}
 
       .dropdown:hover .dropbtn {background-color: #ddd;}
+
+
+.addroombutton{
+    padding: 1%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-color: #f7b366;
+    border: none;
+    border-radius: 10px;
+    font-size: x-large;
+}
+
+.addroombutton:hover{
+    cursor: pointer;
+    background-color: #ff8800;
+}
+
+.btninform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btninform button{
+    font-size: x-large;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.addroombutton1{
+    border: none;
+    background-color: #f7b366;
+}
+
+.addroombutton1:hover{
+    cursor: pointer;
+    background-color: #ff8800;
+}
+
+.backbtn{
+    border-radius: 10px;
+}
+
+.backbtn:hover{
+    cursor: pointer;
+    background-color: #dadada;
+}
+
+.updateroomheader{
+    text-align: center;
+    font-size: 300%;
+}

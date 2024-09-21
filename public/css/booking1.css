@@ -266,21 +266,44 @@ label{
 .deletebutton {
     text-decoration: none;
     background-color: red;
-    color: white; /* สีตัวอักษร */
-    padding: 10px 20px; /* เพิ่มพื้นที่ภายในให้ดูเหมือนปุ่ม */
-    border-radius: 5px; /* ให้มุมมน */
-    display: inline-block; /* เพื่อให้ลิงก์ดูเหมือนบล็อกปุ่ม */
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    display: inline-block; 
     font-weight: bold;
     text-align: center;
+    transition: 0.2s;
 }
 
 .deletecolumn{
-    text-align: center; /* จัดกลางแนวนอน */
-    vertical-align: middle; /* จัดกลางแนวตั้ง */
+    text-align: center;
+    vertical-align: middle;
 }
 
 .deletebutton:hover {
-    background-color: darkred; /* เปลี่ยนสีเมื่อเอาเมาส์ไปวาง */
+    text-decoration: none;
+    background-color: darkred; 
     color: white;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
+.updatebutton{
+    text-decoration: none;
+    color: white; 
+    background-color: yellow;
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    display: inline-block; 
+    font-weight: bold;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.updatebutton:hover{
+    text-decoration: none;
+    background-color: rgb(165, 162, 0); 
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
