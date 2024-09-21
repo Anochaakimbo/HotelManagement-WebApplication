@@ -7,11 +7,11 @@
         <h2 class="updateroomheader">Update Room</h2>
         <input type="hidden" name="id" id="room_id">
         <label for="">Room number:</label><br>
-        <input type="text" name="room_number" id="room_number" readonly><br>
+        <input type="text" name="room_number" id="room_number" readonly class="textroomnumber"><br>
         <label for="roomtype">Room Type:</label><br>
-        <input name="room_type_id" id="room_type_id" required readonly></input><br>
+        <input name="room_type_id" id="room_type_id" required readonly class="textroomtype"></input><br>
         <label for="">Floor:</label><br>
-        <input type="number" name="floor" id="floor" readonly><br>
+        <input type="number" name="floor" id="floor" readonly class="textroomfloor"><br>
         <label for="">Description:</label>
         <br>
         <textarea name="description" id="description" cols="30" rows="10" required></textarea>
