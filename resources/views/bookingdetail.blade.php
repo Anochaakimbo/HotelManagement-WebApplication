@@ -72,6 +72,8 @@
                                 <span class="status-confirmed">จองสำเร็จ</span>
                             @elseif ($booking->status == 'รอยืนยัน')
                                 <span class="status-pending">รอยืนยันการชำระเงิน</span>
+                            @elseif ($booking->status == 'รอชำระเงิน')
+                                <a href="{{ route('rent_2', ['guest_id' => $booking->guest_id]) }}"><span class="status-pay">รอชำระเงิน</span></a>
                             @endif
                         </td>
                     </tr>

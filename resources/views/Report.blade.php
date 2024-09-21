@@ -10,52 +10,52 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const subCategories = {
-                aircon: [
-                    { value: 'aircon1', text: 'ไม่เย็น' },
-                    { value: 'aircon2', text: 'รั่วซึม' },
-                    { value: 'aircon3', text: 'เสียงดัง' }
+                'เครื่องปรับอากาศ (แอร์)': [
+                    { value: 'ไม่เย็น', text: 'ไม่เย็น' },
+                    { value: 'รั่วซึม', text: 'รั่วซึม' },
+                    { value: 'เสียงดัง', text: 'เสียงดัง' }
                 ],
-                'water-heater': [
-                    { value: 'water-heater1', text: 'ไม่ทำงาน' },
-                    { value: 'water-heater2', text: 'รั่วซึม' },
-                    { value: 'water-heater3', text: 'น้ำไม่ร้อน' }
+                เครื่องทำน้ำอุ่น: [
+                    { value: 'ไม่ทำงาน', text: 'ไม่ทำงาน' },
+                    { value: 'รั่วซึม', text: 'รั่วซึม' },
+                    { value: 'น้ำไม่ร้อน', text: 'น้ำไม่ร้อน' }
                 ],
-                electricity: [
-                    { value: 'electricity1', text: 'หลอดไฟเสีย' },
-                    { value: 'electricity2', text: 'สวิตช์ไฟไม่ทำงาน' },
-                    { value: 'electricity3', text: 'ปลั๊กไฟหลวม' }
+                ไฟฟ้าและหลอดไฟ: [
+                    { value: 'หลอดไฟเสีย', text: 'หลอดไฟเสีย' },
+                    { value: 'สวิตช์ไฟไม่ทำงาน', text: 'สวิตช์ไฟไม่ทำงาน' },
+                    { value: 'ปลั๊กไฟหลวม', text: 'ปลั๊กไฟหลวม' }
                 ],
-                'door-window': [
-                    { value: 'door-window1', text: 'ลูกบิดประตูเสีย' },
-                    { value: 'door-window2', text: 'ประตูหรือหน้าต่างปิดไม่สนิท' },
-                    { value: 'door-window3', text: 'บานพับชำรุด' }
+                'ประตูและหน้าต่าง': [
+                    { value: 'ลูกบิดประตูเสีย', text: 'ลูกบิดประตูเสีย' },
+                    { value: 'ประตูหรือหน้าต่างปิดไม่สนิท', text: 'ประตูหรือหน้าต่างปิดไม่สนิท' },
+                    { value: 'บานพับชำรุด', text: 'บานพับชำรุด' }
                 ],
-                furniture: [
-                    { value: 'furniture1', text: 'โต๊ะชำรุดหรือเสียหาย' },
-                    { value: 'furniture2', text: 'เก้าอี้ชำรุดหรือเสียหาย' },
-                    { value: 'furniture3', text: 'ตู้เสื้อผ้าชำรุดหรือเสียหาย' }
+                เฟอร์นิเจอร์: [
+                    { value: 'โต๊ะชำรุดหรือเสียหาย', text: 'โต๊ะชำรุดหรือเสียหาย' },
+                    { value: 'เก้าอี้ชำรุดหรือเสียหาย', text: 'เก้าอี้ชำรุดหรือเสียหาย' },
+                    { value: 'ตู้เสื้อผ้าชำรุดหรือเสียหาย', text: 'ตู้เสื้อผ้าชำรุดหรือเสียหาย' }
                 ],
-                plumbing: [
-                    { value: 'plumbing1', text: 'ท่อน้ำรั่ว' },
-                    { value: 'plumbing2', text: 'น้ำไม่ไหล' },
-                    { value: 'plumbing3', text: 'ก๊อกน้ำหรือสายชำระเสีย' }
+                ระบบประปา: [
+                    { value: 'ท่อน้ำรั่ว', text: 'ท่อน้ำรั่ว' },
+                    { value: 'น้ำไม่ไหล', text: 'น้ำไม่ไหล' },
+                    { value: 'ก๊อกน้ำหรือสายชำระเสีย', text: 'ก๊อกน้ำหรือสายชำระเสีย' }
                 ],
-                bathroom: [
-                    { value: 'bathroom1', text: 'ชักโครกเสีย' },
-                    { value: 'bathroom2', text: 'อ่างล้างหน้าอุดตัน' },
-                    { value: 'bathroom3', text: 'ระบายน้ำช้า' }
+                ห้องน้ำ: [
+                    { value: 'ชักโครกเสีย', text: 'ชักโครกเสีย' },
+                    { value: 'อ่างล้างหน้าอุดตัน', text: 'อ่างล้างหน้าอุดตัน' },
+                    { value: 'ระบายน้ำช้า', text: 'ระบายน้ำช้า' }
                 ],
-                'washing-machine': [
-                    { value: 'washing-machine1', text: 'เครื่องไม่ทำงาน' },
-                    { value: 'washing-machine2', text: 'ปั่นไม่หมาด' }
+                'เครื่องซักผ้า (ถ้ามีในห้อง)': [
+                    { value: 'เครื่องไม่ทำงาน', text: 'เครื่องไม่ทำงาน' },
+                    { value: 'ปั่นไม่หมาด', text: 'ปั่นไม่หมาด' }
                 ],
-                'wall-floor': [
-                    { value: 'wall-floor1', text: 'ผนังร้าว' },
-                    { value: 'wall-floor2', text: 'พื้นเสียหายหรือหลุดร่อน' }
+                'ผนังและพื้นห้อง': [
+                    { value: 'ผนังร้าว', text: 'ผนังร้าว' },
+                    { value: 'พื้นเสียหายหรือหลุดร่อน', text: 'พื้นเสียหายหรือหลุดร่อน' }
                 ],
-                'internet-tv': [
-                    { value: 'internet-tv1', text: 'อินเทอร์เน็ตไม่เชื่อมต่อ' },
-                    { value: 'internet-tv2', text: 'โทรทัศน์สัญญาณขัดข้อง' }
+                'อินเทอร์เน็ตและโทรทัศน์': [
+                    { value: 'อินเทอร์เน็ตไม่เชื่อมต่อ', text: 'อินเทอร์เน็ตไม่เชื่อมต่อ' },
+                    { value: 'โทรทัศน์สัญญาณขัดข้อง', text: 'โทรทัศน์สัญญาณขัดข้อง' }
                 ]
             };
 
@@ -133,16 +133,16 @@
                 <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
                 <select id="main-category" name="main_category">
                     <option value="">เลือกหมวดงานซ่อมหลัก</option>
-                    <option value="aircon">เครื่องปรับอากาศ (แอร์)</option>
-                    <option value="water-heater">เครื่องทำน้ำอุ่น</option>
-                    <option value="electricity">ไฟฟ้าและหลอดไฟ</option>
-                    <option value="door-window">ประตูและหน้าต่าง</option>
-                    <option value="furniture">เฟอร์นิเจอร์</option>
-                    <option value="plumbing">ระบบประปา</option>
-                    <option value="bathroom">ห้องน้ำ</option>
-                    <option value="washing-machine">เครื่องซักผ้า (ถ้ามีในห้อง)</option>
-                    <option value="wall-floor">ผนังและพื้นห้อง</option>
-                    <option value="internet-tv">อินเทอร์เน็ตและโทรทัศน์</option>
+                    <option value="เครื่องปรับอากาศ (แอร์)">เครื่องปรับอากาศ (แอร์)</option>
+                    <option value="เครื่องทำน้ำอุ่น">เครื่องทำน้ำอุ่น</option>
+                    <option value="ไฟฟ้าและหลอดไฟ">ไฟฟ้าและหลอดไฟ</option>
+                    <option value="ประตูและหน้าต่าง">ประตูและหน้าต่าง</option>
+                    <option value="เฟอร์นิเจอร์">เฟอร์นิเจอร์</option>
+                    <option value="ระบบประปา">ระบบประปา</option>
+                    <option value="ห้องน้ำ">ห้องน้ำ</option>
+                    <option value="เครื่องซักผ้า (ถ้ามีในห้อง)">เครื่องซักผ้า (ถ้ามีในห้อง)</option>
+                    <option value="ผนังและพื้นห้อง">ผนังและพื้นห้อง</option>
+                    <option value="อินเทอร์เน็ตและโทรทัศน์">อินเทอร์เน็ตและโทรทัศน์</option>
                 </select>
 
                 <label for="sub_category">เลือกหมวดงานซ่อมย่อย</label>

@@ -111,3 +111,13 @@ tbody tr:nth-child(even) {
     color: red;
     font-weight: bold;
 }
+
+.status-pay {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-pay:hover{
+    background-color: yellow;
+    font-weight: bold;
+}

@@ -35,7 +35,7 @@
             <td>
                 <!-- ส่งค่า room_id ไปด้วย -->
                 <input type="hidden" name="room_id" value="{{ $room->id }}">
-                <button type="submit" class="submit-btn">Submit Billing</button>
+                <button type="submit" class="btn btn-success">Submit Billing</button>
             </td>
         </tr>
     </form>

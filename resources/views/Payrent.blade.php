@@ -12,7 +12,7 @@
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <img src="./img/Logo.png" alt="Logo" class="logo">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
             <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
             <a href="{{ route('Payrent') }}" class="active">ชำระค่าเช่า</a>
             <a href="{{ route('Report') }}">แจ้งปัญหา</a>
@@ -89,22 +89,27 @@
                                     </tr>
                                 </tfoot>
                             </table>
-
+                            @if ($billing->status == 'รอยืนยัน')
+                                <h1>ได้รับข้อมูลการชำระเงินของคุณแล้วกำลังรอตรวจสอบ</h1>
+                            @else
+                                <form action="{{ route('uploadSlip', $billing->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="billing_slip">อัปโหลดสลิปการชำระเงิน:</label>
+                                    <input type="file" name="billing_slip" id="billing_slip" accept="image/*"
+                                        required>
+                                    <button type="submit" class="pay-now" id="pay-now-button"
+                                        disabled>ยืนยันการชำระเงิน</button>
+                                </form>
+                            @endif
                             <div class="payment-info">
                                 <p>ชำระค่าห้องโดย:</p>
                                 <p>บจก. มหานครเรซิเดนท์</p>
-                                <p>บัญชีธนาคารไทยพาณิชย์</p>
-                                <p>เลขที่บัญชี: 123-456-789</p>
+                                <p>บัญชีธนาคาร ไทยพาณิชย์</p>
+                                <p>เลขที่บัญชี: 198-456-7894</p>
                             </div>
 
-                            @if ($billing->status == 'รอยืนยัน')
-                                <p>ได้รับข้อมูลการชำระเงินของคุณแล้วกำลังรอตรวจสอบ</p>
-                            @else
-                                <form action="{{ route('payBilling', $billing->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="pay-now">ชำระเงินทันที</button>
-                                </form>
-                            @endif
+
                         </div>
 
                         <hr>
@@ -112,14 +117,26 @@
                 @else
                     <p>ขณะนี้คุณไม่มียอดค้างชำระ</p>
                 @endif
-
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
+
             </section>
         </div>
+
+        <!-- JavaScript เพื่อเปิดใช้งานปุ่มหลังจากอัปโหลดไฟล์ -->
+        <script>
+            document.getElementById('billing_slip').addEventListener('change', function() {
+                const payButton = document.getElementById('pay-now-button');
+                if (this.files.length > 0) {
+                    payButton.disabled = false;
+                } else {
+                    payButton.disabled = true;
+                }
+            });
+        </script>
 </body>
 
 </html>

@@ -88,18 +88,14 @@ class HomeController extends Controller
     }
     public function updateroom(Request $request)
     {
-        $room = rooms::find($request->id); // ดึงห้องด้วย id จากฟอร์ม
+        $room = rooms::find($request->id); //
 
         if ($room) {
-            $room->room_number = $request->room_number;
-            $room->room_type_id = $request->room_type_id;
-            $room->floor = $request->floor;
             $room->description = $request->description;
             $room->save();
 
-            return redirect()->route('roomdetail')->with('success', 'Room updated successfully.');
+            return redirect()->route('roomdetail');
         }
 
-        return redirect()->route('roomdetail')->with('error', 'Room not found.');
     }
 }

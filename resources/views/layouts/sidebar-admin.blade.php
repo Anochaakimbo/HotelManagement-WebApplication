@@ -6,35 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/Roomdetails1.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-        <a href="{{ route('home') }}">
-            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
-        </a>
-        <a href="{{ route('adminpage') }}">Dashboard</a>
-        <a href="{{ route('guestpage') }}">Guest</a>
-        <a href="/cspxx">Customer problem</a>
-        <div class="dropdown">
-            <button class="dropbtn">Booking</button>
-            <div class="dropdown-content">
-                <a href="{{ route('booking') }}">Booking</a>
-                <a href="{{ route('bookinghistory') }}">Booking History</a>
-            </div>
+    <!-- Sidebar -->
+<div class="sidebar">
+    <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? '' : '' }}">
+        <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
+    </a>
+    <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
+    <a href="{{ route('guestpage') }}" class="{{ Request::routeIs('guestpage') ? 'active' : '' }}">Guest</a>
+    <a href="{{ route('cspxx') }}" class="{{ Request::routeIs('cspxx') ? 'active' : '' }}">Customer problem</a>
+    <div class="dropdown">
+        <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
+        <div class="dropdown-content">
+            <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">Booking</a>
+            <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
         </div>
-        <div class="dropdown">
-            <button class="dropbtn">Billing</button>
-            <div class="dropdown-content">
-                <a href="{{ route('adminbilling') }}">Billing</a>
-                <a href="{{ route('confirmbill') }}">Billing Confirm</a>
-                <a href="{{ route('paymenthistory') }}">Billing History</a>
-            </div>
-        </div>
-        <a href="{{ route('roomdetail') }}">Room Detail</a>
-        <a href="{{ route('Addroom') }}">Add Room</a>
     </div>
+    <div class="dropdown">
+        <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
+        <div class="dropdown-content">
+            <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
+            <a href="{{ route('confirmbill') }}" class="{{ Request::routeIs('confirmbill') ? 'active' : '' }}">Billing Confirm</a>
+            <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
+        </div>
+    </div>
+    <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">Room Detail</a>
+    <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
+</div>
+
 
     <!-- Main Content -->
     <div class="content">
