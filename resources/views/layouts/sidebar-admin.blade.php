@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard')</title>
+    <title>@yield('title', 'Admin')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/Roomdetails1.css') }}">
 </head>
 
@@ -12,7 +12,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="{{ route('home') }}">
-            <img src="{{ asset('img/หอ-2.png') }}" alt="Logo" class="logo">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
         </a>
         <a href="{{ route('adminpage') }}">Dashboard</a>
         <a href="{{ route('guestpage') }}">Guest</a>

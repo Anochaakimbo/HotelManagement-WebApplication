@@ -1,6 +1,12 @@
 @extends('layouts.sidebar-admin')
 @section('content')
     <div class="main-content">
+        @if (session('alert'))
+            <script>
+                alert("{{ session('alert') }}");
+            </script>
+        @endif
+        
         <form action="/Addroom/addroom" method="POST">
             @csrf
             <label for="">Room Type:</label><br>
@@ -30,7 +36,7 @@
             <br>
             <textarea name="description" id="" cols="30" rows="10" required></textarea>
             <br>
-            <button type="submit" onclick="return confirm('Are you sure you want to add room?')" class="submitbutton">Submit</button>
+            <button type="submit" onclick="return confirm('Are you sure you want to add room?')" class="addroombutton">Submit</button>
 
 
         </form>

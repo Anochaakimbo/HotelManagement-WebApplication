@@ -23,10 +23,6 @@ class HomeController extends Controller
         return view('admin.adminpage', compact('bookings'));
     }
 
-    public function guest(){
-        $bookings = Booking::all();
-        return view ('admin.guests', ['bookings' => $bookings]);
-    }
     public function booking(){
         $bookings = Booking::all();
         return view ('admin.booking', ['bookings' => $bookings]);
@@ -40,7 +36,16 @@ class HomeController extends Controller
         return view('admin.csp', ['rooms' => $rooms]);
     }
 
-    public function addRoom(Request $request){
+    public function addRoom(Request $request)
+    {
+        $checkroom= rooms::where('room_number',$request->room_number)->first();
+
+        if($checkroom){
+            return back()->with('alert', 'มีห้องนี้อยู่ในระบบแล้ว')->withInput();
+        }
+
+
+
         $new_room = new rooms;
         $new_room->room_type_id = $request->room_type_id;
         $new_room->room_number = $request->room_number;
@@ -67,5 +72,26 @@ class HomeController extends Controller
         $rooms->destroy($id);
         $rooms = rooms::all();
         return redirect('/roomdetail');
+    }
+
+    public function showDetailroom(){
+        $rooms = rooms::all();
+        return view("room",compact("room"));
+    }
+    public function updateroom(Request $request)
+    {
+        $room = rooms::find($request->id); // ดึงห้องด้วย id จากฟอร์ม
+    
+        if ($room) {
+            $room->room_number = $request->room_number;
+            $room->room_type_id = $request->room_type_id;
+            $room->floor = $request->floor;
+            $room->description = $request->description;
+            $room->save(); 
+    
+            return redirect()->route('roomdetail')->with('success', 'Room updated successfully.');
+        }
+    
+        return redirect()->route('roomdetail')->with('error', 'Room not found.');
     }
 }

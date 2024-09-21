@@ -90,7 +90,7 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="./img/หอ-2.png" alt="Logo" class="logo">
+        <img src="./img/Logo.png" alt="Logo" class="logo">
         <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
         <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
         <a href="{{ route('Report') }}" class="active">แจ้งปัญหา</a>
