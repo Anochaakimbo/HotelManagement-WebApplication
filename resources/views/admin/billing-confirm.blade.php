@@ -20,9 +20,15 @@
                         <td>{{ $billing->status }}</td>
                         <td>
                             <!-- ปุ่มยืนยันการชำระเงิน -->
-                            <form action="{{ route('confirmPayment', $billing->id) }}" method="POST">
+                            <form action="{{ route('confirmPayment', $billing->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit">Confirm Payment</button>
+                            </form>
+
+                            <!-- ปุ่มปฏิเสธการชำระเงิน (Deny) -->
+                            <form action="{{ route('denyPayment', $billing->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="deny-btn">Deny</button>
                             </form>
                         </td>
                     </tr>

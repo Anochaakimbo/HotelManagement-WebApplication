@@ -3,7 +3,7 @@
 <div class="billing-history">
     <h1>Billing History</h1>
 @if ($billings->isNotEmpty())
-    <table>
+    <table class="styled-table">
         <thead>
             <tr>
                 <th>ห้อง</th>
@@ -18,7 +18,7 @@
         <tbody>
             @foreach ($billings as $billing)
                 <tr>
-                    <td>{{ $billing->room->name }}</td>
+                    <td>{{ $billing->room->room_number }}</td>
                     <td>{{ $billing->user->name }}</td>
                     <td>{{ $billing->water_charge }} บาท</td>
                     <td>{{ $billing->electric_charge }} บาท</td>

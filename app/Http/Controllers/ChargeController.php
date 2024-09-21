@@ -109,6 +109,14 @@ public function confirmPayment($id)
 
     return redirect()->route('adminbilling')->with('success', 'ยืนยันการชำระเงินสำเร็จ');
 }
+public function denyPayment($id)
+{
+    $billing = Billing::findOrFail($id);
+    $billing->status = 'ส่งไปยังผู้ใช้แล้ว';  // เปลี่ยนสถานะกลับเป็น "รอชำระเงิน"
+    $billing->save();
+
+    return redirect()->back()->with('success', 'Payment denied and status reverted to pending.');
+}
 public function showPaymentHistory()
 {
     $billings = Billing::onlyTrashed()->get();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Billing;
+use App\Models\rooms;
 use Illuminate\Support\Facades\Hash;
 
 class AdminComtroller extends Controller
@@ -46,7 +47,7 @@ class AdminComtroller extends Controller
     $room->save();
     $booking->delete();
 
-    return view('admin.booking')->with('message', 'Booking deleted and room is now available.');
+    return redirect('/admin/booking');
 }
 
     // ฟังก์ชันสร้างผู้ใช้จากการจอง
@@ -78,7 +79,7 @@ class AdminComtroller extends Controller
         $guest->delete();
         }
         $booking->delete();
-        return redirect()->route('admin.booking')->with('message', 'User created and assigned to room successfully.');
+        return redirect('/admin/booking');
     }
     public function index()
     {
@@ -98,11 +99,14 @@ class AdminComtroller extends Controller
         return view('admin.adminpage', compact('bookings', 'usersCount','billings'));
     }
     public function guest(){
-
+        $users = User::with('room')->where('usertype', '!=', 'admin')->get();
+        return view('admin.guests', compact('users'));
     }
-    public function CustomerProblem(){
-
-    }
+    public function showinfo($id)
+{
+    $room = rooms::with(['roomType', 'billing'])->find($id);
+    return view('admin.guests_roomdetails', compact('room'));
+}
 }
 
 
