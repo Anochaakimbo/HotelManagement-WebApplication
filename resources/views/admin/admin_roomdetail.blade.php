@@ -2,6 +2,40 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/booking1.css') }}">
     @extends('layouts.sidebar-admin')
     @section('content')
+    <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
+        @csrf
+        <h2 class="updateroomheader">Update Room</h2>
+        <input type="hidden" name="id" id="room_id">
+        <label for="">Room number:</label><br>
+        <input type="text" name="room_number" id="room_number"><br>
+        <label for="roomtype">Room Type:</label><br>
+        <select name="room_type_id" id="room_type_id" required>
+            @foreach ($rooms as $room )
+            <option value="{{ $room->id }}">
+                @if ($room->id == "1")
+                Premium Bed Room
+            @elseif ($room->id == "2")
+                Twin Bed Room
+            @elseif ($room->id == "3")
+                Single Bed Room
+            @endif
+            </option>
+            @endforeach
+        </select>
+        <br>
+        <label for="">Floor:</label><br>
+        <input type="number" name="floor" id="floor"><br>
+        <label for="">Description:</label>
+        <br>
+        <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+        <br>
+        <br>
+        <div class="btninform">
+        <button type="button" class="backbtn" onclick="hideupdateform()">Back</button>
+        <button type="submit" onclick="return confirm('Are you sure you update this room?')" class="addroombutton1">Submit</button>
+        </div>
+    </form>
+
     <div class="main-content">
         <div class="room-info">
             <div class="details">
@@ -11,7 +45,8 @@
                             <th>Room number</th>
                             <th>Room Type</th>
                             <th>Description</th>
-                            <th colspan="2">Status</th>
+                            <th>Floor</th>
+                            <th colspan="3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,12 +63,17 @@
                             @endif
                             </td>
                             <td>{{ $rooms->description }}</td>
+                            <td>{{ $rooms->floor}}</td>
+                        
                             <td>
                             @if ($rooms -> is_available == "1")
                                 <p style="color:rgb(0, 255, 0)">Available</p>
                             @else
                                 <p style="color:red">Occupied</p>
                             @endif
+                            </td>
+                            <td>
+                                <Button onclick="showupdateform()">Update</Button>
                             </td>
                             <td class="deletecolumn">
                                 <a href="{{ route ('roomdelete',$rooms->id)}}" class="deletebutton" onclick="return confirm('Are you sure you want to delete this room?')">Delete</a>
@@ -46,4 +86,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function showupdateform(){
+        document.getElementById('updateroom').style.display = 'block';
+    }
+
+    function hideupdateform(){
+            document.getElementById('updateroom').style.display = 'none';
+    }
+</script>
 @endsection
