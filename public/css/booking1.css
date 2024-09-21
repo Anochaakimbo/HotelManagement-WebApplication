@@ -266,10 +266,10 @@ label{
 .deletebutton {
     text-decoration: none;
     background-color: red;
-    color: white; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    display: inline-block; 
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
     font-weight: bold;
     text-align: center;
     transition: 0.2s;
@@ -282,7 +282,7 @@ label{
 
 .deletebutton:hover {
     text-decoration: none;
-    background-color: darkred; 
+    background-color: darkred;
     color: white;
     cursor: pointer;
     transition: 0.2s;
@@ -290,11 +290,11 @@ label{
 
 .updatebutton{
     text-decoration: none;
-    color: white; 
+    color: white;
     background-color: yellow;
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    display: inline-block; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
     font-weight: bold;
     text-align: center;
     transition: 0.2s;
@@ -302,8 +302,12 @@ label{
 
 .updatebutton:hover{
     text-decoration: none;
-    background-color: rgb(165, 162, 0); 
+    background-color: rgb(165, 162, 0);
     color: white;
     cursor: pointer;
     transition: 0.2s;
+}
+
+.textroomnumber ,.textroomtype,.textroomfloor{
+background-color: rgb(188, 187, 187);
 }
