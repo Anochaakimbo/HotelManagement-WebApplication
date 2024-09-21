@@ -1,16 +1,15 @@
-
 <x-action-section>
     <x-slot name="title">
-        {{ __('เซสชันของเบราว์เซอร์') }}
+        {{ __('Browser Sessions') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('จัดการและออกจากระบบเซสชันที่ใช้งานอยู่บนเบราว์เซอร์และอุปกรณ์อื่นๆ') }}
+        {{ __('Manage and log out your active sessions on other browsers and devices.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            {{ __('หากจำเป็น คุณสามารถออกจากระบบเซสชันของเบราว์เซอร์อื่น ๆ บนอุปกรณ์ทั้งหมดของคุณได้ บางส่วนของเซสชันล่าสุดของคุณจะแสดงอยู่ด้านล่าง แต่รายการนี้อาจไม่ครบถ้วนทั้งหมด หากคุณรู้สึกว่าบัญชีของคุณถูกบุกรุก คุณควรเปลี่ยนรหัสผ่านของคุณด้วย') }}
+            {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>
 
         @if (count($this->sessions) > 0)
@@ -54,11 +53,11 @@
 
         <div class="flex items-center mt-5">
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
-                {{ __('ออกจากระบบเซสชันของเบราว์เซอร์อื่นๆ') }}
+                {{ __('Log Out Other Browser Sessions') }}
             </x-button>
 
             <x-action-message class="ms-3" on="loggedOut">
-                {{ __('เสร็จสิ้น.') }}
+                {{ __('Done.') }}
             </x-action-message>
         </div>
 

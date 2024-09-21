@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แจ้งปัญหา</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/report.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/report.css') }}">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const subCategories = {
+             const subCategories = {
                 aircon: [
                     { value: 'aircon1', text: 'ไม่เย็น' },
                     { value: 'aircon2', text: 'รั่วซึม' },
@@ -57,6 +58,7 @@
                 ]
             };
 
+
             const mainCategorySelect = document.getElementById('main-category');
             const subCategorySelect = document.getElementById('sub-category');
 
@@ -75,16 +77,23 @@
                     subCategorySelect.appendChild(option);
                 });
             });
+
+            // ดูค่า user_id และ room_number ในคอนโซล
+            const userId = document.querySelector('input[name="user_id"]').value;
+            const roomNumber = document.querySelector('input[name="room_number"]').value;
+            console.log('User ID:', userId);
+            console.log('Room Number:', roomNumber);
         });
     </script>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
         <img src="./img/หอ-2.png" alt="Logo" class="logo">
         <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
         <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
-        <a href="{{ route('Report') }}"class="active">แจ้งปัญหา</a>
+        <a href="{{ route('Report') }}" class="active">แจ้งปัญหา</a>
     </div>
 
     <!-- Content -->
@@ -113,13 +122,21 @@
         <!-- Form Container -->
         <div class="form-container">
             <h2>แจ้งปัญหา</h2>
-            <form>
+            <form method="POST" action="{{ route('report.store') }}">
+                @csrf
+                <!-- ฟิลด์ซ่อนสำหรับส่ง user_id -->
+                <input type="text" name="user_id" value="{{ Auth::user()->id }}" readonly style="display: none">
+
+                <!-- ฟิลด์สำหรับส่ง room_number -->
+                <input type="text" name="room_number" value="{{ Auth::user()->room->room_number }}" readonly style="display: none">
+
                 <!-- Dynamically show room number from user data -->
                 <label for="room">ห้อง</label>
-                <input type="text" id="room" name="room" value="{{ Auth::user()->room->room_number }}" readonly>
+                <input type="text" id="room" name="room" value="{{ Auth::user()->room->room_number }}"
+                    readonly>
 
                 <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
-                <select id="main-category" name="main-category">
+                <select id="main-category" name="main_category">
                     <option value="">เลือกหมวดงานซ่อมหลัก</option>
                     <option value="aircon">เครื่องปรับอากาศ (แอร์)</option>
                     <option value="water-heater">เครื่องทำน้ำอุ่น</option>
@@ -133,17 +150,16 @@
                     <option value="internet-tv">อินเทอร์เน็ตและโทรทัศน์</option>
                 </select>
 
-                <label for="sub-category">เลือกหมวดงานซ่อมย่อย</label>
-                <select id="sub-category" name="sub-category">
+                <label for="sub_category">เลือกหมวดงานซ่อมย่อย</label>
+                <select id="sub-category" name="sub_category">
                     <option value="">เลือกหมวดงานซ่อมย่อย</option>
-                    <!-- Sub-categories will be populated dynamically -->
                 </select>
 
                 <label for="problem-description">อาการ/ปัญหา</label>
-                <textarea id="problem-description" name="problem-description" rows="4" placeholder="อาการหรือปัญหา..."></textarea>
+                <textarea id="problem-description" name="problem_description" rows="4" placeholder="อาการหรือปัญหา..."></textarea>
 
                 <label for="contact-number">เบอร์โทรศัพท์ที่ติดต่อ</label>
-                <input type="text" id="contact-number" name="contact-number" placeholder="เบอร์โทรศัพท์">
+                <input type="text" id="contact-number" name="contact_number" placeholder="เบอร์โทรศัพท์">
 
                 <label>กรณีผู้เช่าไม่อยู่ห้อง อนุญาตให้ช่างเข้ามาซ่อมหรือไม่?</label>
                 <div>
@@ -159,4 +175,5 @@
         </div>
     </div>
 </body>
+
 </html>

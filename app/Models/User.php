@@ -63,11 +63,12 @@ class User extends Authenticatable
         ];
     }
     public function room()
-{
-    return $this->hasOne(rooms::class);
-}
-public function billing()
-{
-    return $this->hasOne(Billing::class);
-}
+    {
+        return $this->hasOne(rooms::class);
+    }
+    public function billing()
+    {
+        return $this->hasOne(Billing::class);
+    }
+    
 }

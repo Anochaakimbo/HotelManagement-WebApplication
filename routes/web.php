@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\rooms;
 use App\Models\Booking;
 use GuzzleHttp\Middleware;
@@ -17,6 +18,12 @@ use App\Http\Controllers\RoomsingleController;
 use App\Http\Controllers\RoomtwinController;
 use App\Http\Controllers\PaymentCreditController;
 use App\Http\Controllers\BookingDetailController;
+use App\Http\Controllers\IssueReportController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\cspController;
+use App\Http\Controllers\csp2Controller;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,13 +55,13 @@ Route::post('/bookings/store', [BookingController::class, 'store'])->name('booki
 Route::post('/admin/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->Middleware('admin');
 
 
-route::get('/home',[HomeController::class,'index'])->name('home');
+route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
-route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
-route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
-route::get('/guestpage',[HomeController::class,'guest'])->Middleware('auth')->name('guestpage');
-route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
-
+route::get('/admin/booking', [HomeController::class, 'booking'])->Middleware('admin')->name('booking');
+route::get('/adminpage', [AdminComtroller::class, 'index'])->Middleware('admin')->name('adminpage');
+route::get('/guestpage', [HomeController::class, 'guest'])->Middleware('auth')->name('guestpage');
+route::get('/cspxx', [ReportController::class, 'index'])->Middleware('admin')->name('cspxx');
+route::get('/cspaa', [cspController::class, 'index'])->Middleware('admin')->name('cspxx');
 // Merged route for selectbook and bookings
 Route::get('/select', function () {
     $rooms = rooms::all();
@@ -110,12 +117,13 @@ Route::get('/Rent_4_2', [Rent_3Controller::class, 'showRent4_2'])->name('rent_4_
 Route::post('/payment-process', [PaymentCreditController::class, 'processPayment'])->name('payment_process');
 
 // Additional routes from arnoldtest2 branch
-Route::get('/roomdetail',[HomeController::class,'roomdetail'])->Middleware('admin')->name('roomdetail');
-Route::get('/roomdetail/delete/{room_id}',[HomeController::class,'delete'])->name('roomdelete');
-Route::get('/Addroom/addroom',[HomeController::class,'preparetoAdd']);
-Route::post('/Addroom/addroom',[HomeController::class,'addRoom']);
-Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('admin')->name('Addroom');
+Route::get('/roomdetail', [HomeController::class, 'roomdetail'])->Middleware('admin')->name('roomdetail');
+Route::get('/roomdetail/delete/{room_id}', [HomeController::class, 'delete'])->name('roomdelete');
+Route::get('/Addroom/addroom', [HomeController::class, 'preparetoAdd']);
+Route::post('/Addroom/addroom', [HomeController::class, 'addRoom']);
+Route::get('/Addroom', [HomeController::class, 'preparetoAdd'])->Middleware('admin')->name('Addroom');
 
+Route::get('/admin/reports', [IssueReportController::class, 'index'])->name('admin.reports');
 
 
 
@@ -125,3 +133,14 @@ Route::get('/Addroom',[HomeController::class,'preparetoAdd'])->Middleware('admin
 
 
 Route::get('/booking_detail', [BookingDetailController::class, 'showBookings'])->name('booking_detail');
+Route::get('/admin/reports', [IssueReportController::class, 'index'])->name('admin.reports');
+
+
+Route::post('/report/store', [ReportController::class, 'store'])->name('report.store');
+
+
+Route::get('/csp', [cspController::class, 'index'])->name('csp.index');
+Route::get('/csp/delete/{id}', [cspController::class, 'destroy'])->name('reportdelete');
+
+Route::get('/csp2/view/{id}', [csp2Controller::class, 'view'])->name('csp2.view');
+

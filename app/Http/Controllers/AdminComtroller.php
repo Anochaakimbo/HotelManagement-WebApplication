@@ -78,7 +78,7 @@ class AdminComtroller extends Controller
         $guest->delete();
         }
         $booking->delete();
-        return redirect()->route('admin.booking')->with('message', 'User created and assigned to room successfully.');
+        return redirect()->route('booking')->with('message', 'User created and assigned to room successfully.');
     }
     public function index()
     {

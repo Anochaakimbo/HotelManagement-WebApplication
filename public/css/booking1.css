@@ -273,7 +273,20 @@ label{
     font-weight: bold;
     text-align: center;
 }
-
+.viewbutton{
+    text-decoration: none;
+        background-color: rgb(0, 195, 255);
+        color: white;
+        /* สีตัวอักษร */
+        padding: 10px 20px;
+        /* เพิ่มพื้นที่ภายในให้ดูเหมือนปุ่ม */
+        border-radius: 5px;
+        /* ให้มุมมน */
+        display: inline-block;
+        /* เพื่อให้ลิงก์ดูเหมือนบล็อกปุ่ม */
+        font-weight: bold;
+        text-align: center;
+}
 .deletecolumn{
     text-align: center; /* จัดกลางแนวนอน */
     vertical-align: middle; /* จัดกลางแนวตั้ง */

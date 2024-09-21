@@ -16,7 +16,7 @@
         </a>
         <a href="{{ route('adminpage') }}">Dashboard</a>
         <a href="{{ route('guestpage') }}">Guest</a>
-        <a href="{{ route('customerproblem') }}">Customer problem</a>
+        <a href="/cspxx">Customer problem</a>
         <div class="dropdown">
             <button class="dropbtn">Booking</button>
             <div class="dropdown-content">
