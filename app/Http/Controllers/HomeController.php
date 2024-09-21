@@ -11,24 +11,28 @@ use App\Models\RoomType;
 
 class HomeController extends Controller
 {
-    public function index(){
-        if(Auth::user()->usertype =='user'){
+    public function index()
+    {
+        if (Auth::user()->usertype == 'user') {
             return view('dashboard');
-        }else{
+        } else {
             return view('admin.home');
         }
     }
-    public function page(){
-         $bookings = Booking::withTrashed()->get();
+    public function page()
+    {
+        $bookings = Booking::withTrashed()->get();
         return view('admin.adminpage', compact('bookings'));
     }
 
-    public function booking(){
+    public function booking()
+    {
         $bookings = Booking::all();
-        return view ('admin.booking', ['bookings' => $bookings]);
+        return view('admin.booking', ['bookings' => $bookings]);
     }
-    public function customerprob(){
-        return view ('admin.csp');
+    public function customerprob()
+    {
+        return view('admin.csp');
     }
     public function room()
     {
@@ -38,9 +42,9 @@ class HomeController extends Controller
 
     public function addRoom(Request $request)
     {
-        $checkroom= rooms::where('room_number',$request->room_number)->first();
+        $checkroom = rooms::where('room_number', $request->room_number)->first();
 
-        if($checkroom){
+        if ($checkroom) {
             return back()->with('alert', 'มีห้องนี้อยู่ในระบบแล้ว')->withInput();
         }
 
@@ -57,26 +61,30 @@ class HomeController extends Controller
         return redirect('/Addroom');
     }
 
-    public function roomdetail(){
+    public function roomdetail()
+    {
         $rooms = rooms::all();
-        return view ('admin.admin_roomdetail', ['rooms' => $rooms]);
+        return view('admin.admin_roomdetail', ['rooms' => $rooms]);
     }
 
-    public function preparetoAdd(){
+    public function preparetoAdd()
+    {
         $rooms = RoomType::all();
-        return view('admin.admin_addroom',['rooms' => $rooms]);
+        return view('admin.admin_addroom', ['rooms' => $rooms]);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $rooms = rooms::findOrFail($id);
         $rooms->destroy($id);
         $rooms = rooms::all();
         return redirect('/roomdetail');
     }
 
-    public function showDetailroom(){
+    public function showDetailroom()
+    {
         $rooms = rooms::all();
-        return view("room",compact("room"));
+        return view("room", compact("room"));
     }
     public function updateroom(Request $request)
     {

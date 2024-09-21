@@ -1,11 +1,10 @@
-
 <x-action-section>
     <x-slot name="title">
-        {{ __('ยืนยันตัวตน 2 ขั้น') }}
+        {{ __('Two Factor Authentication') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('เพิ่มความปลอดภัยให้บัญชีของคุณ ด้วยการยืนยันตัวตนแบบ 2 ขั้น') }}
+        {{ __('Add additional security to your account using two factor authentication.') }}
     </x-slot>
 
     <x-slot name="content">
@@ -14,16 +13,16 @@
                 @if ($showingConfirmation)
                     {{ __('Finish enabling two factor authentication.') }}
                 @else
-                    {{ __('คุณเปิดใช้งานการยืนยันตัวตน 2 ขั้นแล้ว') }}
+                    {{ __('You have enabled two factor authentication.') }}
                 @endif
             @else
-                {{ __('คุณยังไม่ได้เปิดใช้งานการยืนยันตัวตน 2 ขั้น') }}
+                {{ __('You have not enabled two factor authentication.') }}
             @endif
         </h3>
 
         <div class="mt-3 max-w-xl text-sm text-gray-600">
             <p>
-                {{ __('เมื่อเปิดใช้งานการยืนยันตัวตนแบบ 2 ขั้น คุณจะถูกขอให้ป้อนโทเค็นแบบสุ่มที่ปลอดภัยระหว่างการยืนยันตัวตน คุณสามารถรับโทเค็นนี้จากแอป Google Authenticator บนโทรศัพท์ของคุณได้') }}
+                {{ __('When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone\'s Google Authenticator application.') }}
             </p>
         </div>
 
@@ -81,7 +80,7 @@
             @if (! $this->enabled)
                 <x-confirms-password wire:then="enableTwoFactorAuthentication">
                     <x-button type="button" wire:loading.attr="disabled">
-                        {{ __('เปิดการใช้งาน') }}
+                        {{ __('Enable') }}
                     </x-button>
                 </x-confirms-password>
             @else
@@ -94,7 +93,7 @@
                 @elseif ($showingConfirmation)
                     <x-confirms-password wire:then="confirmTwoFactorAuthentication">
                         <x-button type="button" class="me-3" wire:loading.attr="disabled">
-                            {{ __('ยืนยัน') }}
+                            {{ __('Confirm') }}
                         </x-button>
                     </x-confirms-password>
                 @else
@@ -108,13 +107,13 @@
                 @if ($showingConfirmation)
                     <x-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-secondary-button wire:loading.attr="disabled">
-                            {{ __('ยกเลิก') }}
+                            {{ __('Cancel') }}
                         </x-secondary-button>
                     </x-confirms-password>
                 @else
                     <x-confirms-password wire:then="disableTwoFactorAuthentication">
                         <x-danger-button wire:loading.attr="disabled">
-                            {{ __('ปิดการใช้งาน') }}
+                            {{ __('Disable') }}
                         </x-danger-button>
                     </x-confirms-password>
                 @endif

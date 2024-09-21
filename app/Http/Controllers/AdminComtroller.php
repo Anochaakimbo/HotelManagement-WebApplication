@@ -40,9 +40,9 @@ class AdminComtroller extends Controller
         $guest->delete();
     }
 
-    $room->is_available = 1;
-    $room->save();
-    $booking->delete();
+        $room->is_available = 1;
+        $room->save();
+        $booking->delete();
 
     return redirect('/admin/booking');
 }

@@ -4,7 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
 html, body {
     height: 100vh; /* ความสูงเต็มจอ */
     overflow: hidden; /* ป้องกันการเลื่อน */
@@ -324,3 +327,44 @@ h1{
   .dropdown:hover .dropdown-content {display: block;}
 
   .dropdown:hover .dropbtn {background-color: #ddd;}
+
+   .styled-table {
+       border-collapse: collapse;
+       margin: 25px 0;
+       font-size: 18px;
+       width: 100%;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+       border: 1px solid #ddd;
+       text-align: center;
+   }
+
+   .styled-table thead tr {
+       background-color: #f7b366;
+       /* เปลี่ยนสีหัวตาราง */
+       color: #ffffff;
+       text-align: left;
+       font-weight: bold;
+   }
+
+   .styled-table th,
+   .styled-table td {
+       padding: 12px 15px;
+       border: 1px solid #ddd;
+   }
+
+   .styled-table tbody tr {
+       background-color: #f9f9f9;
+   }
+
+   .styled-table tbody tr:hover {
+       background-color: #f1f1f1;
+   }
+
+   .styled-table tbody tr td a {
+       text-decoration: none;
+       font-weight: bold;
+   }
+
+   .styled-table tbody tr td a:hover {
+       text-decoration: underline;
+   }
