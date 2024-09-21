@@ -10,7 +10,7 @@
                 @if ($usersCount > 0)
                     <p>{{ $usersCount }} </p>
                 @else
-                    <p>No Guest</p>
+                    <p>No Guest right now</p>
                 @endif
             </div>
             <div class="recent-bookings">

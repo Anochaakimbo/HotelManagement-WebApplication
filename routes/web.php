@@ -50,7 +50,7 @@ route::get('/home',[HomeController::class,'index'])->name('home');
 Route::post('/admin/create-user', [AdminComtroller::class, 'createUserFromBooking']);
 route::get('/admin/booking',[HomeController::class,'booking'])->Middleware('admin')->name('booking');
 route::get('/adminpage',[AdminComtroller::class,'index'])->Middleware('admin')->name('adminpage');
-route::get('/guestpage',[AdminComtroller::class,'guest'])->Middleware('auth')->name('guestpage');
+route::get('/guestpage',[AdminComtroller::class,'guest'])->Middleware('admin')->name('guestpage');
 route::get('/customerproblem',[HomeController::class,'customerprob'])->Middleware('admin')->name('customerproblem');
 
 // Merged route for selectbook and bookings
@@ -121,3 +121,6 @@ Route::get('/room/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.deta
 
 Route::get('/roomdetail/updated',[HomeController::class,'showDetailroom']);
 Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
+
+Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
+
