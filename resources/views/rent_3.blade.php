@@ -99,11 +99,29 @@
             </table>
         </main>
 
-        <form action="{{ route('rent_4') }}" method="get">
+        <form id="paymentForm" method="get">
             <input type="hidden" name="guest_id" value="{{ $guest->id }}">
-            <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
+            <input type="hidden" name="payment_method" id="paymentMethod" value="{{ $paymentMethod }}">
             <button type="submit" class="btn">ต่อไป</button>
         </form>
+
+        <script>
+            document.getElementById('paymentForm').addEventListener('submit', function (e) {
+                e.preventDefault(); // หยุดการส่งฟอร์มปกติ
+                
+                var paymentMethod = document.getElementById('paymentMethod').value; // ดึงค่า payment_method
+        
+                if (paymentMethod === 'credit') {
+                    // ส่งฟอร์มไปยังเส้นทาง rent_4 สำหรับการชำระด้วยบัตรเครดิต
+                    this.action = "{{ route('rent_4_2') }}";
+                } else if (paymentMethod === 'qr') {
+                    // ส่งฟอร์มไปยังเส้นทาง rent_4_2 สำหรับการชำระด้วย QR code
+                    this.action = "{{ route('rent_4') }}";
+                }
+                
+                this.submit(); // ส่งฟอร์มอีกครั้งหลังจากตั้งค่า action
+            });
+        </script>
 
 </body>
 </html>
