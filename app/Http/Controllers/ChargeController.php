@@ -84,8 +84,6 @@ public function showAdminForm1()
         return redirect()->route('adminbilling')->with('success', 'ส่งค่าห้องสำเร็จ');
     }
 
-
-
 public function confirmPayment($id)
 {
     $billing = Billing::findOrFail($id);
@@ -111,25 +109,11 @@ public function showPaymentHistory()
 
     return view('admin.payment_history', compact('billings'));
 }
-public function payBilling($id)
-{
-
-    $billing = Billing::findOrFail($id);
-
-
-    if ($billing->status == 'ส่งไปยังผู้ใช้แล้ว') {
-
-        $billing->status = 'รอยืนยัน';
-        $billing->save();
-
-        return redirect()->back()->with('success', 'การชำระเงินถูกส่งเพื่อรอยืนยัน');
-    }
-
-    return redirect()->back()->with('error', 'ไม่สามารถชำระเงินได้');
-}
 public function showBillingForm()
 {
     $rooms = rooms::with('roomType', 'user')->whereHas('user')->get();
     return view('admin.billing', compact('rooms'));
 }
+
+
 }

@@ -9,6 +9,7 @@
                 <tr>
                     <th>Room Number</th>
                     <th>Status</th>
+                    <th>Payment Slip</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -19,16 +20,44 @@
                         <td>{{ $billing->room->room_number }}</td>
                         <td>{{ $billing->status }}</td>
                         <td>
+                            @if ($billing->billing_slip)
+                                <!-- ใช้ลิงก์เพื่อเปิด modal -->
+                                <a href="#" data-toggle="modal" data-target="#slipModal{{ $billing->id }}">
+                                    <img src="{{ asset('billingslip/' . $billing->billing_slip) }}" alt="Payment Slip" style="max-width: 100px; height: auto;">
+                                </a>
+                            @else
+                                <p>No slip uploaded</p>
+                            @endif
+                            <div class="modal fade" id="slipModal{{ $billing->id }}" tabindex="-1" role="dialog" aria-labelledby="slipModalLabel{{ $billing->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="slipModalLabel{{ $billing->id }}">Payment Slip</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ asset('billingslip/' . $billing->billing_slip) }}" alt="Payment Slip" style="width: 100%;">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
                             <!-- ปุ่มยืนยันการชำระเงิน -->
                             <form action="{{ route('confirmPayment', $billing->id) }}" method="POST" style="display: inline;">
                                 @csrf
-                                <button type="submit">Confirm Payment</button>
+                                <button type="submit" class="btn btn-success">Confirm Payment</button>
                             </form>
 
                             <!-- ปุ่มปฏิเสธการชำระเงิน (Deny) -->
                             <form action="{{ route('denyPayment', $billing->id) }}" method="POST" style="display: inline;">
                                 @csrf
-                                <button type="submit" class="deny-btn">Deny</button>
+                                <button type="submit" class="btn btn-warning">Deny</button>
                             </form>
                         </td>
                     </tr>

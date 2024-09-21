@@ -89,7 +89,6 @@ Route::get('/billing', [ChargeController::class, 'showAdminForm'])->name('adminb
 Route::get('/billing-confirm', [ChargeController::class, 'showAdminForm1'])->name('confirmbill')->Middleware('admin');
 Route::post('/confirm-payment/{id}', [ChargeController::class, 'confirmPayment'])->name('confirmPayment');
 Route::post('/billing/deny/{id}', [ChargeController::class, 'denyPayment'])->name('denyPayment');
-Route::post('/pay-billing/{id}', [ChargeController::class, 'payBilling'])->name('payBilling');
 Route::get('/payment-history', [ChargeController::class, 'showPaymentHistory'])->name('paymenthistory')->Middleware('admin');
 
 // Rental views (multiple options)
@@ -123,4 +122,7 @@ Route::get('/roomdetail/updated',[HomeController::class,'showDetailroom']);
 Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
 
 Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
+
+Route::post('/upload-slip/{billing}', [PaymentQrcodeController::class, 'uploadSlip'])->name('uploadSlip');
+
 
