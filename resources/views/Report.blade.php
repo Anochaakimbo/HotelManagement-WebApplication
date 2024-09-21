@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แจ้งปัญหา</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/report.css') }}">
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-             const subCategories = {
+        document.addEventListener("DOMContentLoaded", function () {
+            const subCategories = {
                 aircon: [
                     { value: 'aircon1', text: 'ไม่เย็น' },
                     { value: 'aircon2', text: 'รั่วซึม' },
@@ -58,11 +59,10 @@
                 ]
             };
 
-
             const mainCategorySelect = document.getElementById('main-category');
             const subCategorySelect = document.getElementById('sub-category');
 
-            mainCategorySelect.addEventListener('change', function() {
+            mainCategorySelect.addEventListener('change', function () {
                 const selectedCategory = this.value;
                 const subCategoriesForMain = subCategories[selectedCategory] || [];
 
@@ -70,19 +70,13 @@
                 subCategorySelect.innerHTML = '<option value="">เลือกหมวดงานซ่อมย่อย</option>';
 
                 // Populate subcategory options based on the selected main category
-                subCategoriesForMain.forEach(function(subCategory) {
+                subCategoriesForMain.forEach(function (subCategory) {
                     const option = document.createElement('option');
                     option.value = subCategory.value;
                     option.textContent = subCategory.text;
                     subCategorySelect.appendChild(option);
                 });
             });
-
-            // ดูค่า user_id และ room_number ในคอนโซล
-            const userId = document.querySelector('input[name="user_id"]').value;
-            const roomNumber = document.querySelector('input[name="room_number"]').value;
-            console.log('User ID:', userId);
-            console.log('Room Number:', roomNumber);
         });
     </script>
 </head>
@@ -94,6 +88,7 @@
         <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
         <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
         <a href="{{ route('Report') }}" class="active">แจ้งปัญหา</a>
+        <a href="{{ route('report-history') }}">ประวัติการแจ้งปัญหา</a>
     </div>
 
     <!-- Content -->
@@ -122,7 +117,8 @@
         <!-- Form Container -->
         <div class="form-container">
             <h2>แจ้งปัญหา</h2>
-            <form method="POST" action="{{ route('report.store') }}">
+            <!-- เพิ่ม id ให้กับฟอร์ม -->
+            <form method="POST" action="{{ route('report.store') }}" id="reportForm">
                 @csrf
                 <!-- ฟิลด์ซ่อนสำหรับส่ง user_id -->
                 <input type="text" name="user_id" value="{{ Auth::user()->id }}" readonly style="display: none">
@@ -132,8 +128,7 @@
 
                 <!-- Dynamically show room number from user data -->
                 <label for="room">ห้อง</label>
-                <input type="text" id="room" name="room" value="{{ Auth::user()->room->room_number }}"
-                    readonly>
+                <input type="text" id="room" name="room" value="{{ Auth::user()->room->room_number }}" readonly>
 
                 <label for="main-category">เลือกหมวดงานซ่อมหลัก</label>
                 <select id="main-category" name="main_category">
@@ -174,6 +169,26 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // หยุดการส่งฟอร์มชั่วคราว
+
+            Swal.fire({
+                title: 'ส่งคำขอซ่อมแล้ว',
+                text: 'เราได้รับคำขอซ่อมของคุณเรียบร้อยแล้ว!',
+                icon: 'success',
+                confirmButtonText: 'ตกลง'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit(); // ส่งฟอร์มหลังจากผู้ใช้กด "ตกลง"
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

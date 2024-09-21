@@ -30,25 +30,25 @@ class AdminComtroller extends Controller
 
     // ฟังก์ชันลบการจอง
     public function deleteBooking($id)
-{
-    // ดึงข้อมูลการจอง
-    $booking = Booking::findOrFail($id);
+    {
+        // ดึงข้อมูลการจอง
+        $booking = Booking::findOrFail($id);
 
-    // ดึงข้อมูลห้องที่ถูกจอง
-    $room = $booking->room;
+        // ดึงข้อมูลห้องที่ถูกจอง
+        $room = $booking->room;
 
-    // ลบ Guest ที่เกี่ยวข้องกับการจอง
-    $guest = $booking->guest;
-    if ($guest) {
-        $guest->delete();
+        // ลบ Guest ที่เกี่ยวข้องกับการจอง
+        $guest = $booking->guest;
+        if ($guest) {
+            $guest->delete();
+        }
+
+        $room->is_available = 1;
+        $room->save();
+        $booking->delete();
+
+        return redirect('/admin/booking');
     }
-
-    $room->is_available = 1;
-    $room->save();
-    $booking->delete();
-
-    return redirect('/admin/booking');
-}
 
     // ฟังก์ชันสร้างผู้ใช้จากการจอง
     public function createUserFromBooking(Request $request)
@@ -76,10 +76,10 @@ class AdminComtroller extends Controller
 
         $guest = $booking->guest;
         if ($guest) {
-        $guest->delete();
+            $guest->delete();
         }
         $booking->delete();
-        return redirect()->route('admin.booking')->with('message', 'User created and assigned to room successfully.');
+        return redirect('/admin/booking');
     }
     public function index()
     {
@@ -89,26 +89,23 @@ class AdminComtroller extends Controller
         //$pendingIssuesCount = Issue::where('status', 'pending')->count(); // นับปัญหาที่รอดำเนินการ
         $billings = Billing::where('status', 'ส่งไปยังผู้ใช้แล้ว')->count(); // นับบิลที่ยังไม่ชำระ
         $bookingsPerMonth = Booking::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
-                                   ->groupBy('month')
-                                   ->pluck('total', 'month')->toArray();
+            ->groupBy('month')
+            ->pluck('total', 'month')->toArray();
 
 
 
 
         // ส่งข้อมูลไปยัง view
-        return view('admin.adminpage', compact('bookings', 'usersCount','billings'));
+        return view('admin.adminpage', compact('bookings', 'usersCount', 'billings'));
     }
-    public function guest(){
+    public function guest()
+    {
         $users = User::with('room')->where('usertype', '!=', 'admin')->get();
         return view('admin.guests', compact('users'));
     }
     public function showinfo($id)
-{
-    $room = rooms::with(['roomType', 'billing'])->find($id);
-    return view('admin.guests_roomdetails', compact('room'));
+    {
+        $room = rooms::with(['roomType', 'billing'])->find($id);
+        return view('admin.guests_roomdetails', compact('room'));
+    }
 }
-}
-
-
-
-
