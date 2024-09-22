@@ -14,10 +14,7 @@ class rooms extends Model
         'room_number',
         'description',
     ];
-//     public function billing()
-// {
-//     return $this->hasOne(Billing::class,'room_id');
-// }
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -36,7 +33,7 @@ public function roomType()
 }
 public function getRoomPriceAttribute()
 {
-    return $this->roomType->room_price ?? 0; // หากไม่มี room_type จะให้ราคาเป็น 0
+    return $this->roomType->room_price ?? 0;
 }
 protected static function boot()
 {

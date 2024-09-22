@@ -118,7 +118,7 @@ Route::get('/Addroom', [HomeController::class, 'preparetoAdd'])->middleware('adm
 
 // Booking details and room updates
 Route::get('/booking_detail', [BookingDetailController::class, 'showBookings'])->name('booking_detail');
-Route::get('/room/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.details');
+Route::get('/guest/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.details');
 Route::get('/roomdetail/updated', [HomeController::class, 'showDetailroom']);
 Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
 Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
