@@ -124,7 +124,6 @@ Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
 Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
 
 // Report-related routes
-Route::get('/admin/reports', [IssueReportController::class, 'index'])->name('admin.reports');
 Route::post('/report/store', [ReportController::class, 'store'])->name('report.store');
 Route::get('/csp/delete/{id}', [cspController::class, 'destroy'])->name('reportdelete');
 Route::get('/csp2/view/{id}', [csp2Controller::class, 'view'])->name('csp2.view');
@@ -132,3 +131,4 @@ Route::get('/csp2/view/{id}', [csp2Controller::class, 'view'])->name('csp2.view'
 // Report history
 Route::get('/report-history', [ReportHistoryController::class, 'index'])->name('report-history');
 Route::delete('/reports/{id}', [ReportHistoryController::class, 'destroy'])->name('reports.destroy');
+

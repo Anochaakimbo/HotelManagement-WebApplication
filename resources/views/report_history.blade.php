@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -57,15 +59,17 @@
                     <tbody>
                         @foreach ($reports as $report)
                             <tr>
-                                <td>{{ $report->room_number }}</td>
+                                <td>{{ $report->room->room_number }}</td>
                                 <td>{{ $report->main_category }}</td>
                                 <td>{{ $report->sub_category }}</td>
                                 <td>{{ $report->description }}</td>
                                 <td>
-                                    <form action="{{ route('reports.destroy', $report->id) }}" method="POST" class="delete-form">
+                                    <form action="{{ route('reports.destroy', $report->id) }}" method="POST"
+                                        class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-success btn-sm delete-btn">แก้ไขสำเร็จแล้ว</button>
+                                        <button type="submit"
+                                            class="btn btn-success btn-sm delete-btn">แก้ไขสำเร็จแล้ว</button>
                                     </form>
                                 </td>
                             </tr>
@@ -108,4 +112,5 @@
         });
     </script>
 </body>
+
 </html>
