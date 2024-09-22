@@ -21,8 +21,8 @@
             <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
         </a>
         <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ route('guestpage') }}" class="{{ Request::routeIs('guestpage') ? 'active' : '' }}">Guest</a>
-        <a href="{{ route('cspxx') }}" class="{{ Request::routeIs('cspxx') ? 'active' : '' }}">Customer problem</a>
+        <a href="{{ route('guestpage') }}" class="{{ Request::is('guest*') ? 'active' : '' }}">Guest</a>
+        <a href="{{ route('cspxx') }}" class="{{ Request::is('cspxx*') ? 'active' : '' }}">Customer problem</a>
         <div class="dropdown">
             <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
             <div class="dropdown-content">
