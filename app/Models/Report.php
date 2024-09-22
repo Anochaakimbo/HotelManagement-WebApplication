@@ -18,9 +18,5 @@ class Report extends Model
         'permission',
     ];
 
-    public function room()
-    {
-        return $this->hasMany(rooms::class);
-    }
 }
 
