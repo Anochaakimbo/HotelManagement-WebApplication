@@ -7,7 +7,7 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>Report ID</th>
+                        <th>Roomnumber</th>
                         <th>User Name</th>
                         <th>Description</th>
                         <th>Date Submitted</th>
@@ -19,8 +19,8 @@
 
                     @foreach ($reports as $report)
                         <tr>
-                            <td>{{ $report->user_id }}</td>
-                            <td>{{ $report->room_number }}</td>
+                            <td>{{ $report->room->room_number }}</td>
+                            <td>{{ $report->user->name }}</td>
                             <td>{{ $report->main_category }}</td>
                             <td>{{ $report->created_at }}</td>
                             <td>

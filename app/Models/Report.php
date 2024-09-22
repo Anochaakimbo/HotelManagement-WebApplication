@@ -10,13 +10,26 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'room',
+        'user_id',
+        'room_id',
         'main_category',
         'sub_category',
         'description',
         'contact_number',
-        'permission',
+        'permission'
     ];
 
-}
 
+    // Define the relationship with the Room model (based on room_id)
+    
+    // Define the relationship with the User model
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function room()
+    {
+        return $this->belongsTo(Rooms::class, 'room_id');
+    }
+
+}
