@@ -45,7 +45,7 @@ class HomeController extends Controller
         $checkroom = rooms::where('room_number', $request->room_number)->first();
 
         if ($checkroom) {
-            return back()->with('alert', 'มีห้องนี้อยู่ในระบบแล้ว')->withInput();
+            return back()->with('alert', 'Room duplicate')->withInput();
         }
 
 

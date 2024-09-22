@@ -17,5 +17,10 @@ class Report extends Model
         'contact_number',
         'permission',
     ];
+
+    public function room()
+    {
+        return $this->hasMany(rooms::class);
+    }
 }
 

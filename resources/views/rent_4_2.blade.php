@@ -10,34 +10,34 @@
 <body>
     <nav>
         <a href="/"><img src="./img/Logo.png" alt="Logo" width="100" height="100"></a>
-    <ul>
-        <li>
-            @if (Route::has('login'))
-    @auth
-        @if (Auth::user()->usertype == 'admin')
-            <a href="{{ url('/home') }}">จัดการห้อง</a>
-            <style>
-                .presstologin{
-                    display:none;
-                }
-            </style>
-        @else
-        <style>
-            .presstologin{
-                display:none;
-            }
-        </style>
-
-        @endif
-    @endauth
-    @endif
-    </li>
+        <ul>
+            <li>
+                @if (Route::has('login'))
+                @auth
+                    @if (Auth::user()->usertype == 'admin')
+                        <a href="{{ url('/home') }}">จัดการห้อง</a>
+                        <style>
+                            .presstologin {
+                                display: none;
+                            }
+                        </style>
+                    @else
+                        <style>
+                            .presstologin {
+                                display: none;
+                            }
+                        </style>
+                    @endif
+                @endauth
+                @endif
+            </li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
-            <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
+            <li><a href="{{ route('booking_detail') }}">การจอง</a></li>
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
         </ul>
     </nav>
+
     <div class="step-progress">
         <div class="step active">
             <div class="step-line"></div>
@@ -62,7 +62,6 @@
         <form id="creditCardForm" action="{{ route('payment_process') }}" method="POST" onsubmit="return validateForm()">
             @csrf
             <div class="credit-card-form">
-
                 <label for="cardNumber">หมายเลขบัตรเครดิต:</label>
                 <input type="text" id="cardNumber" name="card_number" maxlength="19" placeholder="1234 5678 9012 3456" required oninput="formatCardNumber(this)">
 
@@ -85,59 +84,65 @@
         </form>
     </section>
 
-
+    <!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         function formatCardNumber(input) {
-            // ลบช่องว่างที่มีอยู่ทั้งหมดก่อน
-            let value = input.value.replace(/\s+/g, '');
-
-            // เพิ่มช่องว่างหลังจากทุกๆ 4 ตัวอักษร
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
-
-            // ตั้งค่าให้เป็นค่าที่จัดรูปแบบแล้ว
+            let value = input.value.replace(/\s+/g, ''); // Remove existing spaces
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || ''; // Add space every 4 digits
             input.value = formattedValue;
         }
 
-        // ฟังก์ชันในการตรวจสอบฟอร์ม
         function validateForm() {
-            var cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, ''); // ลบช่องว่างออกเพื่อทำการตรวจสอบ
+            var cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, ''); // Remove spaces for validation
             var cardName = document.getElementById('cardName').value;
             var expiryDate = document.getElementById('expiryDate').value;
             var cvv = document.getElementById('cvv').value;
 
-
-            // ตรวจสอบว่าข้อมูลครบถ้วนและถูกต้องหรือไม่
-             if (cardNumber.length !== 16) {  // ตรวจสอบเฉพาะตัวเลขและความยาว 16 หลัก
-                alert('กรุณากรอกหมายเลขบัตรเครดิตที่ถูกต้อง');
+            // Validate card number (must be 16 digits)
+            if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+                Swal.fire('Error', 'กรุณากรอกหมายเลขบัตรเครดิตที่ถูกต้อง', 'error');
                 return false;
             }
 
+            // Validate card name (must not be empty)
             else if (cardName === '') {
-                alert('กรุณากรอกชื่อบนบัตร');
+                Swal.fire('Error', 'กรุณากรอกชื่อบนบัตร', 'error');
                 return false;
             }
 
+            // Validate expiry date (must match MM/YY format)
             else if (!expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
-                alert('กรุณากรอกวันหมดอายุในรูปแบบ MM/YY');
+                Swal.fire('Error', 'กรุณากรอกวันหมดอายุในรูปแบบ MM/YY', 'error');
                 return false;
             }
 
+            // Validate CVV (must be 3 digits)
             else if (cvv.length !== 3 || isNaN(cvv)) {
-                alert('กรุณากรอก CVV ที่ถูกต้อง');
+                Swal.fire('Error', 'กรุณากรอก CVV ที่ถูกต้อง', 'error');
                 return false;
             }
-            // แสดงข้อความยืนยันและนำไปยังหน้าแรกหลังจากยืนยันการชำระเงิน
-            else if (confirm("คุณต้องการยืนยันการชำระเงินหรือไม่?")) {
-                alert("ชำระเงินเสร็จสิ้น");
-                return true; // ส่งฟอร์ม
-            }
 
-            return false; // หยุดการส่งฟอร์มหากยกเลิกการยืนยัน
+            // Confirm payment with SweetAlert
+            else {
+                Swal.fire({
+                    title: 'ยืนยันการชำระเงิน?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('สำเร็จ', 'ชำระเงินเสร็จสิ้น', 'success');
+                        document.getElementById('creditCardForm').submit(); // Submit the form if confirmed
+                    }
+                });
+                return false; // Prevent form submission to wait for confirmation
+            }
         }
     </script>
-
-
-
 </body>
 </html>

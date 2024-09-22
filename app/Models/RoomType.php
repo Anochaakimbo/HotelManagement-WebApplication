@@ -12,14 +12,18 @@ class RoomType extends Model
 
     use HasFactory;
 
-    protected $table = 'room_types'; // ชื่อตาราง
+    protected $table = 'room_types';
 
     public $timestamps = false;
 
 
-    // ความสัมพันธ์ hasMany กับ SelectRoom
     public function rooms()
     {
         return $this->hasMany(SelectRoom::class, 'room_type_id');
+    }
+
+    public function room()
+    {
+        return $this->hasMany(rooms::class, 'room_type_id');
     }
 }

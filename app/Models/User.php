@@ -71,6 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Billing::class);
     }
-    
+    public function report(){
+        return $this->hasMany(Report::class);
+    }
+
 }
 
