@@ -9,19 +9,18 @@ class SelectRoom extends Model
 {
     use HasFactory;
 
-    protected $table = 'rooms'; // ชื่อตาราง
+    protected $table = 'rooms';
 
     public $timestamps = false;
 
     protected $fillable = [
         'room_number',
-        'room_type_id', // ตรวจสอบว่าใช้ field นี้ในฐานข้อมูล
+        'room_type_id',
         'floor',
         'price',
         'is_available',
     ];
 
-    // สร้างความสัมพันธ์ belongsTo กับ RoomType
     public function roomType()
     {
         return $this->belongsTo(RoomType::class, 'room_type_id');

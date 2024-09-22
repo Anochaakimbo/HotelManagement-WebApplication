@@ -17,5 +17,6 @@ class Report extends Model
         'contact_number',
         'permission',
     ];
+
 }
 

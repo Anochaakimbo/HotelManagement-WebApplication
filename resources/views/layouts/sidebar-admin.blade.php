@@ -11,37 +11,36 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Add SweetAlert2 -->
 </head>
 
 <body>
     <!-- Sidebar -->
-    <!-- Sidebar -->
-<div class="sidebar">
-    <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? '' : '' }}">
-        <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
-    </a>
-    <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
-    <a href="{{ route('guestpage') }}" class="{{ Request::routeIs('guestpage') ? 'active' : '' }}">Guest</a>
-    <a href="{{ route('cspxx') }}" class="{{ Request::routeIs('cspxx') ? 'active' : '' }}">Customer problem</a>
-    <div class="dropdown">
-        <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
-        <div class="dropdown-content">
-            <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">Booking</a>
-            <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
+    <div class="sidebar">
+        <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? '' : '' }}">
+            <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
+        </a>
+        <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
+        <a href="{{ route('guestpage') }}" class="{{ Request::routeIs('guestpage') ? 'active' : '' }}">Guest</a>
+        <a href="{{ route('cspxx') }}" class="{{ Request::routeIs('cspxx') ? 'active' : '' }}">Customer problem</a>
+        <div class="dropdown">
+            <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
+            <div class="dropdown-content">
+                <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">Booking</a>
+                <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
-        <div class="dropdown-content">
-            <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
-            <a href="{{ route('confirmbill') }}" class="{{ Request::routeIs('confirmbill') ? 'active' : '' }}">Billing Confirm</a>
-            <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
+        <div class="dropdown">
+            <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
+            <div class="dropdown-content">
+                <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
+                <a href="{{ route('confirmbill') }}" class="{{ Request::routeIs('confirmbill') ? 'active' : '' }}">Billing Confirm</a>
+                <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
+            </div>
         </div>
+        <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">Room Detail</a>
+        <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
     </div>
-    <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">Room Detail</a>
-    <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
-</div>
-
 
     <!-- Main Content -->
     <div class="content">
@@ -49,7 +48,7 @@
         <div class="header">
             <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
                 @csrf
-                <button @click.prevent="$root.submit();" class="ml-4">
+                <button type="button" id="logout-button" class="ml-4">
                     {{ __('ล็อคเอาท์') }}
                 </button>
             </form>
@@ -71,6 +70,26 @@
             @yield('content') <!-- ส่วนที่จะแสดงเนื้อหาของแต่ละหน้า -->
         </div>
     </div>
+
+    <!-- SweetAlert2 JavaScript for logout confirmation -->
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Logout?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Logout',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit(); // Submit the logout form
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

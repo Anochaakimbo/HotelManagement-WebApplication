@@ -14,10 +14,10 @@ class rooms extends Model
         'room_number',
         'description',
     ];
-    public function billing()
-{
-    return $this->hasOne(Billing::class,'room_id'); // assuming one room has one billing
-}
+//     public function billing()
+// {
+//     return $this->hasOne(Billing::class,'room_id');
+// }
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -39,15 +39,13 @@ public function getRoomPriceAttribute()
     return $this->roomType->room_price ?? 0; // หากไม่มี room_type จะให้ราคาเป็น 0
 }
 protected static function boot()
-    {
-        parent::boot();
+{
+    parent::boot();
 
-        static::updating(function ($room) {
-            // ตรวจสอบว่า user_id มีการเปลี่ยนแปลงหรือไม่
-            if ($room->isDirty('user_id')) {
-                // อัปเดตวันที่ contract เป็นวันที่ปัจจุบัน
-                $room->contract = Carbon::now();
-            }
-        });
-    }
+    static::updating(function ($room) {
+        if ($room->isDirty('user_id') && !is_null($room->user_id)) {
+            $room->contract = Carbon::now();
+        }
+    });
+}
 }

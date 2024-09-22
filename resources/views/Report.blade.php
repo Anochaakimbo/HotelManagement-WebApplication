@@ -95,7 +95,7 @@
     <div class="content">
         <!-- Header -->
         <div class="header">
-            <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
+            <form class="logout" method="POST" action="{{ route('logout') }}" class="inline" id="logout-form">
                 @csrf
                 <button @click.prevent="$root.submit();" class="ml-4">
                     {{ __('ล็อคเอาท์') }}

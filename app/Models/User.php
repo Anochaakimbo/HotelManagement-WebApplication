@@ -71,6 +71,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Billing::class);
     }
-    
+
 }
 

@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ชำระค่าห้อง</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/Payrent.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container">
-        <!-- Sidebar -->
+
         <div class="sidebar">
             <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
             <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
             <a href="{{ route('Payrent') }}" class="active">ชำระค่าเช่า</a>
             <a href="{{ route('Report') }}">แจ้งปัญหา</a>
             <a href="{{ route('report-history') }}">ประวัติการแจ้งปัญหา</a>
-
         </div>
 
         <div class="content">
-            <!-- Header -->
+
             <div class="header">
                 <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
                     @csrf
@@ -43,7 +43,7 @@
             <section class="invoice-section">
                 <h1>สรุปค่าใช้จ่ายของผู้ใช้: {{ Auth::user()->name }}</h1>
 
-                <!-- แสดงข้อความแจ้งเตือน -->
+
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
@@ -92,13 +92,13 @@
                             @if ($billing->status == 'รอยืนยัน')
                                 <h1>ได้รับข้อมูลการชำระเงินของคุณแล้วกำลังรอตรวจสอบ</h1>
                             @else
-                                <form action="{{ route('uploadSlip', $billing->id) }}" method="POST"
+                                <form id="payment-form" action="{{ route('uploadSlip', $billing->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <label for="billing_slip">อัปโหลดสลิปการชำระเงิน:</label>
                                     <input type="file" name="billing_slip" id="billing_slip" accept="image/*"
                                         required>
-                                    <button type="submit" class="pay-now" id="pay-now-button"
+                                    <button type="button" class="pay-now" id="pay-now-button"
                                         disabled>ยืนยันการชำระเงิน</button>
                                 </form>
                             @endif
@@ -108,10 +108,7 @@
                                 <p>บัญชีธนาคาร ไทยพาณิชย์</p>
                                 <p>เลขที่บัญชี: 198-456-7894</p>
                             </div>
-
-
                         </div>
-
                         <hr>
                     @endforeach
                 @else
@@ -122,12 +119,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
-
             </section>
         </div>
 
-        <!-- JavaScript เพื่อเปิดใช้งานปุ่มหลังจากอัปโหลดไฟล์ -->
         <script>
+
             document.getElementById('billing_slip').addEventListener('change', function() {
                 const payButton = document.getElementById('pay-now-button');
                 if (this.files.length > 0) {
@@ -135,6 +131,23 @@
                 } else {
                     payButton.disabled = true;
                 }
+            });
+
+            document.getElementById('pay-now-button').addEventListener('click', function(event) {
+                Swal.fire({
+                    title: 'ยืนยันการชำระเงิน?',
+                    text: 'คุณแน่ใจหรือไม่ว่าต้องการส่งสลิปการชำระเงิน?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('payment-form').submit();
+                    }
+                });
             });
         </script>
 </body>

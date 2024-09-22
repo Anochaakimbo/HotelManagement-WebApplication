@@ -1,45 +1,72 @@
 @extends('layouts.sidebar-admin')
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @section('content')
-    <div class="main-content">
-        @if (session('alert'))
-            <script>
-                alert("{{ session('alert') }}");
-            </script>
-        @endif
-        
-        <form action="/Addroom/addroom" method="POST">
-            @csrf
-            <label for="">Room Type:</label><br>
-            <select name="room_type_id" id="" required>
-                @foreach ($rooms as $room )
-                <option value="{{ $room->id }}">
-                    @if ($room->id == "1")
-                    Premium Bed Room
-                @elseif ($room->id == "2")
-                    Twin Bed Room
-                @elseif ($room->id == "3")
-                    Single Bed Room
-                @endif
-                </option>
-                @endforeach
-            </select>
-            <br>
-            <br>
-            <label for="">Room Number:</label><br>
-            <input type="text" name="room_number">
-            <br>
-            <br>
-            <label for="">Floor:</label><br>
-            <input type="number" name="floor" id="">
-            <br>
-            <label for="">Description:</label>
-            <br>
-            <textarea name="description" id="" cols="30" rows="10" required></textarea>
-            <br>
-            <button type="submit" onclick="return confirm('Are you sure you want to add room?')" class="addroombutton">Submit</button>
+<div class="main-content">
+    <!-- SweetAlert for session alert -->
+    @if (session('alert'))
+        <script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Notification',
+                text: "{{ session('alert') }}",
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 
+    <form action="/Addroom/addroom" method="POST" id="addRoomForm">
+        @csrf
+        <label for="">Room Type:</label><br>
+        <select name="room_type_id" id="" required>
+            @foreach ($rooms as $room )
+            <option value="{{ $room->id }}">
+                @if ($room->id == "1")
+                Premium Bed Room
+            @elseif ($room->id == "2")
+                Twin Bed Room
+            @elseif ($room->id == "3")
+                Single Bed Room
+            @endif
+            </option>
+            @endforeach
+        </select>
+        <br><br>
 
-        </form>
-    </div>
+        <label for="">Room Number:</label><br>
+        <input type="text" name="room_number" required>
+        <br><br>
+
+        <label for="">Floor:</label><br>
+        <input type="number" name="floor" id="" required>
+        <br><br>
+
+        <label for="">Description:</label><br>
+        <textarea name="description" id="" cols="30" rows="10" required></textarea>
+        <br><br>
+
+        <button type="button" onclick="confirmAddRoom()" class="addroombutton">Submit</button>
+    </form>
 </div>
+
+<script>
+    function confirmAddRoom() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to add this room?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                document.getElementById('addRoomForm').submit();
+            }
+        });
+    }
+</script>
+
 @endsection

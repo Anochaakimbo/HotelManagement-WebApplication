@@ -1,26 +1,34 @@
+@font-face {
+    font-family: ProjectFont;
+    src: url(./font/DBHeaventBdCondv321.ttf);
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-@font-face {
-    font-family: ProjectFont;
-    src: url(./font/DBHeaventBdCondv321.ttf);
-}
+
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'ProjectFont', sans-serif;
     background-color: #f5f5f5;
+    font-size: 20px;
 }
 .header button {
     background-color: #f98f60;
     border: none;
     padding: 10px 20px;
     color: white;
-    font-size: 16px;
+    font-size: 30px;
     cursor: pointer;
     justify-items: left;
+    font-family: 'ProjectFont', sans-serif;
 }
 .header {
+    font-size: 30px;
+    font-family: 'ProjectFont', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,6 +95,7 @@ h1{
 }
 
 .logout {
+    font-family: 'ProjectFont', sans-serif;
     background-color: #f36f24;
     color: white;
     padding: 10px 20px;
@@ -141,6 +150,8 @@ h1{
     margin-top: 20px;
     display: block;
     text-align: center;
+    font-family: 'ProjectFont', sans-serif;
+    font-size: 20px
 }
 .dropbtn {
     text-decoration: none;
@@ -184,3 +195,83 @@ h1{
 
   .dropdown:hover .dropbtn {background-color: #ddd;}
 
+  .content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.main-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px; /* Adds space between sections */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.header .user-info {
+    font-size: 18px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.styled-table thead tr {
+    background-color: #f7b366;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.header button,
+.addroombutton {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: #f7b366;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.header button:hover,
+.addroombutton:hover {
+    background-color: #f28a40;
+    cursor: pointer;
+}
+
+.pay-now:disabled {
+    background-color: #ccc; /* Change this color for the disabled state */
+    cursor: not-allowed; /* Change the cursor to indicate it's disabled */
+    color: #999; /* Change text color when disabled */
+    opacity: 0.7; /* Reduce opacity to make it look inactive */
+}
