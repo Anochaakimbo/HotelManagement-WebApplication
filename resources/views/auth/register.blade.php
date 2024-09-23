@@ -59,15 +59,15 @@
             <button class="register">
                 {{ __('สมัคร') }}
             </button>
-            
+
             <a class="haveAccount" href="{{ route('login') }}">
                 {{ __('มีบัญชีอยู่แล้ว?') }}
             </a>
+            <x-validation-errors class="mb-4" />
         </div>
     </form>
     </div>
 </body>
 </html>
 
-        
-    
+

@@ -21,12 +21,12 @@
             <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
         </div>
 
-    
+
         <div class="passwordbox">
             <label for="password" value="{{ __('รหัสผ่าน') }}">รหัสผ่าน:
             <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
         </div>
-    </div> 
+    </div>
         <div class="rememfor">
             <div class="remembercheckbox">
                 <input type="checkbox" id="remember_me" name="remember" />
@@ -42,6 +42,7 @@
                 @endif
             </div>
         </div>
+        <x-validation-errors class="mb-4" />
         <button class="login">
             {{ __('เข้าสู่ระบบ') }}
         </button>
