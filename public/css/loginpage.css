@@ -9,10 +9,10 @@ body {
     font-size: xx-large;
     background-color: #FFF7EC;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    margin: 0; 
+    margin: 0;
 }
 
 .loginbox{
@@ -42,19 +42,19 @@ input{
     width: 100%;
     height: auto;
     font-size: x-large;
-    margin-bottom: 5%;  
+    margin-bottom: 5%;
 }
 
 
 button.login {
     font-family: ProjectFont;
     display: flex;
-    width: 50%; 
-    height: 50px; 
-    font-size: xx-large; 
-    padding: 1%; 
+    width: 50%;
+    height: 50px;
+    font-size: xx-large;
+    padding: 1%;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     background-color: #b0904e;
     color: white;
     transition: 0.2s;
@@ -91,4 +91,8 @@ button.login:hover{
 
 .forgetpassbox a{
     color: black;
+}
+
+.mb-4{
+    color: red;
 }

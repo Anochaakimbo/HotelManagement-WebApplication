@@ -10,10 +10,10 @@ body{
     font-size: xx-large;
     background-color: #FFF7EC;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    margin: 0; 
+    margin: 0;
 }
 
 .registerbox{
@@ -25,7 +25,7 @@ body{
     padding: 1em;
     background-color: #ffffff;
     border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .registerbox img{
@@ -50,11 +50,11 @@ body{
 button.register {
     display: flex;
     width: 50%;
-    height: 50px; 
-    font-size: x-large; 
-    padding: 1%; 
+    height: 50px;
+    font-size: x-large;
+    padding: 1%;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     background-color: #b0904e;
     color: white;
     transition: 0.2s;
@@ -74,14 +74,18 @@ input{
     width: 100%;
     height: auto;
     font-size: x-large;
-    margin-bottom: 5%;  
+    margin-bottom: 5%;
 }
 
-.haveAccount {
+.haveAccount{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5%;
     color: black;
-{
+}
+
+.mb-4{
+    color: red;
+}
 
