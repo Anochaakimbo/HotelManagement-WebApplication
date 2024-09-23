@@ -105,7 +105,7 @@ return [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
         'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'string' => 'รหัสผ่าน ต้องมีอย่างน้อย :min ตัวอักษร',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',
@@ -134,7 +134,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute field format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'จำเป็นต้องใส่ให้ครบนะ',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -160,7 +160,13 @@ return [
     'url' => 'The :attribute field must be a valid URL.',
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
-
+    'required' => 'ต้องการ :attribute',
+    'string' => ':attribute ต้องเป็นข้อความ',
+    'รหัสผ่าน' => [
+        'min' => ':รหัสผ่าน ต้องมีอย่างน้อย :min ตัวอักษร',
+        'confirmed' => 'การยืนยัน รหัสผ่าน ไม่ตรงกัน'
+    ],
+    'confirmed' => 'การยืนยัน รหัสผ่าน ไม่ตรงกัน',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -190,5 +196,9 @@ return [
     */
 
     'attributes' => [],
+
+
+
+
 
 ];
