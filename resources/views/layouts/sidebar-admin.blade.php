@@ -12,6 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Add SweetAlert2 -->
+
 </head>
 
 <body>
@@ -30,6 +31,7 @@
                 <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
             </div>
         </div>
+
         <div class="dropdown">
             <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
             <div class="dropdown-content">
@@ -42,9 +44,10 @@
         <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
     </div>
 
+
     <!-- Main Content -->
     <div class="content">
-        <!-- Header -->
+
         <div class="header">
             <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
                 @csrf
@@ -65,7 +68,12 @@
             </div>
         </div>
 
-        <!-- Main Content Section -->
+        @if (!Request::routeIs('adminpage') && !Request::routeIs('Addroom'))
+        <div class="s">
+            <label for="search" class="sig">Search :</label><br>
+            <input type="search" id="search" class="sin" placeholder="Enter roomnumber or username" size="30px">
+        </div>
+         @endif
         <div class="main-content">
             @yield('content') <!-- ส่วนที่จะแสดงเนื้อหาของแต่ละหน้า -->
         </div>

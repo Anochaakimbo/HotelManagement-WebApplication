@@ -1,10 +1,14 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/booking1.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 @extends('layouts.sidebar-admin')
 
 <!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 @section('content')
+<h1>Room</h1>
 <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
     @csrf
     <h2 class="updateroomheader">Update Room</h2>
@@ -18,10 +22,11 @@
     <label for="">Description:</label><br>
     <textarea name="description" id="description" cols="30" rows="10" required></textarea><br><br>
     <div class="btninform">
-        <button type="button" class="backbtn" onclick="hideupdateform()">Back</button>
+        <button type="button" class="backbtn" onclick="hideupdateform()">Hide</button>
         <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">Submit</button>
     </div>
 </form>
+
 
 <div class="main-content">
     <div class="room-info">
@@ -116,6 +121,19 @@
             }
         });
     }
+    document.getElementById('search').addEventListener('input', function() {
+    let input = this.value.toLowerCase();
+    let rows = document.querySelectorAll('.styled-table tbody tr');
+
+    rows.forEach(row => {
+        let userName = row.querySelector('td:first-child').textContent.toLowerCase();
+        if (userName.includes(input)) {
+            row.style.display = ''; // แสดงแถวที่ตรงกับการค้นหา
+        } else {
+            row.style.display = 'none'; // ซ่อนแถวที่ไม่ตรงกับการค้นหา
+        }
+    });
+});
 </script>
 
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.sidebar-admin')
 @section('content')
+
     <div class="billing-history">
         <h1>Billing Pending Confirmation</h1>
 
@@ -66,4 +67,22 @@
             </tbody>
         </table>
     </div>
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            let input = this.value.toLowerCase();
+            let rows = document.querySelectorAll('.styled-table tbody tr');
+
+            rows.forEach(row => {
+                // ตรวจสอบข้อมูลทั้งในคอลัมน์ User Name และ Room Number
+                let userName = row.querySelector('td:first-child').textContent.toLowerCase();
+                let roomNumber = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (userName.includes(input) || roomNumber.includes(input)) {
+                    row.style.display = ''; // แสดงแถวที่ตรงกับการค้นหา
+                } else {
+                    row.style.display = 'none'; // ซ่อนแถวที่ไม่ตรงกับการค้นหา
+                }
+            });
+        });
+    </script>
 @endsection

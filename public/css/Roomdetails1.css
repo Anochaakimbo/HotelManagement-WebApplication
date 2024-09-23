@@ -361,3 +361,12 @@ body {
     text-align: center;
     font-size: 300%;
 }
+
+.sin{
+    border-radius: 10px;
+    padding: 4px;
+    font-size: 18px;
+}
+.sig{
+    font-size: 25px;
+}
