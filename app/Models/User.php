@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
     public function billing()
     {
-        return $this->hasOne(Billing::class);
+        return $this->hasOne(Billing::class,'room_id');
     }
 
 }

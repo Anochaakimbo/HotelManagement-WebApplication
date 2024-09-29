@@ -11,11 +11,17 @@
 <p>Water Unit : {{ $room->roomType->electrical_unit }}</p>
 <p>Furniture : {{  $room->roomType->furniture_details }}</p>
 <p>Payment Status:
-    @if(optional($room->billing)->status == 'ส่งไปยังผู้ใช้แล้ว')
-        There is a balance that needs to be paid.
+    @if($room->billing->status)
+        @if($room->billing->status === 'ส่งไปยังผู้ใช้แล้ว')
+            There is a balance that needs to be paid.
+        @else
+            No Dept
+        @endif
     @else
-        No Dept
+        No billing information available.
     @endif
+    {{-- ตรวจสอบค่าของ room ใน Blade --}}
+
 </p>
 
 <!-- ปุ่ม Back -->

@@ -89,7 +89,7 @@ class AdminComtroller extends Controller
     }
     public function showinfo($id)
 {
-    $room = rooms::with(['roomType', 'billings'])->find($id);
+    $room = rooms::with(['roomType', 'billing'])->find($id);
     return view('admin.guests_roomdetails', compact('room'));
 }
     public function checkout($id){
