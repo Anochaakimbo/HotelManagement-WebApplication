@@ -27,10 +27,10 @@
                 display:none;
             }
         </style>
-        
+
         @endif
     @endauth
-    @endif  
+    @endif
     </li>
             <li><a href="#roomtype">ประเภทห้อง</a></li>
             <li><a href="{{ route('booking_detail')}}">การจอง</a></li>
@@ -56,10 +56,10 @@
             <div class="step-circle">4</div>
         </div>
     </div>
-    
+
     <section class="payment-section">
         <h2>สแกนคิวอาร์โค้ด</h2>
-        <form id="qrPaymentForm" action="{{ route('payment_process_qr') }}" method="POST" enctype="multipart/form-data" onsubmit="return checkFileUpload()">
+        <form id="qrPaymentForm" action="{{ route('payment_process_qr') }}" method="POST" enctype="multipart/form-data" onsubmit="checkFileUpload()">
 
             @csrf
             <div class="qr-code">
@@ -83,7 +83,7 @@
         // ฟังก์ชันตรวจสอบเมื่อกดปุ่มยืนยัน
         function checkFileUpload() {
             var fileInput = document.getElementById('file-upload');
-            
+
             // ตรวจสอบว่ามีการเลือกไฟล์หรือไม่
             if (fileInput.files.length === 0) {
                 Swal.fire({
@@ -93,7 +93,7 @@
                 });
                 return false;
             }
-    
+
             // ถ้ามีการเลือกไฟล์แล้ว แสดงการยืนยันชำระเงิน
             Swal.fire({
                 title: 'ยืนยันการชำระเงิน?',
