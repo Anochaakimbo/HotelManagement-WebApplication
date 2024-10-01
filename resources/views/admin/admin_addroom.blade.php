@@ -35,7 +35,7 @@
         <br><br>
 
         <label for="">Room Number:</label><br>
-        <input type="text" name="room_number" id="room_number" required>
+        <input type="text" name="room_number" id="room_number" maxlength="4" required>
         <br><br>
 
         <label for="">Floor:</label><br>
