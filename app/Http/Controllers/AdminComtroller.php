@@ -16,7 +16,7 @@ class AdminComtroller extends Controller
         $booking = Booking::findOrFail($id);
         return view('admin.confirm-booking', compact('booking'));
     }
-    //ส่ง
+    //ส่งข้อมูลตาราง booking ให้หน้า admin กดยืนยัน
 
 
     public function confirmBooking($id)
@@ -28,6 +28,7 @@ class AdminComtroller extends Controller
 
         return redirect()->back()->with('message', 'Booking confirmed successfully.');
     }
+    //เป็นปุ่ม controller ของปุ่มหน้ากดยืนยันการจอง
 
 
     public function deleteBooking($id)
@@ -47,7 +48,8 @@ class AdminComtroller extends Controller
 
     return redirect('/admin/booking');
 }
-    public function createUserFromBooking(Request $request)
+    //เป็นปุ่มลบอ้างอิงจากไอดี การ booking ในกรณ๊ที่ผู้ใช้ ส่งข้อมูลการชำระมาไม่ถูกต้อง
+    public function createUserFromBooking(Request $request)//เป็นการสร้าง account จากข้อมูล Booking
     {
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
@@ -72,7 +74,7 @@ class AdminComtroller extends Controller
         $booking->delete();
         return redirect('/admin/booking');
     }
-    public function index()
+    public function index()//ดึงข้อมูลไปโชว์หน้า DASHBOARD
 {
 
     $bookings = Booking::all();
@@ -83,16 +85,17 @@ class AdminComtroller extends Controller
                                 ->pluck('total', 'month')->toArray();
     return view('admin.adminpage', compact('bookings', 'usersCount', 'billings'));
 }
-
+    //แสดงผู้ใช้ในระบบโดยไม่นับผู้ใช้ที่เป็น ADMIN
     public function guest(){
         $users = User::with('room')->where('usertype', '!=', 'admin')->get();
         return view('admin.guests', compact('users'));
     }
-    public function showinfo($id)
+    public function showinfo($id)//แสดงข้อมูลผู้ใช้หลังจากกด ฺView
 {
     $room = rooms::with(['roomType', 'billing'])->find($id);
     return view('admin.guests_roomdetails', compact('room'));
 }
+    //เป็นการ checkout ออกจากระบบหอ โดยที่จะออกไม่ได้หากผู้ใช้มียอดค้างชำระ
 public function checkout($id) {
     $users = User::findOrFail($id);
     $room = $users->room;

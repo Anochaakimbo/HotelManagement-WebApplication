@@ -11,15 +11,11 @@ class cspController extends Controller
     public function index()
     {
 
-
-
         $reports = Report::all();
-
 
         // ส่งข้อมูลไปยัง view 'csp.blade.php'
         return redirect()->back()->with('reports', $reports);
     }
-
 
     // ฟังก์ชันสำหรับลบรายงาน
     public function destroy($id)

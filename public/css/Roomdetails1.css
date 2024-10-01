@@ -370,3 +370,8 @@ body {
 .sig{
     font-size: 25px;
 }
+.okes{
+    background-color:rgb(23, 203, 23);
+    padding: 5px;
+    border-radius: 15px;
+}

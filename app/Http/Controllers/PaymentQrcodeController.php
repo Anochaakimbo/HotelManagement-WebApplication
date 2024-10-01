@@ -25,7 +25,8 @@ class PaymentQrcodeController extends Controller
 
             // ตรวจสอบและตั้งชื่อไฟล์โดยใช้ชื่อผู้จองและ guest_id
             $guestName = !empty($guest->name) ? preg_replace('/[^A-Za-z0-9\-]/', '', $guest->name) : 'Guest_' . $guest->id;
-            $fileName = $guestName . '_' . $guest->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = $guestName . '_' . $guest->id . '_' . time() . '.' . $file->getClientOriginalExtension();//ดึงนามสกุลไฟล์ดั้งเดิม
+
 
             // ย้ายไฟล์ไปยังโฟลเดอร์ uploads
             $file->move(public_path('uploads'), $fileName);

@@ -23,24 +23,34 @@
         </thead>
         <tbody>
             @foreach ($rooms as $room)
-            @if(!$room->billing)
             <tr>
                 <td>{{ $room->room_number }}</td>
                 <td>{{ $room->user->name }}</td>
                 <td>
-                    <input type="number" id="water_units_{{ $room->id }}" name="water_units[{{ $room->id }}]" min="0" required>
+                    @if(!$room->billing)
+                        <input type="number" id="water_units_{{ $room->id }}" name="water_units[{{ $room->id }}]" min="0" required>
+                    @else
+                        {{ $room->billing->water_units }} <!-- แสดงจำนวนหน่วยน้ำถ้ามีการส่งบิลแล้ว -->
+                    @endif
                 </td>
                 <td>
-                    <input type="number" id="electric_units_{{ $room->id }}" name="electric_units[{{ $room->id }}]" min="0" required>
+                    @if(!$room->billing)
+                        <input type="number" id="electric_units_{{ $room->id }}" name="electric_units[{{ $room->id }}]" min="0" required>
+                    @else
+                        {{ $room->billing->electric_units }} <!-- แสดงจำนวนหน่วยไฟถ้ามีการส่งบิลแล้ว -->
+                    @endif
                 </td>
                 <td>
                     <input type="number" id="room_price_{{ $room->id }}" name="room_price[{{ $room->id }}]" value="{{ $room->roomType->room_price }}" readonly>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">Submit Billing</button>
+                    @if(!$room->billing)
+                        <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">Submit Billing</button>
+                    @else
+                        <span class="okes">Already Send</span> <!-- แสดงสถานะว่าบิลถูกส่งแล้ว -->
+                    @endif
                 </td>
             </tr>
-            @endif
             @endforeach
         </tbody>
     </table>

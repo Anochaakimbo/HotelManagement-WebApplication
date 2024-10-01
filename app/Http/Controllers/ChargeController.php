@@ -18,15 +18,14 @@ class ChargeController extends Controller
 }
 public function showAdminForm()
 {
+    // ดึงข้อมูลห้องทั้งหมดที่มี user_id พร้อมกับข้อมูลบิล (ถ้ามี)
     $rooms = rooms::whereNotNull('user_id')
-        ->whereDoesntHave('billing', function ($query) {
-            $query->where('status', 'ส่งไปยังผู้ใช้แล้ว')
-                  ->whereNull('deleted_at');
-        })
-        ->with('user')
+        ->with(['user', 'billing' => function ($query) {
+            $query->whereNull('deleted_at'); // ดึงข้อมูลบิลที่ไม่ถูกลบ
+        }])
         ->get();
-    $billings = Billing::with('room', 'user')->get();
-    return view('admin.billing', compact('rooms', 'billings'));
+
+    return view('admin.billing', compact('rooms'));
 }
 
 public function showAdminForm1()
