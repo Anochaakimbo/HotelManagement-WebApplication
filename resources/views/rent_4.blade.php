@@ -59,13 +59,14 @@
     
     <section class="payment-section">
         <h2>สแกนคิวอาร์โค้ด</h2>
-        <form id="qrPaymentForm" action="{{ route('payment_process_qr') }}" method="POST" enctype="multipart/form-data">
+        <form id="qrPaymentForm" action="{{ route('payment_process_qr') }}" method="POST" enctype="multipart/form-data" onsubmit="return checkFileUpload()">
+
             @csrf
             <div class="qr-code">
                 <img src="./img/qr code pay.png" alt="QR Code">
                 <div class="amount">ยอดชำระ: 7000 บาท</div>
                 <div class="amount">แนบสลิปการโอนเงิน:</div>
-                <input type="file" id="file-upload" class="slip" name="payment_slip" required>
+                <input type="file" id="file-upload" class="slip" name="payment_slip">
                 <p class="note">*หมายเหตุ กรุณาแนบสลิปการโอนเงินไม่เช่นนั้นจะถือว่าการชำระไม่สำเร็จ</p>
             </div>
             <footer>
@@ -76,24 +77,41 @@
         </form>
     </section>
 
-    <script>
 
-            // ฟังก์ชันตรวจสอบเมื่อกดปุ่มยืนยัน
-            function checkFileUpload() {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // ฟังก์ชันตรวจสอบเมื่อกดปุ่มยืนยัน
+        function checkFileUpload() {
             var fileInput = document.getElementById('file-upload');
             
             // ตรวจสอบว่ามีการเลือกไฟล์หรือไม่
             if (fileInput.files.length === 0) {
-                alert('กรุณาแนบไฟล์ก่อนที่จะยืนยันการชำระเงิน');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ผิดพลาด',
+                    text: 'กรุณาแนบไฟล์ก่อนที่จะยืนยันการชำระเงิน',
+                });
                 return false;
             }
-
-            // แสดงข้อความยืนยันเมื่อมีไฟล์แล้ว
-            alert('ชำระเงินเสร็จเรียบร้อยแล้ว');
-            window.location.href = "/"; //หลับไปหน้าแรก
-            return true; // ดำเนินการต่อ (ส่งฟอร์มหรือไปที่ขั้นตอนถัดไป)
+    
+            // ถ้ามีการเลือกไฟล์แล้ว แสดงการยืนยันชำระเงิน
+            Swal.fire({
+                title: 'ยืนยันการชำระเงิน?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('สำเร็จ', 'ชำระเงินเสร็จสิ้น', 'success').then(() => {
+                        window.location.href = "/";
+                    });
+                }
+            });
+            return false; // หยุดการส่งฟอร์มชั่วคราวจนกว่าจะมีการยืนยัน
         }
-
     </script>
 </body>
 </html>

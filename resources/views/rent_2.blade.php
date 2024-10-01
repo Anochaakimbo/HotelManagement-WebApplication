@@ -61,10 +61,11 @@
     <div class="container">
         <h2>เลือกประเภทจ่ายค่าจอง</h2>
     
-        <!-- ฟอร์มการเลือกชำระเงินด้วยบัตรเครดิต -->
+        <!-- เลือกชำระเงินด้วยบัตรเครดิต -->
         <div class="payment-option">
             <form action="{{ route('rent_3') }}" method="GET">
-                <input type="hidden" name="guest_id" value="{{ $guest->id }}">
+                <input type="hidden" name="guest_id" value="{{ $guest->id }}"> 
+                {{-- จะได้รู้ว่าคนที่กำลังเลือกอยู่คือไอดีไหนในคนจอง --}}
                 <input type="hidden" name="payment_method" value="credit">
                 <button type="submit" class="option-btn">
                     <img src="{{ asset('img/creditcard.png') }}" alt="Credit/Debit Card">
@@ -73,7 +74,7 @@
             </form>
         </div>
     
-        <!-- ฟอร์มการเลือกชำระเงินด้วย QR -->
+        <!-- เลือกชำระเงินด้วย QR -->
         <div class="payment-option">
             <form action="{{ route('rent_3') }}" method="GET">
                 <input type="hidden" name="guest_id" value="{{ $guest->id }}">
