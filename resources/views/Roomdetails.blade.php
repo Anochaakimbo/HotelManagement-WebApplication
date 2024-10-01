@@ -60,11 +60,11 @@
                     <p><strong>ประเภทห้อง:</strong> {{ Auth::user()->room->roomType->room_description }}</p>
                     <p><strong>ราคาห้อง:</strong> {{ Auth::user()->room->roomType->room_price }}</p>
                     <p><strong>สถานะชำระค่าห้อง:</strong>
-                        @if (optional(Auth::user()->billing)->status == 'ส่งไปยังผู้ใช้แล้ว')
-                            มียอดที่ต้องชำระ
-                        @else
-                            {{ optional(Auth::user()->billing)->status ?? 'ไม่มียอดคงค้างชำระ' }}
-                        @endif
+                        @if (Auth::user()->billing && Auth::user()->billing->status == 'ส่งไปยังผู้ใช้แล้ว')
+                        มียอดที่ต้องชำระ
+                    @else
+                        {{ Auth::user()->billing->status ?? 'ไม่มียอดคงค้างชำระ' }}
+                    @endif
                     </p>
                     <p><strong>หน่วยค่าไฟ:</strong> {{ Auth::user()->room->roomType->electrical_unit }} บาท/ยูนิต</p>
                     <p><strong>หน่วยค่าน้ำ:</strong> {{ Auth::user()->room->roomType->water_unit }} บาท/ยูนิต</p>

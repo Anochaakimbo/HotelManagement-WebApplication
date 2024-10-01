@@ -68,4 +68,14 @@
         });
     }
 </script>
+@if($errors->has('msg'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ $errors->first('msg') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
 @endsection

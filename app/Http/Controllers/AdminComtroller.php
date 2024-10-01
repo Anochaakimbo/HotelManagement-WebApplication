@@ -16,6 +16,7 @@ class AdminComtroller extends Controller
         $booking = Booking::findOrFail($id);
         return view('admin.confirm-booking', compact('booking'));
     }
+    //ส่ง
 
 
     public function confirmBooking($id)
@@ -92,18 +93,29 @@ class AdminComtroller extends Controller
     $room = rooms::with(['roomType', 'billing'])->find($id);
     return view('admin.guests_roomdetails', compact('room'));
 }
-    public function checkout($id){
-        $users = User::findOrFail($id);
-        $room = $users->room;
+public function checkout($id) {
+    $users = User::findOrFail($id);
+    $room = $users->room;
+
+
+    $billing = Billing::where('user_id', $id)->whereNull('deleted_at')->first();
+
+    if ($billing) {
+        return redirect()->back()->withErrors(['msg' => 'This guest cannot be checked out because they have existing billing records.']);
+    }
+
     if ($room) {
         $room->is_available = '1';
         $room->user_id = NULL;
         $room->contract = NULL;
         $room->save();
     }
-        $users->delete($id);
-        return redirect('/guestpage');
+
+    $users->delete($id);
+
+    return redirect('/guestpage');
 }
+
 }
 
 

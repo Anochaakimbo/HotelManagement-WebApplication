@@ -19,7 +19,7 @@ class ChargeController extends Controller
 public function showAdminForm()
 {
     $rooms = rooms::whereNotNull('user_id')
-        ->whereDoesntHave('billings', function ($query) {
+        ->whereDoesntHave('billing', function ($query) {
             $query->where('status', 'ส่งไปยังผู้ใช้แล้ว')
                   ->whereNull('deleted_at');
         })
@@ -32,7 +32,7 @@ public function showAdminForm()
 public function showAdminForm1()
 {
     $rooms = rooms::whereNotNull('user_id')
-        ->whereDoesntHave('billings', function ($query) {
+        ->whereDoesntHave('billing', function ($query) {
             $query->where('status', 'ส่งไปยังผู้ใช้แล้ว')
                   ->whereNull('deleted_at');
         })
