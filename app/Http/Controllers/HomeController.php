@@ -63,10 +63,9 @@ class HomeController extends Controller
 
     public function roomdetail()
     {
-        $rooms = rooms::all();
+        $rooms = rooms::orderBy('room_number', 'asc')->get(); // เรียงลำดับตาม room_number จากน้อยไปมาก
         return view('admin.admin_roomdetail', ['rooms' => $rooms]);
     }
-
     public function preparetoAdd()
     {
         $rooms = RoomType::all();

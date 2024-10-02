@@ -11,10 +11,10 @@ class Billing extends Model
     use HasFactory, SoftDeletes; // ใช้ SoftDeletes trait
 
     protected $fillable = [
-        'room_id', 'user_id', 'water_units', 'electric_units', 'room_price', 'water_charge', 'electric_charge', 'total_charge', 'status'
+        'room_id', 'user_id', 'water_units', 'electric_units', 'room_price', 'water_charge', 'electric_charge', 'total_charge', 'status', 'billing_date'
     ];
 
-    protected $dates = ['deleted_at']; // ระบุวันที่สำหรับ soft delete
+    protected $dates = ['deleted_at', 'billing_date']; // ระบุวันที่สำหรับ soft delete และ billing date
 
     public function room()
     {
@@ -26,4 +26,3 @@ class Billing extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 }
-

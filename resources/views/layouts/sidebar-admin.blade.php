@@ -36,7 +36,6 @@
             <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
             <div class="dropdown-content">
                 <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
-                <a href="{{ route('confirmbill') }}" class="{{ Request::routeIs('confirmbill') ? 'active' : '' }}">Billing Confirm</a>
                 <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
             </div>
         </div>
