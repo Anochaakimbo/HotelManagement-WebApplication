@@ -63,6 +63,12 @@
                     </p>
                     <p><strong>หน่วยค่าไฟ:</strong> {{ Auth::user()->room->roomType->electrical_unit }} บาท/ยูนิต</p>
                     <p><strong>หน่วยค่าน้ำ:</strong> {{ Auth::user()->room->roomType->water_unit }} บาท/ยูนิต</p>
+                    <p>Contract End Date: {{ $contractEndDate->format('Y-m-d') }}</p>
+                    @if ($remainingDays > 0)
+                    <p>Remaining days: {{ $remainingDays }} days</p>
+                    @else
+                    <p>The contract has expired.</p>
+                    @endif
                 </div>
             </div>
         </div>
