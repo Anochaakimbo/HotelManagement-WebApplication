@@ -16,6 +16,7 @@
         </script>
     @endif
 
+    <!-- ฟอร์มกรอกค่าห้องที่ต้องการเพิ่มลง db -->
     <form action="/Addroom/addroom" method="POST" id="addRoomForm">
         @csrf
         <label for="">Room Type:</label><br>
@@ -56,7 +57,7 @@
         let roomType = this.value;
         let roomNumberField = document.getElementById('room_number');
 
-        // Set prefix based on room type
+        // เวลาเลือกประเภทห้อง จะตั้งค่า Default ในช่องกรอกเป็นตัวอักษรห้องนั้นๆ
         if (roomType == "1") { // Premium Bed Room
             roomNumberField.value = 'P';
         } else if (roomType == "2") { // Twin Bed Room
@@ -64,7 +65,7 @@
         } else if (roomType == "3") { // Single Bed Room
             roomNumberField.value = 'S';
         } else {
-            roomNumberField.value = ''; // Clear the field if no valid type is selected
+            roomNumberField.value = ''; 
         }
     });
 
