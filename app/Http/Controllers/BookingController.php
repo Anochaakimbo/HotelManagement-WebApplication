@@ -7,9 +7,10 @@ use App\Models\Guest;
 use App\Models\rooms;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 class BookingController extends Controller
 {
-    public function store(Request $request)//เก็บข้อมูล Guests
+    public function store(Request $request)
     {
         $request->validate([
             'firstname' => 'required|string|max:255',
@@ -19,15 +20,15 @@ class BookingController extends Controller
             'room_number' => 'required',
         ]);
 
-
         $room = rooms::where('room_number', $request->input('room_number'))->firstOrFail();
-        //ตรงนี้ เอามาแก้ error ในกรณี js ไม่ทำงาน
-        $existingBooking = Booking::where('room_id', $room->id)->where('status', '!=', 'ยกเลิก')->first();
 
+        // ตรวจสอบว่าห้องถูกจองไปแล้วหรือยัง
+        $existingBooking = Booking::where('room_id', $room->id)->where('status', '!=', 'ยกเลิก')->first();
         if ($existingBooking) {
             return redirect()->back()->with('error', 'ห้องนี้ถูกจองไปแล้ว');
         }
 
+        // ตรวจสอบว่า guest มีการจองแล้วหรือไม่
         $existingGuest = Guest::where('email', $request->input('email'))->first();
         if ($existingGuest) {
             return redirect()->back()->with('error', 'คุณได้ทำการจองไปแล้ว');
@@ -47,36 +48,44 @@ class BookingController extends Controller
             'status' => 'รอชำระเงิน',
         ]);
 
+        // ทำให้ห้องไม่ว่าง
         $room->is_available = 0;
         $room->save();
 
+        // ตรวจสอบว่ามี 'bookings' ใน session หรือไม่ และเก็บข้อมูลการจองใน session
+        $bookings = $request->session()->get('bookings', []); // หากไม่มี 'bookings' จะคืนค่าเป็น array ว่าง
+        $bookings[] = $booking->id; // เพิ่มการจองใหม่เข้าไปใน array
+        $request->session()->put('bookings', $bookings); // บันทึก array กลับไปใน session
 
-        return redirect()->route('rent_2', ['guest_id' => $guest->id])->with('message', 'จองสำเร็จ,กำลังพาคุณไปหน้าชำระเงิน.');
+        return redirect()->route('rent_2', ['guest_id' => $guest->id])
+            ->with('message', 'จองสำเร็จ,กำลังพาคุณไปหน้าชำระเงิน.');
     }
+
+
 
 
     public function updateStatus(Request $request, Booking $booking)
-{
-    $booking->status = $request->input('status');
-    $booking->save();
+    {
+        $booking->status = $request->input('status');
+        $booking->save();
 
-    if ($booking->status == 'จองสำเร็จ') {
-        $room = $booking->room;
-        $room->is_available = false;
+        if ($booking->status == 'จองสำเร็จ') {
+            $room = $booking->room;
+            $room->is_available = false;
+            $room->save();
+        }
+
+        return redirect()->back()->with('message', 'Booking status updated.');
+    }
+    public function assignUserToRoom($roomId, $userId) //เอาวันที่ไปแปะในตาราง CONTACT
+    {
+        $room = rooms::findOrFail($roomId);
+        $room->user_id = $userId;
+        $room->contract = Carbon::now();
         $room->save();
     }
-
-    return redirect()->back()->with('message', 'Booking status updated.');
-}
-public function assignUserToRoom($roomId, $userId)//เอาวันที่ไปแปะในตาราง CONTACT
-{
-    $room = rooms::findOrFail($roomId);
-    $room->user_id = $userId;
-    $room->contract = Carbon::now();
-    $room->save();
-}
-//เอาข้อมูลที่โดน softdelete ไปแสดง
-public function historybooking()
+    //เอาข้อมูลที่โดน softdelete ไปแสดง
+    public function historybooking()
     {
         $bookings = Booking::onlyTrashed()->with(['room', 'guest' => function ($query) {
             $query->withTrashed();
@@ -84,5 +93,4 @@ public function historybooking()
 
         return view('admin.booking_history', compact('bookings'));
     }
-
 }

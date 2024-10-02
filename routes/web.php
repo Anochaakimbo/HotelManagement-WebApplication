@@ -40,9 +40,7 @@ Route::middleware([
 
     Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
 
-    Route::get('/Roomdetails', function () {
-        return view('Roomdetails');
-    })->name('Roomdetails');
+    Route::get('/Roomdetails', [HomeController::class,'showUserRoomDetails'])->name('Roomdetails');
 });
 
 // Routes for ChargeController and BookingController
@@ -122,6 +120,7 @@ Route::get('/guest/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.det
 Route::get('/roomdetail/updated', [HomeController::class, 'showDetailroom']);
 Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
 Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
+Route::get('/search', [BookingDetailController::class, 'search'])->name('search');
 
 // Report-related routes
 Route::post('/report/store', [ReportController::class, 'store'])->name('report.store');

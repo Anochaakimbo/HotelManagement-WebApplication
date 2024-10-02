@@ -63,6 +63,13 @@
                     </p>
                     <p><strong>หน่วยค่าไฟ:</strong> {{ Auth::user()->room->roomType->electrical_unit }} บาท/ยูนิต</p>
                     <p><strong>หน่วยค่าน้ำ:</strong> {{ Auth::user()->room->roomType->water_unit }} บาท/ยูนิต</p>
+                    <p>วันหมดสัญญา: {{ $contractEndDate->format('Y-m-d') }}</p>
+                    @if ($remainingDays > 0)
+                    <p>ระยะเวลาคงเหลือ: {{ $remainingDays }} วัน</p>
+                    @else
+                    <p>สัญญาหมดแล้วกรุณาติดต่อเพื่อต่อสัญญากับหอพักได้ที่ห้องส่วนกลาง</p>
+
+                    @endif
                 </div>
             </div>
         </div>
