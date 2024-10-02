@@ -1,10 +1,10 @@
 <x-form-section submit="updateProfileInformation">
     <x-slot name="title">
-        {{ __('Profile Information') }}
+        {{ __('รายละเอียดโปรไฟล์') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('คุณสามารถเปลี่ยนข้อมูลบัญชีของคุณได้') }}
     </x-slot>
 
     <x-slot name="form">
@@ -39,12 +39,12 @@
                 </div>
 
                 <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
+                    {{ __('เลือกรูปภาพใหม่') }}
                 </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                        {{ __('ลบรูปภาพ') }}
                     </x-secondary-button>
                 @endif
 
@@ -54,29 +54,29 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
+            <x-label for="name" value="{{ __('ชื่อ') }}" />
+            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" readonly/>
             <x-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
+            <x-label for="email" value="{{ __('อีเมล') }}" />
+            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" readonly/>
             <x-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
                 <p class="text-sm mt-2">
-                    {{ __('Your email address is unverified.') }}
+                    {{ __('อีเมลของคุณยังไม่ได้รับการยืนยัน') }}
 
                     <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('กดเพื่อส่งอีเมลยืนยันอีกครั้ง') }}
                     </button>
                 </p>
 
                 @if ($this->verificationLinkSent)
                     <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
+                        {{ __('เราได้ส่งลิ้งค์สำหรับการยืนยันตัวตนให้คุณทางอีเมลแล้ว') }}
                     </p>
                 @endif
             @endif
@@ -85,11 +85,11 @@
 
     <x-slot name="actions">
         <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
+            {{ __('บันทึกแล้ว.') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
+        <x-button wire:loading.attr="disabled" wire:target="photo" style="display: none;">
+            {{ __('บันทึก') }}
         </x-button>
     </x-slot>
 </x-form-section>
