@@ -39,6 +39,7 @@
                         <th>Room Type</th>
                         <td>Guess name</td>
                         <th>Description</th>
+                        <th>Guest name</th>
                         <th>Floor</th>
                         <th colspan="3">Status</th>
                     </tr>
@@ -56,6 +57,13 @@
                             @endif 
                         </td>
                         <td>{{ $rooms->description }}</td>
+                        <td>
+                            @if ($rooms->user)
+                                {{ $rooms->user->name }}
+                            @else
+                                <p style="color:gray">ขณะนี้ไม่มีผู้พัก</p>
+                            @endif
+                        </td>
                         <td>{{ $rooms->floor }}</td>
                         <td>
                         @if ($rooms->is_available == "1")
