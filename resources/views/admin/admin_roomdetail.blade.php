@@ -37,6 +37,7 @@
                     <tr>
                         <th>Room number</th>
                         <th>Room Type</th>
+                        <td>Guess name</td>
                         <th>Description</th>
                         <th>Floor</th>
                         <th colspan="3">Status</th>
@@ -47,6 +48,13 @@
                     <tr>
                         <td>{{ $rooms->room_number }}</td>
                         <td>{{ $rooms->roomType->room_description }}</td>
+                        <td>
+                            @if ($rooms->user)
+                                {{ $rooms->user->name }}
+                            @else
+                                ไม่มีผู้เข้าพัก
+                            @endif 
+                        </td>
                         <td>{{ $rooms->description }}</td>
                         <td>{{ $rooms->floor }}</td>
                         <td>
