@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
     public function room()
     {
-        return $this->hasOne(rooms::class,'room_id');
+        return $this->hasOne(rooms::class);
     }
     public function billing()
 {

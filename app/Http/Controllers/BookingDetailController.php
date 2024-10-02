@@ -9,15 +9,21 @@ use Illuminate\Http\Request;
 
 class BookingDetailController extends Controller
 {
-    public function showBookings()
+    public function showBookings(Request $request)
     {
-        // ดึงข้อมูล bookings พร้อมข้อมูล rooms และ room_types
-        $bookings = Booking::with('room.roomType')->get(); 
+        // ดึง booking IDs จาก session (เก็บเฉพาะการจองของ guest ที่เก็บใน session)
+        $bookingIds = $request->session()->get('bookings', []); // หากไม่มี bookings ใน session ให้คืน array ว่าง
+
+        // ดึงข้อมูล bookings ที่มีใน session พร้อมข้อมูล rooms และ room_types
+        $bookings = Booking::with('room.roomType')->whereIn('id', $bookingIds)->get();
+
+        // ดึงข้อมูล rooms พร้อมข้อมูล roomType
         $rooms = Rooms::with('roomType')->get();
 
-        // ส่งข้อมูล bookings ไปยัง view
+        // ส่งข้อมูล bookings และ rooms ไปยัง view
         return view('bookingdetail', compact('rooms', 'bookings'));
     }
+
 
     public function search(Request $request)
     {
