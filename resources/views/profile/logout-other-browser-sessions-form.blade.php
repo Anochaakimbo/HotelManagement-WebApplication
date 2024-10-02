@@ -1,4 +1,4 @@
-<x-action-section>
+<x-action-section style="display: none;">
     <x-slot name="title">
         {{ __('Browser Sessions') }}
     </x-slot>

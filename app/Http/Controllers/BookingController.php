@@ -22,9 +22,7 @@ class BookingController extends Controller
 
         $room = rooms::where('room_number', $request->input('room_number'))->firstOrFail();
         //ตรงนี้ เอามาแก้ error ในกรณี js ไม่ทำงาน
-        $existingBooking = Booking::where('room_id', $room->id)
-        ->whereIn('status', ['รอยืนยัน', 'จองสำเร็จ', 'รอชำระเงิน'])
-        ->first();
+        $existingBooking = Booking::where('room_id', $room->id)->where('status', '!=', 'ยกเลิก')->first();
 
         if ($existingBooking) {
             return redirect()->back()->with('error', 'ห้องนี้ถูกจองไปแล้ว');

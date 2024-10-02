@@ -9,14 +9,27 @@
         <div class="booking-details">
             <p><strong>Room:</strong> {{ $booking->room->room_number }}</p>
             <p><strong>Guest:</strong> {{ $booking->guest->name }}</p>
-            <p><strong>Status:</strong> {{ $booking->status }}</p>
+            <p><strong>Status:</strong>
+                @if ($booking->status == 'Wait for payment')
+                    รอจ่ายเงิน
+                @else
+                    {{ $booking->status }}
+                @endif
+            </p>
 
             @if ($booking->payment_slip)
                 <p><strong>Payment Slip:</strong></p>
-                <img src="{{ asset('uploads/' . $booking->payment_slip) }}" alt="Payment Slip" style="max-width: 400px; height: auto;">
+                <img src="{{ asset('uploads/' . $booking->payment_slip) }}" alt="Payment Slip"
+                    style="max-width: 400px; height: auto;">
             @else
-                <h1>Paymented by credit card</h1>
+                @if ($booking->status == 'Wait for payment method')
+                    <h1>รอจ่ายเงิน</h1>
+                @else
+                    <h1>Paid by credit card</h1>
+                @endif
             @endif
+
+
 
             @if ($booking->status == 'รอยืนยัน')
                 <!-- Confirm Booking Button with SweetAlert -->

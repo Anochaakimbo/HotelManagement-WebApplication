@@ -75,15 +75,19 @@
 
             <label for="room_number">เลขห้อง :</label>
             <input type="text" id="room_number" name="room_number" value="{{ request('room_number') }}" readonly>
+            {{-- ดึงค่าจาก url --}}
 
             <label for="room_type">ประเภทของห้อง :</label>
             <input type="text" id="room_type" name="room_type" value="{{ request('room_type') }}" readonly>
+            {{-- ดึงค่าจาก url --}}
 
             <label for="contract_duration">ระยะสัญญา :</label>
             <input type="text" id="contract_duration" name="contract_duration" value="{{ request('contract_duration') }}" readonly>
+            {{-- ดึงค่าจาก url --}}
 
             <label for="deposit">ค่าประกัน :</label>
             <input type="text" id="deposit" name="deposit" value="{{ request('deposit') }}" readonly>
+            {{-- ดึงค่าจาก url --}}
 
             <button type="submit" class="btn">ต่อไป</button>
         </form>

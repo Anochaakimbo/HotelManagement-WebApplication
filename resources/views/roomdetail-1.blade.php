@@ -86,7 +86,8 @@
                     <p>ค่ามัดจำ: {{ $room->deposit_price }} บาท</p>
                 </div>
                 @endforeach
-                <a href="{{ route('selectbook', ['bedType' => 'single']) }}" class="btn">จองห้อง</a>
+                <a href="{{ route('selectbook', ['bedType' => 'single']) }}" class="btn">จองห้อง</a> 
+                {{-- ส่งค่าbedtype ไปในurlด้วย --}}
             </section>
     </div>
 </body>

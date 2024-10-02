@@ -11,6 +11,7 @@
                     <th>Room Number</th>
                     <th>Status</th>
                     <th>Payment Slip</th>
+                    <th>Total Price</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -47,6 +48,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                        {{ $billing->total_charge }} บาท
                         </td>
                         <td>
                             <!-- ปุ่มยืนยันการชำระเงิน -->
