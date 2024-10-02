@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\Billing;
 use App\Models\rooms;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class AdminComtroller extends Controller
@@ -90,11 +91,28 @@ class AdminComtroller extends Controller
         $users = User::with('room')->where('usertype', '!=', 'admin')->get();
         return view('admin.guests', compact('users'));
     }
-    public function showinfo($id)//แสดงข้อมูลผู้ใช้หลังจากกด ฺView
-{
-    $room = rooms::with(['roomType', 'billing'])->find($id);
-    return view('admin.guests_roomdetails', compact('room'));
-}
+
+    public function showinfo($id)
+    {
+        // ดึงข้อมูลห้องที่ต้องการพร้อมกับข้อมูลประเภทห้องและบิล
+        $room = rooms::with(['roomType', 'billing'])->findOrFail($id);
+
+        // ดึงวันที่ทำสัญญาจากตาราง rooms
+        $contractDate = Carbon::parse($room->contract);
+
+        // ดึงระยะเวลาสัญญาจาก roomType (สมมุติว่าเป็นจำนวนเดือน)
+        $contractDuration = $room->roomType->contact_date; // ตัวอย่าง 12 เดือน
+
+        // คำนวณวันหมดสัญญาโดยบวกจำนวนเดือนของสัญญา
+        $contractEndDate = $contractDate->copy()->addMonths($contractDuration);
+
+        // คำนวณจำนวนวันที่เหลือจากวันนี้ถึงวันหมดสัญญา
+        $remainingDays = floor(Carbon::now()->diffInDays($contractEndDate, false)); // false เพื่อให้ได้ค่าติดลบหากสัญญาหมดแล้ว
+
+        // ส่งข้อมูลไปที่ view
+        return view('admin.guests_roomdetails', compact('room', 'contractEndDate', 'remainingDays'));
+    }
+
     //เป็นการ checkout ออกจากระบบหอ โดยที่จะออกไม่ได้หากผู้ใช้มียอดค้างชำระ
 public function checkout($id) {
     $users = User::findOrFail($id);

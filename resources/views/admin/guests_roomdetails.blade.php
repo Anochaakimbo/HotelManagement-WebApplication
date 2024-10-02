@@ -10,6 +10,13 @@
 <p>Electrical Unit : {{ $room->roomType->water_unit }}</p>
 <p>Water Unit : {{ $room->roomType->electrical_unit }}</p>
 <p>Furniture : {{  $room->roomType->furniture_details }}</p>
+<p>Contract End Date: {{ $contractEndDate->format('Y-m-d') }}</p>
+@if ($remainingDays > 0)
+    <p>Remaining days: {{ $remainingDays }} days</p>
+@else
+    <p>The contract has expired.</p>
+@endif
+
 
 <p>Payment Status:
     @if(isset($room->billing) && $room->billing->status === 'ส่งไปยังผู้ใช้แล้ว')
