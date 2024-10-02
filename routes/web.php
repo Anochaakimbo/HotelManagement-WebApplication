@@ -127,7 +127,10 @@ Route::post('/report/store', [ReportController::class, 'store'])->name('report.s
 Route::get('/csp/delete/{id}', [cspController::class, 'destroy'])->name('reportdelete');
 Route::get('/csp2/view/{id}', [csp2Controller::class, 'view'])->name('csp2.view');
 
-// Report history
+// Report-related routes
+Route::get('/report', [ReportController::class, 'showReportForm'])->name('report.form');
+Route::post('/report/store', [ReportController::class, 'store'])->name('report.store');
 Route::get('/report-history', [ReportHistoryController::class, 'index'])->name('report-history');
 Route::delete('/reports/{id}', [ReportHistoryController::class, 'destroy'])->name('reports.destroy');
 
+Route::get('/report-history', [ReportHistoryController::class, 'index'])->name('report-history');

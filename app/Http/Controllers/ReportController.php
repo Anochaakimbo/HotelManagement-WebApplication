@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MainCategory;
+use App\Models\SubCategory;
+use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Report;
 
 class ReportController extends Controller
 {
-    
-    public function index()
+    // แสดงฟอร์มการแจ้งปัญหา
+    public function showReportForm()
     {
-        $reports = Report::all(); // ดึงข้อมูลจากตาราง report
-        return view('admin.csp', ['reports' => $reports]);
+        $mainCategories = MainCategory::with('subCategories')->get();
+        return view('report', compact('mainCategories'));
     }
 
+    // บันทึกการแจ้งปัญหา
     public function store(Request $request)
     {
-        // Check the form data
         $validatedData = $request->validate([
             'room_id' => 'required|exists:rooms,id',
             'main_category' => 'required|string',
@@ -27,7 +29,7 @@ class ReportController extends Controller
             'permission' => 'required|in:allow,disallow',
         ]);
 
-        // Store the new report in the database
+        // บันทึกข้อมูลการแจ้งปัญหา
         Report::create([
             'user_id' => Auth::id(),
             'room_id' => $request->room_id,
@@ -40,7 +42,4 @@ class ReportController extends Controller
 
         return redirect()->back()->with('success', 'ส่งคำขอซ่อมสำเร็จ');
     }
-
-
-
 }
