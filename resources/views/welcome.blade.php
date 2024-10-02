@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-
+{{-- Navigation Bar หน้าหลัก --}}
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -20,7 +20,7 @@
         <ul>
             <li>
                 @if (Route::has('login'))
-    @auth
+    @auth {{-- เช็ค Login--}}
         @if (Auth::user()->usertype == 'admin')
             <a href="{{ url('/home') }}">จัดการห้อง</a>
             <style>
@@ -52,7 +52,7 @@
             <li><a href="#contactus">ติดต่อเรา</a></li>
             <li class="presstologin"><a href="/login">ล็อกอิน</a></li>
             <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
-                @csrf
+                @csrf{{-- ปุ่ม Logout --}}
                 <li @click.prevent="$root.submit();" class="logoutbutton" style="display: none" onclick="document.getElementById('logout-form').submit();">
                     <a href="javascript:void(0);">
                         {{ __('ออกจากระบบ') }}
@@ -74,7 +74,7 @@
 
     <h1 class="typeroomtext">ประเภทห้อง</h1>
     
-    
+    {{-- เลือกประเภทห้อง --}}
 <div class="image-type" id="roomtype">
     <div class="typeone">
         <a href="{{ route('roomdetail-1') }}"><img src="./img/singlebedroom1.jpg" alt=""></a>
@@ -115,6 +115,8 @@
 
     <br>
 <img src="./img/facilities.jpg" alt="" class="footerfac">
+
+{{-- Footer ของเว็บ --}}
 <footer id="contactus">  
     <ul>
         <li><a href="#contactus">ติดต่อสอบถาม</li></a>

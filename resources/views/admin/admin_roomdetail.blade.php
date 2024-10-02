@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @section('content')
 <h1>Room</h1>
+{{-- Form เอาไว้ Update รายละเอียดห้อง แต่ว่าเอาซ่อนไว้ก่อน จะให้แสดงตอนกดปุ่ม Update --}}
 <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
     @csrf
     <h2 class="updateroomheader">Update Room</h2>
@@ -27,7 +28,7 @@
     </div>
 </form>
 
-
+{{-- ตารางแสดงรายละเอียดห้อง แล้วก็มีปุ่ม Delete กับ Update --}}
 <div class="main-content">
     <div class="room-info">
         <div class="details">
@@ -58,12 +59,12 @@
                         <td class="updatecolumn">
                             <a href="javascript:void(0)" class="updatebutton"
                                onclick="showupdateform({{ $rooms->id }}, '{{ $rooms->roomType->room_description }}', '{{ $rooms->room_number }}', '{{ $rooms->description }}', {{ $rooms->floor }})">
-                               Update
+                               Update{{-- ปุ่ม Update ห้อง โดยส่งค่าต่างๆไปยัง script showupdateform --}}
                             </a>
                         </td>
                         <td class="deletecolumn">
                             <a href="javascript:void(0)" class="deletebutton"
-                               onclick="confirmDeleteRoom('{{ route('roomdelete', $rooms->id) }}')">
+                               onclick="confirmDeleteRoom('{{ route('roomdelete', $rooms->id) }}')">  {{-- ปุ่ม Delete ห้อง --}}
                                Delete
                             </a>
                         </td>
@@ -75,6 +76,7 @@
     </div>
 </div>
 
+{{-- Script เอาไว้ดึงค่าห้องในแถวที่กดปุ่ม Update --}}
 <script>
     function showupdateform(id, room_description, room_number, description, floor) {
         document.getElementById('room_id').value = id;
@@ -89,7 +91,7 @@
     function hideupdateform() {
         document.getElementById('updateroom').style.display = 'none';
     }
-
+// alert ตอนกด update
     function confirmUpdateRoom() {
         Swal.fire({
             title: 'Are you sure?',
@@ -105,7 +107,7 @@
             }
         });
     }
-
+// alert ตอนกด delete
     function confirmDeleteRoom(deleteUrl) {
         Swal.fire({
             title: 'Are you sure?',
