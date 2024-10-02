@@ -122,6 +122,7 @@ Route::get('/guest/{id}', [AdminComtroller::class, 'showinfo'])->name('guest.det
 Route::get('/roomdetail/updated', [HomeController::class, 'showDetailroom']);
 Route::post('/roomdetail/updated', [HomeController::class, 'updateroom']);
 Route::get('/checkout/{id}', [AdminComtroller::class, 'checkout'])->name('guest.checkout');
+Route::get('/search', [BookingDetailController::class, 'search'])->name('search');
 
 // Report-related routes
 Route::post('/report/store', [ReportController::class, 'store'])->name('report.store');

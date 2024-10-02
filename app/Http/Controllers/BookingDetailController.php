@@ -18,4 +18,17 @@ class BookingDetailController extends Controller
         // ส่งข้อมูล bookings ไปยัง view
         return view('bookingdetail', compact('rooms', 'bookings'));
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        // ค้นหาหมายเลขห้องแบบไม่สนตัวพิมพ์เล็กพิมพ์ใหญ่
+        $bookings = Booking::whereHas('room', function($query) use ($searchTerm) {
+            $query->whereRaw('LOWER(room_number) LIKE ?', ['%' . strtolower($searchTerm) . '%']);
+        })->get();
+
+        // ส่งผลลัพธ์กลับไปยัง view
+        return view('bookingdetail', compact('bookings'));
+    }
 }
