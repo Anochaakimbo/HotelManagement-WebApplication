@@ -121,3 +121,27 @@ tbody tr:nth-child(even) {
     background-color: yellow;
     font-weight: bold;
 }
+
+.search-container {
+    float: right;
+    margin-right: 5%;
+}
+.search-container input {
+    padding: 5px;
+}
+.search-container button {
+    background-color: #c9a94b;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.search-container button:hover{
+    background-color: #916d39;
+}
+
+.search-container label{
+    font-size: 24px;
+    margin-right: 10px;
+}
