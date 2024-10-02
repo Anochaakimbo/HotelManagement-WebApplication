@@ -7,6 +7,8 @@
 
 <!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 @section('content')
 <h1>Room</h1>
 {{-- Form เอาไว้ Update รายละเอียดห้อง แต่ว่าเอาซ่อนไว้ก่อน จะให้แสดงตอนกดปุ่ม Update --}}
@@ -37,9 +39,8 @@
                     <tr>
                         <th>Room number</th>
                         <th>Room Type</th>
-                        <td>Guess name</td>
-                        <th>Description</th>
-                        <th>Guest name</th>
+                        <td>Description</td>
+                        <th>Guest Name</th>
                         <th>Floor</th>
                         <th colspan="3">Status</th>
                     </tr>
@@ -49,19 +50,12 @@
                     <tr>
                         <td>{{ $rooms->room_number }}</td>
                         <td>{{ $rooms->roomType->room_description }}</td>
-                        <td>
-                            @if ($rooms->user)
-                                {{ $rooms->user->name }}
-                            @else
-                                ไม่มีผู้เข้าพัก
-                            @endif 
-                        </td>
                         <td>{{ $rooms->description }}</td>
                         <td>
                             @if ($rooms->user)
                                 {{ $rooms->user->name }}
                             @else
-                                <p style="color:gray">ขณะนี้ไม่มีผู้พัก</p>
+                                <p style="color:gray">- ขณะนี้ไม่มีผู้พัก -</p>
                             @endif
                         </td>
                         <td>{{ $rooms->floor }}</td>
@@ -74,14 +68,14 @@
                         </td>
                         <td class="updatecolumn">
                             <a href="javascript:void(0)" class="updatebutton"
-                               onclick="showupdateform({{ $rooms->id }}, '{{ $rooms->roomType->room_description }}', '{{ $rooms->room_number }}', '{{ $rooms->description }}', {{ $rooms->floor }})">
-                               Update{{-- ปุ่ม Update ห้อง โดยส่งค่าต่างๆไปยัง script showupdateform --}}
+                            onclick="showupdateform({{ $rooms->id }}, '{{ $rooms->roomType->room_description }}', '{{ $rooms->room_number }}', '{{ $rooms->description }}', {{ $rooms->floor }})">
+                            Update{{-- ปุ่ม Update ห้อง โดยส่งค่าต่างๆไปยัง script showupdateform --}}
                             </a>
                         </td>
                         <td class="deletecolumn">
                             <a href="javascript:void(0)" class="deletebutton"
-                               onclick="confirmDeleteRoom('{{ route('roomdelete', $rooms->id) }}')">  {{-- ปุ่ม Delete ห้อง --}}
-                               Delete
+                            onclick="confirmDeleteRoom('{{ route('roomdelete', $rooms->id) }}')">  {{-- ปุ่ม Delete ห้อง --}}
+                            Delete
                             </a>
                         </td>
                     </tr>
@@ -123,6 +117,16 @@
             }
         });
     }
+    
+    @if (session('error'))
+    Swal.fire({
+        title: 'Error!',
+        text: "{{ session('error') }}",
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+@endif 
+
 // alert ตอนกด delete
     function confirmDeleteRoom(deleteUrl) {
         Swal.fire({

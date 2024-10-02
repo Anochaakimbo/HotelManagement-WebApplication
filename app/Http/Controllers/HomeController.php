@@ -77,6 +77,10 @@ class HomeController extends Controller
     public function delete($id)
     {
         $rooms = rooms::findOrFail($id);
+        if ($rooms->is_available == "0") {
+            return back()->with('error', 'ลบไม่ได้ เพราะ มีผู้เช่าอาศัยอยู่')->withInput();
+        }
+    
         $rooms->destroy($id);
         $rooms = rooms::all();
         return redirect('/roomdetail');
