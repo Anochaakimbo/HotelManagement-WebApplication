@@ -39,7 +39,15 @@
     </nav>
 
     <section class="booking-details">
+        <div class="search-container">
+            <form method="GET" action="{{ route('search') }}">
+                <label for="search">ค้นหาหมายเลขห้อง:</label>
+                <input type="text" id="search" name="search" placeholder="กรอกหมายเลขห้อง">      
+                <button type="submit">ค้นหา</button>
+            </form>
+        </div>
         <h2>รายละเอียดการจองห้อง</h2>
+        
         <table>
             <thead>
                 <tr>
