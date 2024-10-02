@@ -23,7 +23,7 @@
                         text: 'เสียงดัง'
                     }
                 ],
-                เครื่องทำน้ำอุ่น: [{
+                เครื่ องทำน้ ำอุ่ น: [{
                         value: 'ไม่ทำงาน',
                         text: 'ไม่ทำงาน'
                     },
@@ -36,7 +36,7 @@
                         text: 'น้ำไม่ร้อน'
                     }
                 ],
-                ไฟฟ้าและหลอดไฟ: [{
+                ไฟฟ้ าและหลอดไฟ: [{
                         value: 'หลอดไฟเสีย',
                         text: 'หลอดไฟเสีย'
                     },
@@ -62,7 +62,7 @@
                         text: 'บานพับชำรุด'
                     }
                 ],
-                เฟอร์นิเจอร์: [{
+                เฟอร์ นิเจอร์: [{
                         value: 'โต๊ะชำรุดหรือเสียหาย',
                         text: 'โต๊ะชำรุดหรือเสียหาย'
                     },
@@ -88,7 +88,7 @@
                         text: 'ก๊อกน้ำหรือสายชำระเสีย'
                     }
                 ],
-                ห้องน้ำ: [{
+                ห้ องน้ ำ: [{
                         value: 'ชักโครกเสีย',
                         text: 'ชักโครกเสีย'
                     },
@@ -230,14 +230,13 @@
                 <input type="text" id="contact-number" name="contact_number" placeholder="เบอร์โทรศัพท์">
 
                 <label>กรณีผู้เช่าไม่อยู่ห้อง อนุญาตให้ช่างเข้ามาซ่อมหรือไม่?</label>
-                <div>
+                <div class="radio">
                     <input type="radio" id="allow" name="permission" value="allow">
                     <label for="allow">อนุญาต</label>
 
                     <input type="radio" id="disallow" name="permission" value="disallow">
                     <label for="disallow">ไม่อนุญาต</label>
                 </div>
-
                 <button type="submit">ส่งคำขอซ่อม</button>
             </form>
         </div>
