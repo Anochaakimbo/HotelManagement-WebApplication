@@ -84,47 +84,45 @@
         </form>
     </section>
 
-    <!-- Include SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         function formatCardNumber(input) {
-            let value = input.value.replace(/\s+/g, ''); // Remove existing spaces
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || ''; // Add space every 4 digits
+            let value = input.value.replace(/\s+/g, ''); // เอาช่องว่างออก
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || ''; // เพิ่มช่องว่างทุกๆ 4 ตัว
             input.value = formattedValue;
         }
 
         function validateForm() {
-            var cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, ''); // Remove spaces for validation
+            var cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
             var cardName = document.getElementById('cardName').value;
             var expiryDate = document.getElementById('expiryDate').value;
             var cvv = document.getElementById('cvv').value;
 
-            // Validate card number (must be 16 digits)
+            // เช็คว่าเลขมี16ตัวหรือไม่
             if (cardNumber.length !== 16 || isNaN(cardNumber)) {
                 Swal.fire('Error', 'กรุณากรอกหมายเลขบัตรเครดิตที่ถูกต้อง', 'error');
                 return false;
             }
 
-            // Validate card name (must not be empty)
+            // เช็คว่าว่างหรือเปล่า
             else if (cardName === '') {
                 Swal.fire('Error', 'กรุณากรอกชื่อบนบัตร', 'error');
                 return false;
             }
 
-            // Validate expiry date (must match MM/YY format)
+            // ให้กรอกในฟรอม mm/yy เดือนมี 0-9 และ 0-2
             else if (!expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
                 Swal.fire('Error', 'กรุณากรอกวันหมดอายุในรูปแบบ MM/YY', 'error');
                 return false;
             }
 
-            // Validate CVV (must be 3 digits)
+            // เช็คว่าเป็นเลข3ตัวหรือเปล่า
             else if (cvv.length !== 3 || isNaN(cvv)) {
                 Swal.fire('Error', 'กรุณากรอก CVV ที่ถูกต้อง', 'error');
                 return false;
             }
 
-            // Confirm payment with SweetAlert
             else {
                 Swal.fire({
                     title: 'ยืนยันการชำระเงิน?',
@@ -137,10 +135,10 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire('สำเร็จ', 'ชำระเงินเสร็จสิ้น', 'success');
-                        document.getElementById('creditCardForm').submit(); // Submit the form if confirmed
+                        document.getElementById('creditCardForm').submit();
                     }
                 });
-                return false; // Prevent form submission to wait for confirmation
+                return false;
             }
         }
     </script>

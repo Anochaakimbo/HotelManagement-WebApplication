@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
-
+use Illuminate\Support\Facades\Auth;
 class ReportHistoryController extends Controller
 {
     public function index()
     {
-        // ดึงข้อมูลทั้งหมดจากตาราง reports
-        $reports = Report::all();
+        $user = Auth::user(); // ดึงข้อมูลผู้ใช้ที่ล็อกอินอยู่
+        $reports = Report::where('user_id', $user->id)->with('room')->get(); // ดึงข้อมูลที่เกี่ยวข้องกับผู้ใช้
 
-        // ส่งข้อมูลไปยัง view
         return view('report_history', compact('reports'));
     }
     // ลบรายงานออกจากฐานข้อมูล

@@ -62,9 +62,11 @@
             <tbody id="roomTable">
                 @foreach($rooms as $index => $room)
                 <tr data-room-type="{{ $room->roomType->room_description }}" 
-                    data-room-status="{{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }}">
+                    {{-- เช็คค่าของห้องจากหน้าก่อนหน้า --}}
+                    data-room-status="{{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }}"> 
+                    {{-- ถ้าว่างค่า is_available เป็นจริง --}}
 
-                    <td>{{ $room->room_number }}</td> <!-- เลขห้อง -->
+                    <td>{{ $room->room_number }}</td>
                     <td>
                         @if($room->roomType->room_description === 'Premium')
                             Premium Bed
@@ -75,11 +77,12 @@
                         @else
                             {{ $room->roomType->room_description }}
                         @endif
-                    </td> <!-- ประเภทห้อง -->
-                    <td>{{ $room->floor }}</td> <!-- ชั้น -->
-                    <td>{{ $room->roomType->room_price }}</td> <!-- ราคา -->
-                    <td class="{{ $room->is_available ? 'available' : 'unavailable' }}">
-                        {{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }} <!-- สถานะห้อง -->
+                    </td> 
+                    <td>{{ $room->floor }}</td> 
+                    <td>{{ $room->roomType->room_price }}</td> 
+                    <td class="{{ $room->is_available ? 'available' : 'unavailable' }}"> 
+                        {{-- ถ้าว่างจะใช้ class อันแรก --}}
+                        {{ $room->is_available ? 'ว่าง' : 'ไม่ว่าง' }} 
                     </td>
                 </tr>
                 @endforeach
@@ -97,14 +100,15 @@
                 selectedRoomData = {
                     room_number: row.cells[0].innerText,
                     room_type: row.cells[1].innerText,
-                    contract_duration: "12 เดือน", // กำหนดระยะสัญญาเริ่มต้น
+                    contract_duration: "12 เดือน",
                     deposit: row.cells[3].innerText
                 };
-
+                // คลิ๊กเลือกแล้วจะเปลี่ยนตรง url ส่งไปยังหน้าถัดไป
                 nextLink.href = `{{ route('rent_1') }}?room_number=${selectedRoomData.room_number}&room_type=${selectedRoomData.room_type}&contract_duration=${selectedRoomData.contract_duration}&deposit=${selectedRoomData.deposit}`;
-                nextLink.style.pointerEvents = 'auto'; // เปิดการคลิก
-                nextLink.style.opacity = '1'; // คืนค่าลิงก์ให้กดได้
-                nextLink.style.cursor = 'pointer'; // เปลี่ยนเคอร์เซอร์ให้กลับมากดได้
+                nextLink.style.pointerEvents = 'auto'; 
+                nextLink.style.opacity = '1'; 
+                nextLink.style.cursor = 'pointer'; 
+                // ปุ่มจะสามารถกดได้
             });
         });
     });
@@ -118,83 +122,68 @@
         const bedType = getBedTypeFromUrl(); // รับค่าประเภทเตียงจาก URL
         console.log("Selected bed type: ", bedType); // ตรวจสอบค่า bedType ใน console
     
-        const rows = document.querySelectorAll('#roomTable tr'); // เลือกทุกแถวในตาราง
-        const filterStatus = document.getElementById('filterStatus'); // ตัวกรองสถานะห้อง
-        const nextLink = document.querySelector('.btn'); // ลิงก์ "ต่อไป"
+        const rows = document.querySelectorAll('#roomTable tr'); 
+        const filterStatus = document.getElementById('filterStatus');
+        const nextLink = document.querySelector('.btn'); 
     
         function filterRooms() {
-            const selectedStatus = filterStatus.value; // รับค่าที่เลือกในฟิลเตอร์ ('ว่าง', 'ไม่ว่าง', 'ทั้งหมด')
-            console.log("Selected status: ", selectedStatus); // ตรวจสอบค่า selectedStatus ใน console
+            const selectedStatus = filterStatus.value; // รับค่าที่เลือกในฟิลเตอร์
+            console.log("Selected status: ", selectedStatus);
     
             rows.forEach(row => {
-                const roomType = row.dataset.roomType; // ดึงค่าประเภทห้องจาก data-room-type
-                const roomStatus = row.dataset.roomStatus; // ดึงค่าสถานะห้องจาก data-room-status
+                const roomType = row.dataset.roomType;
+                const roomStatus = row.dataset.roomStatus; 
     
                 console.log("Room Type: ", roomType, "Room Status: ", roomStatus);
     
-                // เงื่อนไขการแสดงผลตามประเภทเตียงและสถานะห้อง
                 const showByBedType = (bedType === 'single' && roomType === 'Single Bed') ||
                                       (bedType === 'twin' && roomType === 'Two Bed') ||
                                       (bedType === 'premium' && roomType === 'Premium Bed');
     
                 const showByStatus = filterByRoomStatus(roomStatus, selectedStatus);
-    
-                // แสดงเฉพาะแถวที่ตรงกับประเภทเตียงและสถานะห้อง
+                // เอาค่าของห้องกับค่าที่เลือกมา
                 if (showByStatus) {
                     row.style.display = ''; // แสดงแถวที่ตรง
                 } else {
-                    row.style.display = 'none'; // ซ่อนแถวที่ไม่ตรง
+                    row.style.display = 'none';
                 }
             });
         }
     
-        // ฟังก์ชันเพื่อกรองตามสถานะห้อง
+        // กรองตามสถานะห้อง
         function filterByRoomStatus(roomStatus, selectedStatus) {
             if (selectedStatus === 'ทั้งหมด') {
-                return true; // แสดงทุกห้องถ้าเลือก 'ทั้งหมด'
+                return true; 
             }
-    
-            // เงื่อนไขการกรองสถานะห้อง
             return roomStatus === selectedStatus;
         }
-    
-        // เรียกใช้ฟังก์ชันกรองเมื่อหน้าโหลดเสร็จ
+
         filterRooms();
     
-        // เรียกใช้ฟังก์ชันกรองเมื่อมีการเปลี่ยนแปลงค่าในฟิลเตอร์สถานะห้อง
+        // ถ้าเปลี่ยนจากห้องว่างไม่ว่างในlogก็เปลี่ยนด้วย
         filterStatus.addEventListener('change', filterRooms);
     
-        // ฟังก์ชันสำหรับคลิกแถวเพื่อเปลี่ยนสีพื้นหลังและเช็คสถานะห้อง
+        // เปลี่ยนพื้นหลังตามที่คลิก
         rows.forEach(row => {
             row.addEventListener('click', () => {
                 const roomStatus = row.dataset.roomStatus;
     
-                // เอาคลาส 'selected' ออกจากแถวอื่น
+                // แถวที่ไม่ได้คลิ๊ก
                 rows.forEach(r => r.classList.remove('selected'));
-                // เพิ่มคลาส 'selected' ให้กับแถวที่คลิก
+                // แถวที่คลิ๊กจะมีพื้นหลังเปลี่ยน
                 row.classList.add('selected');
     
-                // เช็คสถานะห้อง: ถ้าไม่ว่าง ให้ disable ลิงก์ "ต่อไป"
+                //ห้องไม่ว่างจะกดไม่ได้
                 if (roomStatus === 'ไม่ว่าง') {
-                    nextLink.style.pointerEvents = 'none'; // ปิดการคลิก
-                    nextLink.style.opacity = '0.5'; // ทำให้ลิงก์จางลงเพื่อให้เห็นว่าไม่สามารถกดได้
-                    nextLink.style.cursor = 'not-allowed'; // เปลี่ยนเคอร์เซอร์เมื่อไม่สามารถกดได้
+                    nextLink.style.pointerEvents = 'none'; 
+                    nextLink.style.opacity = '0.5'; 
+                    nextLink.style.cursor = 'not-allowed'; 
                 } else {
-                    nextLink.style.pointerEvents = 'auto'; // เปิดการคลิก
-                    nextLink.style.opacity = '1'; // คืนค่าลิงก์ให้กดได้
-                    nextLink.style.cursor = 'pointer'; // เปลี่ยนเคอร์เซอร์ให้กลับมากดได้
+                    nextLink.style.pointerEvents = 'auto';
+                    nextLink.style.opacity = '1'; 
+                    nextLink.style.cursor = 'pointer'; 
                 }
             });
-        });
-
-            document.addEventListener('click', function(event) {
-            if (!event.target.closest('#roomTable tr')) {
-                // เอาคลาส 'selected' ออกจากแถวทุกแถว
-                rows.forEach(row => row.classList.remove('selected'));
-                nextLink.style.pointerEvents = 'none'; // ปิดการคลิก "ต่อไป" เมื่อไม่มีแถวที่เลือก
-                nextLink.style.opacity = '0.5';
-                nextLink.style.cursor = 'not-allowed';
-            }
         });
         });
     </script>

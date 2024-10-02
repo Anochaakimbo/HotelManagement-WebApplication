@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
     <div class="sidebar">
         <img src="./img/Logo.png" alt="Logo" class="logo">
         <a href="{{ route('Roomdetails') }}" class="active">รายละเอียดห้อง</a>
@@ -19,9 +18,7 @@
 
     </div>
 
-    <!-- Content -->
     <div class="content">
-        <!-- Header -->
         <div class="header">
             <form method="POST" action="{{ route('logout') }}" x-data class="inline" id="logout-form">
                 @csrf
@@ -30,9 +27,7 @@
                 </button>
             </form>
             <div class="user-info dropdown">
-                <!-- ปุ่มสำหรับ dropdown -->
                 <span class="dropbtn">User: {{ Auth::user()->name }}</span>
-                <!-- เนื้อหาของ dropdown -->
                 <div class="dropdown-content">
                     <div class="block px-4 py-2 text-xs text-gray-400">
                         {{ __('Manage Account') }}
@@ -60,11 +55,11 @@
                     <p><strong>ประเภทห้อง:</strong> {{ Auth::user()->room->roomType->room_description }}</p>
                     <p><strong>ราคาห้อง:</strong> {{ Auth::user()->room->roomType->room_price }}</p>
                     <p><strong>สถานะชำระค่าห้อง:</strong>
-                        @if (optional(Auth::user()->billing)->status == 'ส่งไปยังผู้ใช้แล้ว')
-                            มียอดที่ต้องชำระ
-                        @else
-                            {{ optional(Auth::user()->billing)->status ?? 'ไม่มียอดคงค้างชำระ' }}
-                        @endif
+                        @if (Auth::user()->billing && Auth::user()->billing->status == 'ส่งไปยังผู้ใช้แล้ว')
+                        มียอดที่ต้องชำระ
+                    @else
+                        {{ Auth::user()->billing->status ?? 'ไม่มียอดคงค้างชำระ' }}
+                    @endif
                     </p>
                     <p><strong>หน่วยค่าไฟ:</strong> {{ Auth::user()->room->roomType->electrical_unit }} บาท/ยูนิต</p>
                     <p><strong>หน่วยค่าน้ำ:</strong> {{ Auth::user()->room->roomType->water_unit }} บาท/ยูนิต</p>

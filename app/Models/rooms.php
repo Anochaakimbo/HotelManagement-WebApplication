@@ -23,9 +23,10 @@ class rooms extends Model
 {
     return $this->belongsTo(User::class);
 }
-public function billings()
+
+public function billing()
 {
-    return $this->hasMany(Billing::class, 'room_id');
+    return $this->hasOne(Billing::class, 'room_id');
 }
 public function roomType()
 {

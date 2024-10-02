@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Report; // เรียกใช้โมเดล Report
 
@@ -11,15 +11,11 @@ class cspController extends Controller
     public function index()
     {
 
-
-
         $reports = Report::all();
-
 
         // ส่งข้อมูลไปยัง view 'csp.blade.php'
         return redirect()->back()->with('reports', $reports);
     }
-
 
     // ฟังก์ชันสำหรับลบรายงาน
     public function destroy($id)

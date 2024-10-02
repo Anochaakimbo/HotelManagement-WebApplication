@@ -19,23 +19,23 @@
     <form action="/Addroom/addroom" method="POST" id="addRoomForm">
         @csrf
         <label for="">Room Type:</label><br>
-        <select name="room_type_id" id="" required>
+        <select name="room_type_id" id="room_type" required>
             @foreach ($rooms as $room )
             <option value="{{ $room->id }}">
                 @if ($room->id == "1")
                 Premium Bed Room
-            @elseif ($room->id == "2")
+                @elseif ($room->id == "2")
                 Twin Bed Room
-            @elseif ($room->id == "3")
+                @elseif ($room->id == "3")
                 Single Bed Room
-            @endif
+                @endif
             </option>
             @endforeach
         </select>
         <br><br>
 
         <label for="">Room Number:</label><br>
-        <input type="text" name="room_number" required>
+        <input type="text" name="room_number" id="room_number" maxlength="4" required>
         <br><br>
 
         <label for="">Floor:</label><br>
@@ -51,6 +51,23 @@
 </div>
 
 <script>
+    // Function to update the room number prefix based on the selected room type
+    document.getElementById('room_type').addEventListener('change', function() {
+        let roomType = this.value;
+        let roomNumberField = document.getElementById('room_number');
+
+        // Set prefix based on room type
+        if (roomType == "1") { // Premium Bed Room
+            roomNumberField.value = 'P';
+        } else if (roomType == "2") { // Twin Bed Room
+            roomNumberField.value = 'T';
+        } else if (roomType == "3") { // Single Bed Room
+            roomNumberField.value = 'S';
+        } else {
+            roomNumberField.value = ''; // Clear the field if no valid type is selected
+        }
+    });
+
     function confirmAddRoom() {
         Swal.fire({
             title: 'Are you sure?',

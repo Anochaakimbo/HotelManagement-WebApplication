@@ -52,7 +52,7 @@
 
                 @if ($billings->isNotEmpty())
                     @foreach ($billings as $billing)
-                        <h1>ชำระค่าห้อง</h1>
+                    <h1>ชำระค่าห้องประจำเดือน {{ \Carbon\Carbon::parse($billing->billing_date)->format('Y-m') }}</h1>
                         <div class="invoice">
                             <table>
                                 <thead>

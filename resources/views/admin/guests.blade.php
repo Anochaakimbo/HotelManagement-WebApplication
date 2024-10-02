@@ -50,6 +50,8 @@
                 }
             });
         });
+        </script>
+        <script>
     function confirmCheckout(userId) {
         Swal.fire({
             title: 'Are you sure?',
@@ -61,9 +63,19 @@
             confirmButtonText: 'Check out!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "{{ url('/guest/checkout') }}/" + userId;
+            window.location.href = "{{ route('guest.checkout', '') }}/" + userId;
             }
         });
     }
 </script>
+@if($errors->has('msg'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '{{ $errors->first('msg') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
 @endsection

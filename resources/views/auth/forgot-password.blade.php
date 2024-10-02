@@ -11,11 +11,6 @@
 </head>
 <body>
     <div class="forgetpassbox">
-    @session('status')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ $value }}
-        </div>
-    @endsession
     <form method="POST" action="{{ route('password.email') }}">
         <img src="./img/Logo.png" alt="">
         <div class="description">
@@ -32,6 +27,11 @@
             </button>
     </form>
     </div>
+    @session('status')
+    <div class="mb-4 font-medium text-sm text-green-600">
+        {{ $value }}
+    </div>
+@endsession
 </body>
 
 </html>

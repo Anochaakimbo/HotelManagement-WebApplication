@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 class BookingController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request)//เก็บข้อมูล Guests
     {
         $request->validate([
             'firstname' => 'required|string|max:255',
@@ -21,6 +21,7 @@ class BookingController extends Controller
 
 
         $room = rooms::where('room_number', $request->input('room_number'))->firstOrFail();
+        //ตรงนี้ เอามาแก้ error ในกรณี js ไม่ทำงาน
         $existingBooking = Booking::where('room_id', $room->id)->where('status', '!=', 'ยกเลิก')->first();
 
         if ($existingBooking) {
@@ -67,17 +68,14 @@ class BookingController extends Controller
 
     return redirect()->back()->with('message', 'Booking status updated.');
 }
-
-
-
-
-public function assignUserToRoom($roomId, $userId)
+public function assignUserToRoom($roomId, $userId)//เอาวันที่ไปแปะในตาราง CONTACT
 {
     $room = rooms::findOrFail($roomId);
     $room->user_id = $userId;
     $room->contract = Carbon::now();
     $room->save();
 }
+//เอาข้อมูลที่โดน softdelete ไปแสดง
 public function historybooking()
     {
         $bookings = Booking::onlyTrashed()->with(['room', 'guest' => function ($query) {
