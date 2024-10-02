@@ -40,9 +40,7 @@ Route::middleware([
 
     Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
 
-    Route::get('/Roomdetails', function () {
-        return view('Roomdetails');
-    })->name('Roomdetails');
+    Route::get('/Roomdetails', [HomeController::class,'showUserRoomDetails'])->name('Roomdetails');
 });
 
 // Routes for ChargeController and BookingController

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Booking;
 use App\Models\rooms;
 use App\Models\RoomType;
+use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -97,4 +99,24 @@ class HomeController extends Controller
         }
 
     }
+    public function showUserRoomDetails()
+{
+    // ดึงข้อมูลผู้ใช้ที่ล็อกอินอยู่
+    $user = Auth::user();
+
+    // ดึงวันที่ทำสัญญาจากห้องพักของผู้ใช้
+    $contractDate = Carbon::parse($user->room->contract);
+
+    // ดึงระยะเวลาสัญญาจากประเภทห้องของผู้ใช้ (สมมุติว่าเป็นจำนวนเดือน)
+    $contractDuration = $user->room->roomType->contact_date;
+
+    // คำนวณวันหมดสัญญา
+    $contractEndDate = $contractDate->copy()->addMonths($contractDuration);
+
+    // คำนวณจำนวนวันที่เหลือจากวันนี้ถึงวันหมดสัญญา
+    $remainingDays = floor(Carbon::now()->diffInDays($contractEndDate, false));
+
+    // ส่งข้อมูลไปยัง View
+    return view('Roomdetails', compact('user', 'contractEndDate', 'remainingDays'));
+}
 }
