@@ -21,26 +21,26 @@
         <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? '' : '' }}">
             <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
         </a>
-        <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ route('guestpage') }}" class="{{ Request::is('guest*') ? 'active' : '' }}">Guest</a>
-        <a href="{{ route('cspxx') }}" class="{{ Request::is('cspxx*') ? 'active' : '' }}">Customer problem</a>
+        <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">หน้าหลัก</a>
+        <a href="{{ route('guestpage') }}" class="{{ Request::is('guest*') ? 'active' : '' }}">รายชื่อผู้เข้าพัก</a>
+        <a href="{{ route('cspxx') }}" class="{{ Request::is('cspxx*') ? 'active' : '' }}">รายงานปัญหาจากผู้เข้าพัก</a>
         <div class="dropdown">
-            <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
+            <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">การจอง</button>
             <div class="dropdown-content">
-                <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">Booking</a>
-                <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
+                <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">การจอง</a>
+                <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">ประวัติการจอง</a>
             </div>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
+            <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">บิล</button>
             <div class="dropdown-content">
-                <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
-                <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
+                <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">ส่งบิล</a>
+                <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">ประวัติการส่งบิล</a>
             </div>
         </div>
-        <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">Room Detail</a>
-        <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
+        <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">ห้องทั้งหมด</a>
+        <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">เพิ่มห้องพัก</a>
     </div>
 
 
@@ -69,8 +69,8 @@
 
         @if (!Request::routeIs('adminpage') && !Request::routeIs('Addroom'))
         <div class="s">
-            <label for="search" class="sig">Search :</label><br>
-            <input type="search" id="search" class="sin" placeholder="Enter roomnumber or username" size="30px">
+            <label for="search" class="sig">ค้นหา :</label><br>
+            <input type="search" id="search" class="sin" placeholder="ใส่เลขห้องหรือชื่อผู้ใช้" size="30px">
         </div>
          @endif
         <div class="main-content">

@@ -19,7 +19,7 @@
     <!-- ฟอร์มกรอกค่าห้องที่ต้องการเพิ่มลง db -->
     <form action="/Addroom/addroom" method="POST" id="addRoomForm">
         @csrf
-        <label for="">Room Type:</label><br>
+        <label for="">ประเภทห้อง:</label><br>
         <select name="room_type_id" id="room_type" required>
             @foreach ($rooms as $room )
             <option value="{{ $room->id }}">
@@ -35,19 +35,19 @@
         </select>
         <br><br>
 
-        <label for="">Room Number:</label><br>
+        <label for="">หมายเลขห้อง:</label><br>
         <input type="text" name="room_number" id="room_number" maxlength="4" required>
         <br><br>
 
-        <label for="">Floor:</label><br>
+        <label for="">ชั้น:</label><br>
         <input type="number" name="floor" id="" required>
         <br><br>
 
-        <label for="">Description:</label><br>
+        <label for="">รายละเอียดห้อง:</label><br>
         <textarea name="description" id="" cols="30" rows="10" required></textarea>
         <br><br>
 
-        <button type="button" onclick="confirmAddRoom()" class="addroombutton">Submit</button>
+        <button type="button" onclick="confirmAddRoom()" class="addroombutton">ยืนยัน</button>
     </form>
 </div>
 

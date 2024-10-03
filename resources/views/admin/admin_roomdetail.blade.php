@@ -10,23 +10,22 @@
 
 
 @section('content')
-<h1>Room</h1>
-{{-- Form เอาไว้ Update รายละเอียดห้อง แต่ว่าเอาซ่อนไว้ก่อน จะให้แสดงตอนกดปุ่ม Update --}}
+<h1>ห้องทั้งหมด</h1>
 <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
     @csrf
-    <h2 class="updateroomheader">Update Room</h2>
+    <h2 class="updateroomheader">แก้ไขห้อง</h2>
     <input type="hidden" name="id" id="room_id">
-    <label for="">Room number:</label><br>
+    <label for="">หมายเลขห้อง:</label><br>
     <input type="text" name="room_number" id="room_number" readonly class="textroomnumber"><br>
-    <label for="roomtype">Room Type:</label><br>
+    <label for="roomtype">ประเภทห้อง:</label><br>
     <input name="room_type_id" id="room_type_id" required readonly class="textroomtype"><br>
-    <label for="">Floor:</label><br>
+    <label for="">ชั้น:</label><br>
     <input type="number" name="floor" id="floor" readonly class="textroomfloor"><br>
-    <label for="">Description:</label><br>
+    <label for="">รายละเอียดห้อง:</label><br>
     <textarea name="description" id="description" cols="30" rows="10" required></textarea><br><br>
     <div class="btninform">
-        <button type="button" class="backbtn" onclick="hideupdateform()">Hide</button>
-        <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">Submit</button>
+        <button type="button" class="backbtn" onclick="hideupdateform()">ปิด</button>
+        <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">ยืนยัน</button>
     </div>
 </form>
 
@@ -37,12 +36,12 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>Room number</th>
-                        <th>Room Type</th>
-                        <td>Description</td>
-                        <th>Guest Name</th>
-                        <th>Floor</th>
-                        <th colspan="3">Status</th>
+                        <th>หมายเลขห้อง</th>
+                        <th>ประเภทห้อง</th>
+                        <th>รายละเอียดห้อง</th>
+                        <th>ชื่อผู้เข้าพัก</th>
+                        <th>ชั้น</th>
+                        <th colspan="3">สถานะ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,9 +60,9 @@
                         <td>{{ $rooms->floor }}</td>
                         <td>
                         @if ($rooms->is_available == "1")
-                            <p style="color:rgb(0, 255, 0)">Available</p>
+                            <p style="color:rgb(0, 255, 0)">ห้องว่าง</p>
                         @else
-                            <p style="color:red">Occupied</p>
+                            <p style="color:red">ห้องไม่ว่าง</p>
                         @endif
                         </td>
                         <td class="updatecolumn">

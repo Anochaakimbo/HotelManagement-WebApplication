@@ -8,14 +8,14 @@
 @section('content')
     <div class="report-info">
         <div class="details">
-            <h1>Customer Problem</h1>
+            <h1>รายงานปัญหาจากผู้เข้าพัก</h1>
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>Roomnumber</th>
-                        <th>User Name</th>
-                        <th>Description</th>
-                        <th>Date Submitted</th>
+                        <th>หมายเลขห้อง</th>
+                        <th>ชื่อผูเ้ข้าพัก</th>
+                        <th>รายละเอียดห้องพัก</th>
+                        <th>วันที่ส่ง</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -29,7 +29,7 @@
                             <td>{{ $report->main_category }}</td>
                             <td>{{ $report->created_at }}</td>
                             <td>
-                                <a href="{{ route('csp2.view', $report->id) }}" class="viewbutton">View</a>
+                                <a href="{{ route('csp2.view', $report->id) }}" class="viewbutton">ดูรายละเอียด</a>
                             </td>
                         </tr>
                     @endforeach

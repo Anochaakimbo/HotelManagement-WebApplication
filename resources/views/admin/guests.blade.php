@@ -6,15 +6,15 @@
 @section('content')
 
 <div class="billing-history">
-    <h1>Guest</h1>
+    <h1>รายชื่อผู้เข้าพัก</h1>
     @if($users->isEmpty())
-    <h1>There is no guest right now!</h1>
+    <h1>ขณะนี้ยังไม่มีผู้เข้าพัก</h1>
     @else
     <table class="styled-table">
         <thead>
             <tr>
-                <th>User Name</th>
-                <th>Room Number</th>
+                <th>ชื่อผู้เข้าพัก</th>
+                <th>หมายเลขห้อง</th>
                 <th colspan="2">Action</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->room->room_number }}</td>
-                <td><a href="{{ route('guest.details', $user->room->id) }}" class="btn btn-primary">View</a></td>
+                <td><a href="{{ route('guest.details', $user->room->id) }}" class="btn btn-primary">ดูรายละเอียด</a></td>
                 <!-- Updated button to call confirmCheckout function -->
                 <td><button onclick="confirmCheckout({{ $user->id }})" class="btn btn-danger">Check out</button></td>
             </tr>
