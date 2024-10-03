@@ -12,12 +12,13 @@ class Report extends Model
     protected $fillable = [
         'user_id',
         'room_id',
-        'main_category',
-        'sub_category',
+        'main_category_id',
+        'sub_category_id',
         'description',
         'contact_number',
         'permission'
     ];
+
 
 
     // Define the relationship with the Room model (based on room_id)
@@ -31,5 +32,15 @@ class Report extends Model
     {
         return $this->belongsTo(Rooms::class, 'room_id');
     }
+    // ความสัมพันธ์กับ MainCategory
+    public function mainCategory()
+    {
+        return $this->belongsTo(MainCategory::class, 'main_category_id');
+    }
 
+    // ความสัมพันธ์กับ SubCategory
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+    }
 }

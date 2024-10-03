@@ -16,7 +16,7 @@
             <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
             <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
             <a href="{{ route('Payrent') }}" class="active">ชำระค่าเช่า</a>
-            <a href="{{ route('Report') }}">แจ้งปัญหา</a>
+            <a href="{{ route('report') }}">แจ้งปัญหา</a>
             <a href="{{ route('report-history') }}">ประวัติการแจ้งปัญหา</a>
         </div>
 

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MainCategory extends Model
@@ -11,6 +10,6 @@ class MainCategory extends Model
 
     public function subCategories()
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategory::class); // สัมพันธ์แบบ one-to-many
     }
 }
