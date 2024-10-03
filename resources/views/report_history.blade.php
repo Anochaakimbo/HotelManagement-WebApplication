@@ -16,7 +16,7 @@
         <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
         <a href="{{ route('Roomdetails') }}">รายละเอียดห้อง</a>
         <a href="{{ route('Payrent') }}">ชำระค่าเช่า</a>
-        <a href="{{ route('Report') }}">แจ้งปัญหา</a>
+        <a href="{{ route('report') }}">แจ้งปัญหา</a>
         <a href="{{ route('report-history') }}" class="active">ประวัติการแจ้งปัญหา</a>
     </div>
 
@@ -56,25 +56,24 @@
                             <th colspan ="2">รายละเอียด</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($reports as $report)
-                            <tr>
-                                <td>{{ $report->room->room_number }}</td>
-                                <td>{{ $report->main_category }}</td>
-                                <td>{{ $report->sub_category }}</td>
-                                <td>{{ $report->description }}</td>
-                                <td>
-                                    <form action="{{ route('reports.destroy', $report->id) }}" method="POST"
-                                        class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="btn btn-success btn-sm delete-btn">แก้ไขสำเร็จแล้ว</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
+                   <tbody>
+    @foreach ($reports as $report)
+        <tr>
+            <td>{{ $report->room->room_number }}</td>
+            <td>{{ $report->mainCategory->name ?? 'ไม่มีข้อมูลหมวดหมู่หลัก' }}</td>
+            <td>{{ $report->subCategory->name ?? 'ไม่มีข้อมูลหมวดหมู่ย่อย' }}</td>
+            <td>{{ $report->description }}</td>
+            <td>
+                <form action="{{ route('reports.destroy', $report->id) }}" method="POST" class="delete-form">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-success btn-sm delete-btn" id="delete-btn-{{ $report->id }}">แก้ไขสำเร็จแล้ว</button>
+                </form>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
+
                 </table>
             </div>
         </div>
@@ -85,6 +84,8 @@
         document.querySelectorAll('.delete-form').forEach(form => {
             form.addEventListener('submit', function(e) {
                 e.preventDefault(); // หยุดการส่งฟอร์มชั่วคราว
+
+                const button = form.querySelector('button[type="submit"]');
 
                 Swal.fire({
                     title: 'ช่างแก้ไขให้คุณแล้วใช่ไหม',
@@ -97,6 +98,8 @@
                     cancelButtonText: 'ยกเลิก'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        // ซ่อนปุ่ม "แก้ไขสำเร็จแล้ว"
+                        button.style.display = 'none';
                         // ส่งฟอร์มเมื่อผู้ใช้ยืนยันการลบ
                         form.submit();
 
