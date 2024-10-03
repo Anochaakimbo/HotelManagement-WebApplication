@@ -12,15 +12,15 @@
 
 @section('content')
     <div class="billing-history">
-        <h1>Billing Send</h1>
+        <h1>ส่งบิล</h1>
         <table class="styled-table">
             <thead>
                 <tr>
-                    <th>Room Number</th>
-                    <th>User</th>
-                    <th>Water Units</th>
-                    <th>Electricity Units</th>
-                    <th>Room Price</th>
+                    <th>หมายเลขห้อง</th>
+                    <th>ชื่อผู้เข้าห้อง</th>
+                    <th>หน่วยค่าน้ำ</th>
+                    <th>หน่วยค่าไฟ</th>
+                    <th>ราคารวม</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -52,20 +52,20 @@
                         <td>
                             @if (!$room->billing)
                                 <!-- หากบิลยังไม่ได้ถูกส่ง -->
-                                <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">Submit Billing</button>
+                                <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">ยืนยันการส่งบิล</button>
                             @else
                                 @if (Carbon\Carbon::parse($room->billing->billing_date)->format('Y-m') == Carbon\Carbon::now()->format('Y-m') && $room->billing->status == 'ชำระค่าห้องแล้ว')
                                     <!-- แสดงข้อความเมื่อบิลของเดือนนี้ถูกชำระแล้ว -->
                                     <span class="okes">บิลของเดือนนี้ถูกส่งไปแล้ว</span>
                                 @elseif ($room->billing->status == 'รอยืนยัน')
                                     <!-- แสดงข้อความและปุ่มเมื่อสถานะเป็น 'รอยืนยัน' -->
-                                    <a href="{{ route('confirmbill', ['room_id' => $room->id]) }}" class="btn btn-warning">Wait for confirm</a>
+                                    <a href="{{ route('confirmbill', ['room_id' => $room->id]) }}" class="btn btn-warning">รอการยืนยัน</a>
                                 @elseif ($room->billing->trashed())
                                     <!-- หากบิลถูก Soft Delete -->
                                     <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">Submit Billing</button>
                                 @else
                                     <!-- แสดงข้อความเมื่อบิลถูกส่งแล้วในสถานะอื่นๆ -->
-                                    <span class="okes">Already Send</span>
+                                    <span class="okes">บิลถูกส่งไปแล้ว</span>
                                 @endif
                             @endif
                         </td>

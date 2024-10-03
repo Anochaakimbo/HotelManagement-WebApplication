@@ -324,3 +324,11 @@ label{
 .textroomnumber ,.textroomtype,.textroomfloor{
 background-color: rgb(188, 187, 187);
 }
+
+.styled-table th{
+    font-size: 1.5em;
+}
+
+.styled-table td{
+    font-size: 1em;
+}

@@ -10,6 +10,12 @@
 
 
 @section('content')
+<h1>ห้องทั้งหมด</h1>
+<form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
+    @csrf
+    <h2 class="updateroomheader">แก้ไขห้อง</h2>
+    <input type="hidden" name="id" id="room_id">
+    <label for="">หมายเลขห้อง:</label><br>
 <h1>ห้อง</h1>
 {{-- Form เอาไว้ Update รายละเอียดห้อง แต่ว่าเอาซ่อนไว้ก่อน จะให้แสดงตอนกดปุ่ม Update --}}
 <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
@@ -22,6 +28,11 @@
     <input name="room_type_id" id="room_type_id" required readonly class="textroomtype"><br>
     <label for="">ชั้น:</label><br>
     <input type="number" name="floor" id="floor" readonly class="textroomfloor"><br>
+    <label for="">รายละเอียดห้อง:</label><br>
+    <textarea name="description" id="description" cols="30" rows="10" required></textarea><br><br>
+    <div class="btninform">
+        <button type="button" class="backbtn" onclick="hideupdateform()">ปิด</button>
+        <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">ยืนยัน</button>
     <label for="">ข้อมูลเพิ่มเติม:</label><br>
     <textarea name="description" id="description" cols="30" rows="10" required></textarea><br><br>
     <div class="btninform">
@@ -37,6 +48,10 @@
             <table class="styled-table">
                 <thead>
                     <tr>
+                        <th>หมายเลขห้อง</th>
+                        <th>ประเภทห้อง</th>
+                        <th>รายละเอียดห้อง</th>
+                        <th>ชื่อผู้เข้าพัก</th>
                         <th>เลขห้อง</th>
                         <th>ประเภทห้อง</th>
                         <td>ข้อมูลเพิ่มเติม</td>
@@ -61,6 +76,9 @@
                         <td>{{ $rooms->floor }}</td>
                         <td>
                         @if ($rooms->is_available == "1")
+                            <p style="color:rgb(0, 255, 0)">ห้องว่าง</p>
+                        @else
+                            <p style="color:red">ห้องไม่ว่าง</p>
                             <p style="color:rgb(0, 255, 0)">ว่าง</p>
                         @else
                             <p style="color:red">ไม่ว่าง</p>
