@@ -11,6 +11,15 @@
                     <p>{{ $usersCount }} </p>
                 @else
                     <p>ขณะนี้ยังไม่มีผู้เข้าพัก</p>
+            <h1>สรุปข้อมูลทั่วไป</h1>
+
+            <!-- สถิติทั่วไป -->
+            <div class="stat-item">
+                <h3>แขกที่พักทั้งหมด</h3>
+                @if ($usersCount > 0)
+                    <p>{{ $usersCount }} </p>
+                @else
+                    <p>ขณะนี้ยังไม่มีผู้พัก</p>
                 @endif
             </div>
             <div class="recent-bookings">
@@ -23,6 +32,11 @@
                     </ul>
                 @else
                     <p>ยังไม่มีการจอง</p>
+                            <li>ห้อง {{ $booking->room->room_number }} โดย {{ $booking->guest->name }} - วันที่ {{ $booking->created_at }}</li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>ขณะนี้ยังไม่มีการจอง</p>
                 @endif
             </div>
             {{-- <div class="stat-item">
@@ -40,6 +54,12 @@
                     </p>
                 @else
                     <p>ไม่มีรายการบิล</p>
+                <h3>การเรียกเก็บเงิน</h3>
+                @if ($billings > 0)
+                    <p>{{ $billings }} การเรียกเก็บเงิน
+                    </p>
+                @else
+                    <p>ตอนนี้ยังไม่มีการเรียกเก็บเงินใดๆ</p>
                 @endif
             </div>
             </div>

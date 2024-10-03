@@ -444,11 +444,18 @@ form label {
     display: flex;
     gap: 10px;
     align-items: center;
+    
 }
 
 .radio-group label {
     font-size: 16px;
     color: #333;
+    display: inline;
 }
+.radio{
+display: flex;
+    gap: 10px;
+}
+
 
 /* Consistent margin between form sections */

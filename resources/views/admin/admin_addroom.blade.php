@@ -20,6 +20,7 @@
     <form action="/Addroom/addroom" method="POST" id="addRoomForm">
         @csrf
         <label for="">ประเภทห้อง:</label><br>
+        <label for="">ประเภทห้อง :</label><br>
         <select name="room_type_id" id="room_type" required>
             @foreach ($rooms as $room )
             <option value="{{ $room->id }}">
@@ -48,6 +49,19 @@
         <br><br>
 
         <button type="button" onclick="confirmAddRoom()" class="addroombutton">ยืนยัน</button>
+        <label for="">เลขห้อง :</label><br>
+        <input type="text" name="room_number" id="room_number" maxlength="4" required>
+        <br><br>
+
+        <label for="">ชั้น :</label><br>
+        <input type="number" name="floor" id="" required>
+        <br><br>
+
+        <label for="">ข้อมูลเพิ่มเติม :</label><br>
+        <textarea name="description" id="" cols="30" rows="10" required></textarea>
+        <br><br>
+
+        <button type="button" onclick="confirmAddRoom()" class="addroombutton">เพิ่มห้อง</button>
     </form>
 </div>
 
@@ -65,7 +79,7 @@
         } else if (roomType == "3") { // Single Bed Room
             roomNumberField.value = 'S';
         } else {
-            roomNumberField.value = ''; 
+            roomNumberField.value = '';
         }
     });
 

@@ -16,43 +16,48 @@
                         <th>ชื่อผูเ้ข้าพัก</th>
                         <th>รายละเอียดห้องพัก</th>
                         <th>วันที่ส่ง</th>
+            <h1>Customer Problem</h1>
+            <table class="styled-table table table-bordered">
+                <thead>
+                   <tr>
+                        <th>Roomnumber</th>
+                        <th>User Name</th>
+                        <th>Description</th>
+                        <th>Date Submitted</th>
                         <th colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-
-
                     @foreach ($reports as $report)
                         <tr>
-                            <td>{{ $report->room->room_number }}</td>
-                            <td>{{ $report->user->name }}</td>
-                            <td>{{ $report->main_category }}</td>
-                            <td>{{ $report->created_at }}</td>
+                            <td>{{ $report->room->room_number ?? 'N/A' }}</td>
+                            <td>{{ $report->user->name ?? 'N/A' }}</td>
+            <td>{{ $report->mainCategory->name ?? 'ไม่มีข้อมูลหมวดหมู่หลัก' }}</td>
+                            <td>{{ $report->created_at->format('d/m/Y') }}</td>
                             <td>
                                 <a href="{{ route('csp2.view', $report->id) }}" class="viewbutton">ดูรายละเอียด</a>
+                                <a href="{{ route('csp2.view', $report->id) }}" class="btn btn-primary">View</a>
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
     </div>
-    </div>
+
     <script>
-                document.getElementById('search').addEventListener('input', function() {
+        document.getElementById('search').addEventListener('input', function() {
             let input = this.value.toLowerCase();
             let rows = document.querySelectorAll('.styled-table tbody tr');
 
             rows.forEach(row => {
-                // ตรวจสอบข้อมูลทั้งในคอลัมน์ User Name และ Room Number
-                let userName = row.querySelector('td:first-child').textContent.toLowerCase();
-                let roomNumber = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                let userName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                let roomNumber = row.querySelector('td:first-child').textContent.toLowerCase();
 
                 if (userName.includes(input) || roomNumber.includes(input)) {
-                    row.style.display = ''; // แสดงแถวที่ตรงกับการค้นหา
+                    row.style.display = '';
                 } else {
-                    row.style.display = 'none'; // ซ่อนแถวที่ไม่ตรงกับการค้นหา
+                    row.style.display = 'none';
                 }
             });
         });
