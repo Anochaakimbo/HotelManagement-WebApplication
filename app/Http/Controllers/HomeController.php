@@ -14,13 +14,39 @@ use Carbon\Carbon;
 class HomeController extends Controller
 {
     public function index()
-    {
-        if (Auth::user()->usertype == 'user') {
-            return view('dashboard');
+{
+    // ตรวจสอบว่าเป็นผู้ใช้ทั่วไปหรือผู้ดูแลระบบ
+    if (Auth::user()->usertype == 'user') {
+        // ดึงข้อมูลผู้ใช้ที่ล็อกอินอยู่
+        $user = Auth::user();
+
+        // ตรวจสอบว่าผู้ใช้มีห้องที่เชื่อมโยงอยู่หรือไม่
+        if ($user->room) {
+            // ดึงวันที่ทำสัญญาจากห้องพักของผู้ใช้
+            $contractDate = Carbon::parse($user->room->contract);
+
+            // ดึงระยะเวลาสัญญาจากประเภทห้องของผู้ใช้ (สมมุติว่าเป็นจำนวนเดือน)
+            $contractDuration = $user->room->roomType->contact_date;
+
+            // คำนวณวันหมดสัญญา
+            $contractEndDate = $contractDate->copy()->addMonths($contractDuration);
+
+            // คำนวณจำนวนวันที่เหลือจากวันนี้ถึงวันหมดสัญญา
+            $remainingDays = floor(Carbon::now()->diffInDays($contractEndDate, false));
         } else {
-            return view('admin.home');
+            // กรณีที่ผู้ใช้ไม่มีห้องเชื่อมโยง ให้เซ็ตค่าเริ่มต้น
+            $contractEndDate = null;
+            $remainingDays = null;
         }
+
+        // ส่งข้อมูลไปยัง view 'home' สำหรับผู้ใช้ทั่วไป
+        return view('home', compact('user', 'contractEndDate', 'remainingDays'));
+    } else {
+        // ส่งข้อมูลไปยัง view 'admin.home' สำหรับผู้ดูแลระบบ
+        return view('admin.home');
     }
+}
+
     public function page()
     {
         $bookings = Booking::withTrashed()->get();
@@ -80,7 +106,7 @@ class HomeController extends Controller
         if ($rooms->is_available == "0") {
             return back()->with('error', 'ลบไม่ได้ เพราะ มีผู้เช่าอาศัยอยู่')->withInput();
         }
-    
+
         $rooms->destroy($id);
         $rooms = rooms::all();
         return redirect('/roomdetail');

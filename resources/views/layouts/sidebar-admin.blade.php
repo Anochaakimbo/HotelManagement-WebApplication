@@ -21,26 +21,26 @@
         <a href="{{ route('home') }}" class="{{ Request::routeIs('home') ? '' : '' }}">
             <img src="{{ asset('img/Logo.png') }}" alt="Logo" class="logo">
         </a>
-        <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ route('guestpage') }}" class="{{ Request::is('guest*') ? 'active' : '' }}">Guest</a>
-        <a href="{{ route('cspxx') }}" class="{{ Request::is('cspxx*') ? 'active' : '' }}">Customer problem</a>
+        <a href="{{ route('adminpage') }}" class="{{ Request::routeIs('adminpage') ? 'active' : '' }}">สรุปข้อมูล</a>
+        <a href="{{ route('guestpage') }}" class="{{ Request::is('guest*') ? 'active' : '' }}">ผู้พัก</a>
+        <a href="{{ route('cspxx') }}" class="{{ Request::is('cspxx*') ? 'active' : '' }}">ปัญหาของผู้พัก</a>
         <div class="dropdown">
-            <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">Booking</button>
+            <button class="dropbtn {{ Request::routeIs('booking', 'bookinghistory') ? 'active' : '' }}">หมวดหมู่การจอง</button>
             <div class="dropdown-content">
-                <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">Booking</a>
-                <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">Booking History</a>
+                <a href="{{ route('booking') }}" class="{{ Request::routeIs('booking') ? 'active' : '' }}">การจอง</a>
+                <a href="{{ route('bookinghistory') }}" class="{{ Request::routeIs('bookinghistory') ? 'active' : '' }}">ประวัติการจอง</a>
             </div>
         </div>
 
         <div class="dropdown">
-            <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">Billing</button>
+            <button class="dropbtn {{ Request::routeIs('adminbilling', 'confirmbill', 'paymenthistory') ? 'active' : '' }}">ค่าใช้จ่าย</button>
             <div class="dropdown-content">
-                <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">Billing</a>
-                <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">Billing History</a>
+                <a href="{{ route('adminbilling') }}" class="{{ Request::routeIs('adminbilling') ? 'active' : '' }}">ส่งค่าใช้จ่าย</a>
+                <a href="{{ route('paymenthistory') }}" class="{{ Request::routeIs('paymenthistory') ? 'active' : '' }}">ประวัติค่าใช้จ่าย</a>
             </div>
         </div>
-        <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">Room Detail</a>
-        <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">Add Room</a>
+        <a href="{{ route('roomdetail') }}" class="{{ Request::routeIs('roomdetail') ? 'active' : '' }}">ข้อมูลห้องพัก</a>
+        <a href="{{ route('Addroom') }}" class="{{ Request::routeIs('Addroom') ? 'active' : '' }}">เพิ่มห้องพัก</a>
     </div>
 
 
@@ -56,7 +56,7 @@
             </form>
             <div class="user-info dropdown">
                 <!-- ปุ่มสำหรับ dropdown -->
-                <span class="dropbtn">User: {{ Auth::user()->name }}</span>
+                <span class="dropbtn">ผู้ใช้ : {{ Auth::user()->name }}</span>
                 <!-- เนื้อหาของ dropdown -->
                 <div class="dropdown-content">
                     <div class="block px-4 py-2 text-xs text-gray-400">
@@ -69,7 +69,7 @@
 
         @if (!Request::routeIs('adminpage') && !Request::routeIs('Addroom'))
         <div class="s">
-            <label for="search" class="sig">Search :</label><br>
+            <label for="search" class="sig">ค้นหา :</label><br>
             <input type="search" id="search" class="sin" placeholder="Enter roomnumber or username" size="30px">
         </div>
          @endif

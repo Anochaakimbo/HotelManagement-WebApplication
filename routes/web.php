@@ -31,16 +31,13 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class,'showUserRoomDetails'])->name('dashboard');
 
     Route::get('/Report', function () {
         return view('Report');
     })->name('Report');
 
     Route::get('/Payrent', [ChargeController::class, 'showPayRent'])->name('Payrent');
-
     Route::get('/Roomdetails', [HomeController::class,'showUserRoomDetails'])->name('Roomdetails');
 });
 

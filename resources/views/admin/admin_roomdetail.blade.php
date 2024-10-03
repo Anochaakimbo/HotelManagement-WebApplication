@@ -10,23 +10,23 @@
 
 
 @section('content')
-<h1>Room</h1>
+<h1>ห้อง</h1>
 {{-- Form เอาไว้ Update รายละเอียดห้อง แต่ว่าเอาซ่อนไว้ก่อน จะให้แสดงตอนกดปุ่ม Update --}}
 <form action="/roomdetail/updated" method="POST" style="display: none;" id="updateroom">
     @csrf
-    <h2 class="updateroomheader">Update Room</h2>
+    <h2 class="updateroomheader">อัพเดทห้อง</h2>
     <input type="hidden" name="id" id="room_id">
-    <label for="">Room number:</label><br>
+    <label for="">เลขห้อง:</label><br>
     <input type="text" name="room_number" id="room_number" readonly class="textroomnumber"><br>
-    <label for="roomtype">Room Type:</label><br>
+    <label for="roomtype">ประเภทห้อง:</label><br>
     <input name="room_type_id" id="room_type_id" required readonly class="textroomtype"><br>
-    <label for="">Floor:</label><br>
+    <label for="">ชั้น:</label><br>
     <input type="number" name="floor" id="floor" readonly class="textroomfloor"><br>
-    <label for="">Description:</label><br>
+    <label for="">ข้อมูลเพิ่มเติม:</label><br>
     <textarea name="description" id="description" cols="30" rows="10" required></textarea><br><br>
     <div class="btninform">
-        <button type="button" class="backbtn" onclick="hideupdateform()">Hide</button>
-        <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">Submit</button>
+        <button type="button" class="backbtn" onclick="hideupdateform()">กลับ</button>
+        <button type="button" onclick="confirmUpdateRoom()" class="addroombutton1">บันทึกการเปลี่ยนแปลง</button>
     </div>
 </form>
 
@@ -37,12 +37,12 @@
             <table class="styled-table">
                 <thead>
                     <tr>
-                        <th>Room number</th>
-                        <th>Room Type</th>
-                        <td>Description</td>
-                        <th>Guest Name</th>
-                        <th>Floor</th>
-                        <th colspan="3">Status</th>
+                        <th>เลขห้อง</th>
+                        <th>ประเภทห้อง</th>
+                        <td>ข้อมูลเพิ่มเติม</td>
+                        <th>ชื่อผู้พัก</th>
+                        <th>ชั้น</th>
+                        <th colspan="3">สถานะ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,21 +61,21 @@
                         <td>{{ $rooms->floor }}</td>
                         <td>
                         @if ($rooms->is_available == "1")
-                            <p style="color:rgb(0, 255, 0)">Available</p>
+                            <p style="color:rgb(0, 255, 0)">ว่าง</p>
                         @else
-                            <p style="color:red">Occupied</p>
+                            <p style="color:red">ไม่ว่าง</p>
                         @endif
                         </td>
                         <td class="updatecolumn">
                             <a href="javascript:void(0)" class="updatebutton"
                             onclick="showupdateform({{ $rooms->id }}, '{{ $rooms->roomType->room_description }}', '{{ $rooms->room_number }}', '{{ $rooms->description }}', {{ $rooms->floor }})">
-                            Update{{-- ปุ่ม Update ห้อง โดยส่งค่าต่างๆไปยัง script showupdateform --}}
+                            อัพเดท{{-- ปุ่ม Update ห้อง โดยส่งค่าต่างๆไปยัง script showupdateform --}}
                             </a>
                         </td>
                         <td class="deletecolumn">
                             <a href="javascript:void(0)" class="deletebutton"
                             onclick="confirmDeleteRoom('{{ route('roomdelete', $rooms->id) }}')">  {{-- ปุ่ม Delete ห้อง --}}
-                            Delete
+                            ลบห้อง
                             </a>
                         </td>
                     </tr>
@@ -104,8 +104,8 @@
 // alert ตอนกด update
     function confirmUpdateRoom() {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to update this room?",
+            title: 'แน่ใจเหรอ?',
+            text: "จะอัพเดทห้องนี้ใช่ไหม?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -117,7 +117,7 @@
             }
         });
     }
-    
+
     @if (session('error'))
     Swal.fire({
         title: 'Error!',
@@ -125,13 +125,13 @@
         icon: 'error',
         confirmButtonText: 'OK'
     });
-@endif 
+@endif
 
 // alert ตอนกด delete
     function confirmDeleteRoom(deleteUrl) {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "Do you want to delete this room?",
+            title: 'แน่ใจเหรอ?',
+            text: "คุณจะลบห้องนี้ออกจากระบบ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

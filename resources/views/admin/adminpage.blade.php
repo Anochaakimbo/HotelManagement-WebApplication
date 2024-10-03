@@ -2,27 +2,27 @@
 @section('content')
         <!-- Dashboard Overview -->
         <div class="dashboard-overview">
-            <h1>Dashboard</h1>
+            <h1>สรุปข้อมูลทั่วไป</h1>
 
             <!-- สถิติทั่วไป -->
             <div class="stat-item">
-                <h3>Guest</h3>
+                <h3>แขกที่พักทั้งหมด</h3>
                 @if ($usersCount > 0)
                     <p>{{ $usersCount }} </p>
                 @else
-                    <p>No Guest right now</p>
+                    <p>ขณะนี้ยังไม่มีผู้พัก</p>
                 @endif
             </div>
             <div class="recent-bookings">
-                <h3>Lastest Booking</h3>
+                <h3>การจองล่าสุด</h3>
                 @if ($bookings->isNotEmpty())
                     <ul>
                         @foreach ($bookings as $booking)
-                            <li>Room {{ $booking->room->room_number }} By {{ $booking->guest->name }} - Date {{ $booking->created_at }}</li>
+                            <li>ห้อง {{ $booking->room->room_number }} โดย {{ $booking->guest->name }} - วันที่ {{ $booking->created_at }}</li>
                         @endforeach
                     </ul>
                 @else
-                    <p>No Booking</p>
+                    <p>ขณะนี้ยังไม่มีการจอง</p>
                 @endif
             </div>
             {{-- <div class="stat-item">
@@ -34,12 +34,12 @@
                 @endif
             </div> --}}
             <div class="stat-item">
-                <h3>Billing list</h3>
+                <h3>การเรียกเก็บเงิน</h3>
                 @if ($billings > 0)
-                    <p>{{ $billings }} Billing to follow
+                    <p>{{ $billings }} การเรียกเก็บเงิน
                     </p>
                 @else
-                    <p>There are no billing items.</p>
+                    <p>ตอนนี้ยังไม่มีการเรียกเก็บเงินใดๆ</p>
                 @endif
             </div>
             </div>
