@@ -52,7 +52,7 @@
                         <td>
                             @if (!$room->billing)
                                 <!-- หากบิลยังไม่ได้ถูกส่ง -->
-                                <button type="button" class="btn btn-success" onclick="confirmBilling({{ $room->id }})">ยืนยันการส่งบิล</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmBilling({{ $room->id }})">ยืนยันการส่งบิล</button>
                             @else
                                 @if (Carbon\Carbon::parse($room->billing->billing_date)->format('Y-m') == Carbon\Carbon::now()->format('Y-m') && $room->billing->status == 'ชำระค่าห้องแล้ว')
                                     <!-- แสดงข้อความเมื่อบิลของเดือนนี้ถูกชำระแล้ว -->

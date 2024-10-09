@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="billing-history">
-    <h1>ประวัติการจ่ายบิล</h1>
+    <h1>ประวัติการจอง</h1>
 <div class="main-content">
     <div class="room-info">
         <div class="details">

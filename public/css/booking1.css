@@ -22,6 +22,10 @@
     font-weight: bold;
 }
 
+.styled-table th{
+    background-color: #f7b366;
+}
+
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
@@ -330,5 +334,13 @@ background-color: rgb(188, 187, 187);
 }
 
 .styled-table td{
+    font-size: 1em;
+}
+
+.report-details p{
+    font-size: 1.5em;
+}
+
+.report-details strong{
     font-size: 1em;
 }

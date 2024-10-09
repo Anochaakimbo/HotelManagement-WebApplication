@@ -374,6 +374,7 @@ body {
 }
 .okes{
     background-color:rgb(23, 203, 23);
+    color: white;
     padding: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
 }

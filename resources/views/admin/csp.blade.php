@@ -11,20 +11,12 @@
             <h1>รายงานปัญหาจากผู้เข้าพัก</h1>
             <table class="styled-table">
                 <thead>
-                    <tr>
-                        <th>หมายเลขห้อง</th>
-                        <th>ชื่อผูเ้ข้าพัก</th>
-                        <th>รายละเอียดห้องพัก</th>
-                        <th>วันที่ส่ง</th>
-            <h1>Customer Problem</h1>
-            <table class="styled-table table table-bordered">
-                <thead>
                    <tr>
-                        <th>Roomnumber</th>
-                        <th>User Name</th>
-                        <th>Description</th>
-                        <th>Date Submitted</th>
-                        <th colspan="2">Action</th>
+                        <th>หมายเลขห้อง</th>
+                        <th>ชื่อผู้เข้าพัก</th>
+                        <th>รายละเอียด</th>
+                        <th>วันที่ส่ง</th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +27,7 @@
             <td>{{ $report->mainCategory->name ?? 'ไม่มีข้อมูลหมวดหมู่หลัก' }}</td>
                             <td>{{ $report->created_at->format('d/m/Y') }}</td>
                             <td>
-                                <a href="{{ route('csp2.view', $report->id) }}" class="viewbutton">ดูรายละเอียด</a>
-                                <a href="{{ route('csp2.view', $report->id) }}" class="btn btn-primary">View</a>
+                                <a href="{{ route('csp2.view', $report->id) }}" class="btn btn-primary">ดูรายละเอียด</a>
                             </td>
                         </tr>
                     @endforeach

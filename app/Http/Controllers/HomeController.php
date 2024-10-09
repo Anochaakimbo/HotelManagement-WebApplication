@@ -104,7 +104,7 @@ class HomeController extends Controller
     {
         $rooms = rooms::findOrFail($id);
         if ($rooms->is_available == "0") {
-            return back()->with('error', 'ลบไม่ได้ เพราะ มีผู้เช่าอาศัยอยู่')->withInput();
+            return back()->with('error', 'ลบไม่ได้ เพราะ มีผู้เข้าพักอาศัยอยู่')->withInput();
         }
 
         $rooms->destroy($id);

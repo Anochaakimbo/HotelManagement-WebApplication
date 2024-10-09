@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="billing-history">
-    <h1>Billing History</h1>
+    <h1>ประวัติการชำระเงิน</h1>
 @if ($billings->isNotEmpty())
     <table class="styled-table">
         <thead>

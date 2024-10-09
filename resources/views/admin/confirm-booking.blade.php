@@ -22,10 +22,10 @@
                 <img src="{{ asset('uploads/' . $booking->payment_slip) }}" alt="Payment Slip"
                     style="max-width: 400px; height: auto;">
             @else
-                @if ($booking->status == 'Wait for payment method')
+                @if ($booking->status == 'รอชำระเงิน')
                     <h1>รอจ่ายเงิน</h1>
                 @else
-                    <h1>Paid by credit card</h1>
+                    <h1>จ่ายด้วยบัตรเครดิต</h1>
                 @endif
             @endif
 

@@ -16,11 +16,9 @@
         </script>
     @endif
 
-    <!-- ฟอร์มกรอกค่าห้องที่ต้องการเพิ่มลง db -->
     <form action="/Addroom/addroom" method="POST" id="addRoomForm">
         @csrf
         <label for="">ประเภทห้อง:</label><br>
-        <label for="">ประเภทห้อง :</label><br>
         <select name="room_type_id" id="room_type" required>
             @foreach ($rooms as $room )
             <option value="{{ $room->id }}">
@@ -49,19 +47,6 @@
         <br><br>
 
         <button type="button" onclick="confirmAddRoom()" class="addroombutton">ยืนยัน</button>
-        <label for="">เลขห้อง :</label><br>
-        <input type="text" name="room_number" id="room_number" maxlength="4" required>
-        <br><br>
-
-        <label for="">ชั้น :</label><br>
-        <input type="number" name="floor" id="" required>
-        <br><br>
-
-        <label for="">ข้อมูลเพิ่มเติม :</label><br>
-        <textarea name="description" id="" cols="30" rows="10" required></textarea>
-        <br><br>
-
-        <button type="button" onclick="confirmAddRoom()" class="addroombutton">เพิ่มห้อง</button>
     </form>
 </div>
 
@@ -71,7 +56,7 @@
         let roomType = this.value;
         let roomNumberField = document.getElementById('room_number');
 
-        // เวลาเลือกประเภทห้อง จะตั้งค่า Default ในช่องกรอกเป็นตัวอักษรห้องนั้นๆ
+        // Set prefix based on room type
         if (roomType == "1") { // Premium Bed Room
             roomNumberField.value = 'P';
         } else if (roomType == "2") { // Twin Bed Room
@@ -79,7 +64,7 @@
         } else if (roomType == "3") { // Single Bed Room
             roomNumberField.value = 'S';
         } else {
-            roomNumberField.value = '';
+            roomNumberField.value = ''; // Clear the field if no valid type is selected
         }
     });
 

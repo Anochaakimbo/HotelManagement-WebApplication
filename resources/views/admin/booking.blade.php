@@ -6,16 +6,16 @@
 @section('content')
 
 <div class="billing-history">
-    <h1>Booking</h1>
+    <h1>การจองทั้งหมด</h1>
         <div class="main-content">
             <div class="room-info">
                 <div class="details">
                     <table class="styled-table">
                         <thead>
                             <tr>
-                                <th>Room number</th>
-                                <th>Guest Name</th>
-                                <th>Booking Status</th>
+                                <th>เลขห้อง</th>
+                                <th>ชื่อผู้จอง</th>
+                                <th>สถานะการจอง</th>
                             </tr>
                         </thead>
                         <tbody>
