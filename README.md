@@ -1,1 +1,5 @@
-<h1>SET UP PROJECT</h1>
+<h1> PROJECT SET UP </h1>
+```
+npm install
+```
+
